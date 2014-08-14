@@ -1,0 +1,60 @@
+﻿<html>
+<head>
+<script>
+function generatepass(plength){
+temp=''
+for (i=0;i<plength;)
+{
+//ascii from 33 - 126
+	a=String.fromCharCode(Math.floor(Math.random()*93)+33).replace(/[^a-zA-Z@#$%;:!~]/g,"")
+	if(a)
+	{
+		temp+=a
+		i++
+	}
+}
+return temp
+}
+function generateusr(plength){
+temp=''
+for (i=0;i<plength;)
+{
+//ascii from 33 - 126
+a=String.fromCharCode(Math.floor(Math.random()*93)+33).replace(/[^a-zA-Z]/g,"")
+if(a)
+{
+ temp+=a
+ i++
+}
+}
+return temp
+}
+
+function populateform(enterlength){
+document.pgenerate.output.value=generatepass(enterlength)
+}
+
+function runPrintPwd(enterlength){
+var pwdlist = document.createElement('p');
+pwd=generatepass(enterlength)
+pwdlist.innerHTML=pwd
+document.body.appendChild(pwdlist);
+}
+
+function runPrintUsr(enterlength){
+var pwdlist = document.createElement('p');
+pwd=generateusr(enterlength)
+pwdlist.innerHTML=pwd
+document.body.appendChild(pwdlist);
+}
+</script>
+</head>
+<body>
+<form name="pgenerate">
+<b>Password Length:</b> <input type="text" name="thelength" size=3 value="10">
+<input type="button" value="Generate Password" onClick="runPrintPwd(this.form.thelength.value)">  
+<input type="button" value="Generate UserName" onClick="runPrintUsr(this.form.thelength.value)"><br />
+</form>
+</body>
+</html>
+

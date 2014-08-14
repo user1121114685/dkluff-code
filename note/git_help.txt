@@ -1,0 +1,7 @@
+*first time to empty rep:
+git clone git://uri
+git commit -m 'initial commit'
+git push origin master
+
+*gitingore:
+git config --global core.excludesfile ~/.gitignore_global

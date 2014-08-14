@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+if [ -e /tmp/netio0/1.lck ] && [ -e /tmp/netio0/2.lck ] && [ -e /tmp/netio0/3.lck ] && [ -e /tmp/netio0/6.lck ] && [ -e /tmp/netio0/7.lck ] && [ -e /tmp/netio0/8.lck ];
+then
+    ./py2net.py > /dev/null 2>&1 &
+    sleep 1
+else
+    echo "Please run all routers first, or edit the NETMAP file to change bridge. -- flyxj"
+fi

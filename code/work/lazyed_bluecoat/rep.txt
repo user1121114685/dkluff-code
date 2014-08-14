@@ -1,0 +1,22 @@
+*Output Results:
+
+1.Internet Flow(MAIN,SSL) Only HTTP/HTTPS inspect
+  Top Bytes(In+Out) (Only suc)
+  Top Request (No matter suc or fail)
+  protocl detail: http/https, nonhttp
+  Top Denied Hosts & by req --more--involed client(Vulnerability)
+
+2.VPN Flow (MAIN,SSL,CIFS)
+  Top Request
+  Top Bytes(In+Out)
+  protocl details: HTTP/HTTPS,SSH,VNC,SMB,RDP,OTHER
+
+interHost={"hostname":[req,unhit_sc,unhit_cs,hit_sc,hit_cs]}
+interDeniedHost={"hostname":[deniedreq,set()]}
+vpnHost={"hostname":[req,unhit_sc,unhit_cs,hit_sc,hit_cs]}
+PROTOCOL={"HTTP":[req,unhit_sc,unhit_cs,hit_sc,hit_cs],"VPNHTTP":[req,unhit_sc,unhit_cs,hit_sc,hit_cs]}
+
+
+
+
+
