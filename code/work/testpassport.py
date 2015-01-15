@@ -2,6 +2,7 @@
 # coding=utf-8
 import re
 import json
+import sys
 
 
 fmt = '\033[0;3{}m{}\033[0m'.format
@@ -79,13 +80,7 @@ def recordmis(fdir,iid):
 
 
 
-if __name__ == "__main__":
-
-  f=open("199-01.txt")
-  res="wrongans.txt"
-  bookmark="bookmark.txt"
-  p=readf(f)
-  
+def play(p):  
   iid=0
   lenth=len(p)
   while iid <lenth:
@@ -99,7 +94,7 @@ if __name__ == "__main__":
     print fmt(4,i[0])
     tf=prtRes(i[2],myanswer,i[1])
     if not tf:
-      recordmis(res,iid+1)
+      recordmis(logfile,iid+1)
   
     iid+=1
   
@@ -110,4 +105,21 @@ if __name__ == "__main__":
       pass
 
   
+if __name__ == "__main__":
+
+  f=open(sys.argv[1])
+  logfile="wrlog.log"
+  bookmark="bookmark.txt"
+  p=readf(f)
+  wrgs=[]
+  if len(sys.argv) == 3:
+    wrgfile=sys.argv[2]
+    print "Review...."
+    with open(wrgfile) as r:
+      for l in r:
+        wrgs+=[p[int(l[:-1])-1]]
+  if len(wrgs) > 0:
+    play(wrgs)
+  else:
+    play(p)
 
