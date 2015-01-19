@@ -20,7 +20,14 @@ function getroleid(str){
 }
 
 function getuid(json){
-  return JSON.parse(json)[0].pageData.sellerGameId;
+  try
+  {
+    return JSON.parse(json)[0].pageData.sellerGameId;
+  }
+  catch(err)
+  {
+    console.log(err)
+  }
 }
 
 function matchArr(tg,txt){
@@ -35,37 +42,51 @@ function matchArr(tg,txt){
   return fd
 
 }
-function requrl(url){
-  var resp=""
-  try
-  {
-    xp=new XMLHttpRequest();
-    xp.open("GET",url,true);
-    console.log("Requesting URL...["+url+"]")
-    xp.send();
-    resp=xp.responseText
-    console.log("Requesting URL...resp=["+resp+"]")
-  }
-  catch(err)
-  {
-    console.log(err)
-    console.log("Requesting URL...Err")
-  }
-  return resp
-
+function requrl(url,chkfunc){
+  xp=new XMLHttpRequest();
+  xp.onreadystatechange = chkfunc;
+  xp.open("GET",url,true);
+  xp.send();
 }
-function getroleskills(id){
-  //get uid by id
-  //get skill by uid
-  //return found target skill texts
-  tgskills = ["心佛","五郎","古谱","九宫","鸳鸯" ]
-  uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id
-  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId=186100010&type=SkillContainer&roleUid="
-
-  uid=getuid(requrl(uidurl));
-  skills=requrl(skillurl+uid);
-
-  return matchArr(tgskills,skills)
+function procRole(id,item){
+  var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯","虬枝","金蛇","玲珑" ]
+  var skills="";
+  var resp="";
+  uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
+  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId=186100010&type=SkillContainer&roleUid=";
+  requrl(uidurl,function (){
+    if (this.readyState==4 && this.status==200){
+	  uid=getuid(this.responseText);
+	  requrl(skillurl+uid,function (){
+	    if (this.readyState==4 && this.status==200){
+		  skills=matchArr(tgskills,this.responseText);
+		  addskilltext(item,skills);
+		}
+	   }
+	  );
+	}
+  }
+  );
+}
+function old_procRole(id,item){
+  var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯" ]
+  var skills="";
+  var resp="";
+  uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
+  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId=186100010&type=SkillContainer&roleUid=";
+  requrl(uidurl,function (){
+    if (xp.readyState==4 && xp.status==200){
+          uid=getuid(xp.responseText);
+          requrl(skillurl+uid,function (){
+            if (xp.readyState==4 && xp.status==200){
+                  skills=matchArr(tgskills,xp.responseText);
+                  addskilltext(item,skills);
+                }
+           }
+          );
+        }
+  }
+  );
 }
 
 function addskilltext(item,str){
@@ -87,8 +108,7 @@ function runview(){
     try{
       a=tbli[i].getElementsByTagName("a")[0]
       id=getroleid(a.href)
-      skillstr=getroleskills(id)
-      addskilltext(a,skillstr)
+      procRole(id,a)
     }
     catch(err){
       console.log(err)
@@ -101,8 +121,9 @@ elmBtdiv.className="controllbar";
 elmBtdiv.innerHTML="<a id='btshow_all' href=\"javascript:void();\">[Show All]</a>"
 
 document.body.appendChild(elmBtdiv);
-addGlobalStyle('.controllbar{position:absolute;right:10%;top:5%;}');
+addGlobalStyle('.controllbar{position:absolute;right:10%;top:50%;}');
 
 document.getElementById('btshow_all').addEventListener('click',function(){runview();},false);
+
 
 
