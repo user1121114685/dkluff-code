@@ -69,7 +69,7 @@ function procRole(id,item){
   );
 }
 function old_procRole(id,item){
-  var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯","虬枝","金蛇","玲珑" ]
+  //////var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯","虬枝","金蛇","玲珑" ]
   var skills="";
   var resp="";
   uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
@@ -138,7 +138,7 @@ function getCookie(cname) {
 var elmBtdiv = document.createElement('div');
 elmBtdiv.className="controllbar";
 elmBtdiv.innerHTML="<a id='btshow_all' href=\"javascript:void();\">[Show All]</a></br>"+
-                    "<textarea id='wantedskills' rows='1' cols='40'>心佛,五郎,古谱,九宫,鸳鸯,虬枝,金蛇,玲珑</textarea>"
+                    "<textarea id='wantedskills' rows='1' cols='40'>心佛,五郎八卦,古谱,九宫剑法,鸳鸯双刀,虬枝,金蛇剑法,玲珑骰,修罗刀</textarea>"
 
 document.body.appendChild(elmBtdiv);
 addGlobalStyle('.controllbar{position:absolute;right:10%;top:30%;}');
