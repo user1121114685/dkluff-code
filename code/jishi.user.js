@@ -49,7 +49,7 @@ function requrl(url,chkfunc){
   xp.send();
 }
 function procRole(id,item){
-  var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯","虬枝","金蛇剑法","玲珑骰" ]
+  var tgskills = ["心佛","五郎八卦","古谱","九宫剑法","鸳鸯双刀","虬枝","金蛇剑法","玲珑骰" ]
   var skills="";
   var resp="";
   uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
