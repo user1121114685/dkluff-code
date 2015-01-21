@@ -49,11 +49,11 @@ function requrl(url,chkfunc){
   xp.send();
 }
 function procRole(id,item){
-  var tgskills = ["心佛","五郎八卦","古谱","九宫剑法","鸳鸯双刀","虬枝","金蛇剑法","玲珑骰" ]
+  //var tgskills = ["心佛","五郎八卦","古谱","九宫剑法","鸳鸯双刀","虬枝","金蛇剑法","玲珑骰" ]
   var skills="";
   var resp="";
   uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
-  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId=186100010&type=SkillContainer&roleUid=";
+  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=SkillContainer&roleUid=";
   requrl(uidurl,function (){
     if (this.readyState==4 && this.status==200){
 	  uid=getuid(this.responseText);
@@ -98,6 +98,9 @@ function addskilltext(item,str){
 function runview(){
   tb=document.getElementById("findSellingGoods")
   tblist=document.getElementById("findNoticeGoods")
+  serverName=getCookie("serverName")
+  tgskills=getSkills()
+
   
   if(tblist){
     tb=tblist
@@ -115,13 +118,30 @@ function runview(){
     }
   }
 }
+function getSkills(){
+  var skills=document.getElementById('wantedskills').value.split(",")
+  console.log("Wanted skills: "+skills)
+  return skills
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
 
 var elmBtdiv = document.createElement('div');
 elmBtdiv.className="controllbar";
-elmBtdiv.innerHTML="<a id='btshow_all' href=\"javascript:void();\">[Show All]</a>"
+elmBtdiv.innerHTML="<a id='btshow_all' href=\"javascript:void();\">[Show All]</a></br>"+
+                    "<textarea id='wantedskills' rows='1' cols='40'>心佛,五郎,古谱,九宫,鸳鸯,虬枝,金蛇,玲珑</textarea>"
 
 document.body.appendChild(elmBtdiv);
-addGlobalStyle('.controllbar{position:absolute;right:10%;top:50%;}');
+addGlobalStyle('.controllbar{position:absolute;right:10%;top:30%;}');
 
 document.getElementById('btshow_all').addEventListener('click',function(){runview();},false);
 
