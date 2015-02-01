@@ -50,17 +50,25 @@ function requrl(url,chkfunc){
 }
 function procRole(id,item){
   //var tgskills = ["心佛","五郎八卦","古谱","九宫剑法","鸳鸯双刀","虬枝","金蛇剑法","玲珑骰" ]
-  var skills="";
-  var resp="";
-  uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
-  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=SkillContainer&roleUid=";
+
+  var uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
+  var skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=SkillContainer&roleUid=";
+  var jmurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=JingMaiContainer"+"&roleUid=";
   requrl(uidurl,function (){
     if (this.readyState==4 && this.status==200){
 	  uid=getuid(this.responseText);
 	  requrl(skillurl+uid,function (){
 	    if (this.readyState==4 && this.status==200){
-		  skills=matchArr(tgskills,this.responseText);
+		  var skills=matchArr(tgskills,this.responseText);
 		  addskilltext(item,skills);
+		}
+	   }
+	  );
+	  //jinmai
+	  requrl(jmurl+uid,function (){
+	    if (this.readyState==4 && this.status==200){
+		  var jm=fixjmtext(this.responseText);
+		  addjmtext(item,jm);
 		}
 	   }
 	  );
@@ -68,31 +76,26 @@ function procRole(id,item){
   }
   );
 }
-function old_funcprocrole(id,item){
-  //////var tgskills = ["心佛","五郎","古谱","九宫","鸳鸯","虬枝","金蛇","玲珑" ]
-  var skills="";
-  var resp="";
-  uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
-  skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId=186100010&type=SkillContainer&roleUid=";
-  requrl(uidurl,function (){
-    if (xp.readyState==4 && xp.status==200){
-          uid=getuid(xp.responseText);
-          requrl(skillurl+uid,function (){
-            if (xp.readyState==4 && xp.status==200){
-                  skills=matchArr(tgskills,xp.responseText);
-                  addskilltext(item,skills);
-                }
-           }
-          );
-        }
+function fixjmtext(str){
+  var p=str.match(/[0-9]*周天/g).sort()
+  var jmgood= [];
+  for(i=0;i<p.length;i++){
+	if(parseInt(p[i])>108){
+	  jmgood.push(p[i])
+	}
   }
-  );
+  return "GOOD "+jmgood.length+" :"+jmgood.join()
+	
 }
 
 function addskilltext(item,str){
   var elBtdiv = document.createElement('p');
   elBtdiv.innerHTML=str
   item.appendChild(elBtdiv);
+}
+
+function addjmtext(item,str){
+  item.getElementsByClassName('goods_tips_desc')[0].value="<div class='reolesDesc'>"+str+"</div>"
 }
 
 function matchrolelist(txt){
@@ -180,7 +183,7 @@ function runview(){
 
 function getSkills(){
   //var skills=document.getElementById('wantedskills').value.split(",")
-  var skills = localStorage.wantedskills.split(",")
+  var skills = localStorage.wantedskills.split(" ")
   console.log("Wanted skills: "+skills)
   return skills
 }
@@ -212,7 +215,7 @@ document.body.appendChild(elmBtdiv);
 if (localStorage.wantedskills){
   document.getElementById("wantedskills").value = localStorage.wantedskills
 } else {
-  localStorage.wantedskills = "神风诀,心佛,五郎八卦,古谱,九宫剑法,鸳鸯双刀,虬枝,金蛇剑法,玲珑骰,修罗刀"
+  localStorage.wantedskills = "神风诀 心佛 五郎八卦 古谱 九宫剑法 鸳鸯双刀 虬枝 金蛇剑法 玲珑骰 修罗刀 辟邪 神行无踪 雪斋"
   localStorage.ngrolelist = ""
   localStorage.okrolelist = ""
 }
