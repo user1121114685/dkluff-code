@@ -99,25 +99,28 @@ function addjmtext(item,str){
 }
 
 function matchrolelist(txt){
-  if(localStorage.okrolelist.match(txt)){
+  txt=escape(txt)
+  if(escape(localStorage.okrolelist).match(txt)){
     return "okrolename";
   }
-  if(localStorage.ngrolelist.match(txt)){
+  if(escape(localStorage.ngrolelist).match(txt)){
     return "ngrolename";
   }
   return "unrolename";
 }
 function updatelist(elm,txt,rolelist,okng){
-  if(rolelist.match(txt)){
-    rolelist=rolelist.replace(eval("/"+txt+"/g"),"")
+  etxt=escape(txt);
+  rolelist=escape(rolelist);
+  if(rolelist.match(etxt)){
+    rolelist=rolelist.replace(eval("/"+etxt+"/g"),"")
   }else{
-    rolelist+=txt
+    rolelist+=etxt
   }
   
   if(okng){
-    localStorage.okrolelist = rolelist;
+    localStorage.okrolelist = unescape(rolelist);
   }else{
-    localStorage.ngrolelist = rolelist;
+    localStorage.ngrolelist = unescape(rolelist);
   }
   elm.id=matchrolelist(txt)
   console.log(localStorage.ngrolelist+" NG");
