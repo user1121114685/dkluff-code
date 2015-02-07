@@ -88,7 +88,9 @@ if __name__ == "__main__":
 
   p1=run(f,s1,e1)
   p2=run(f,s2,e2)
-  print p1,":",p2
+  print
+  print sorted(p1),":",sorted(p2)
+  print
   printrolls(p1)
   printrolls(p2)
 
