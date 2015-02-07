@@ -25,20 +25,21 @@ def countb(resultdic,item,s=1,e=6):
 def pickballs(b):
   l=len(b)
   c=random.randint(0,l-1)
+  print "picked :",c,"from",l
   r=[]
   while c>=0:
-    r.append(b[random.randint(0,c)])
+    r.append(b[random.randint(0,l-1)])
     c-=1
   return r
 
 def run(fdir,s=1,e=6,play=False):
   r = procfile(fdir)
-  balls = [ fmtdata(i[3]) for i in r ]
-  if play: return [ b[s-1:][:e-s+1] for b in balls ]
-  balls = pickballs(balls)
-  total_len =  len(balls)
+  fballs = [ fmtdata(i[3]) for i in r ]
+  if play: return [ b[s-1:][:e-s+1] for b in fballs ]
+  balls = pickballs(fballs)
+  total_len =  len(fballs)
   ballcount = { i:0 for i in range(1,MAXNUM) }
-  for i in balls:
+  for i in fballs:
     countb(resultdic=ballcount,item=i,s=s,e=e)
   #
   #print ballcount
