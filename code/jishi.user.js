@@ -114,7 +114,9 @@ function addskilltext(item,str){
 }
 
 function addjmtext(item,str){
-  item.getElementsByClassName('goods_tips_desc')[0].value="<div class='reolesDesc'>"+str+"</div>"
+  //item.getElementsByClassName('goods_tips_desc')[0].value="<div class='reolesDesc'>"+str+"</div>"
+  s=item.getElementsByClassName('goods_tips_desc')[0].value
+  item.getElementsByClassName('goods_tips_desc')[0].value=s.replace("</div>","")+str+"</div>"
 }
 
 function matchrolelist(txt){
