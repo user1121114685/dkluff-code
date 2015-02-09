@@ -42,6 +42,7 @@ function matchArr(tg,txt){
   return fd
 
 }
+
 function requrl(url,chkfunc){
   xp=new XMLHttpRequest();
   xp.onreadystatechange = chkfunc;
@@ -50,13 +51,27 @@ function requrl(url,chkfunc){
 }
 function procRole(id,item){
   //var tgskills = ["心佛","五郎八卦","古谱","九宫剑法","鸳鸯双刀","虬枝","金蛇剑法","玲珑骰" ]
+  var equarr = ["阴柔属性","太极属性","阳刚属性"]
 
   var uidurl="http://jishi.woniu.com/9yin/getTradeItem.html?itemId="+id;
   var skillurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=SkillContainer&roleUid=";
   var jmurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=JingMaiContainer"+"&roleUid=";
+  var equurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=EquipBox"+"&roleUid=";
+
   requrl(uidurl,function (){
     if (this.readyState==4 && this.status==200){
 	  uid=getuid(this.responseText);
+	  
+	  //equipment
+	  requrl(equurl+uid,function (){
+	    if (this.readyState==4 && this.status==200){
+		  var equ=matchArr(equarr,this.responseText);
+		  addskilltext(item,equ);
+		}
+	   }
+	  );
+	  
+	  //skills
 	  requrl(skillurl+uid,function (){
 	    if (this.readyState==4 && this.status==200){
 		  var skills=matchArr(tgskills,this.responseText);
@@ -64,6 +79,7 @@ function procRole(id,item){
 		}
 	   }
 	  );
+	  
 	  //jinmai
 	  requrl(jmurl+uid,function (){
 	    if (this.readyState==4 && this.status==200){
@@ -72,6 +88,9 @@ function procRole(id,item){
 		}
 	   }
 	  );
+	  
+	  
+	  
 	}
   }
   );
@@ -249,7 +268,7 @@ addGlobalStyle('.controllbar{position:absolute;right:10%;top:30%;}');
 addGlobalStyle('#ngrolename{background:gray;}');
 addGlobalStyle('#okrolename{background:green;}');
 addGlobalStyle('#exprolename{background:yellow;}');
-
+addGlobalStyle('a.pic img {opacity:0.4;width: 90px;height: 70px;border: 1px solid #fff;float: left;background: url("img/tipsImg.png") no-repeat 0 0;}');
 
 document.getElementById('btshow_all').addEventListener('click',function(){runview();},false);
 document.getElementById('btupdate').addEventListener('click',function(){updateskills();},false);
