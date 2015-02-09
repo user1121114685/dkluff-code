@@ -100,12 +100,16 @@ function addjmtext(item,str){
 
 function matchrolelist(txt){
   txt=escape(txt)
-  if(escape(localStorage.okrolelist).match(txt)){
-    return "okrolename";
-  }
   if(escape(localStorage.ngrolelist).match(txt)){
     return "ngrolename";
   }
+  if(escape(localStorage.exprolelist).match(txt)){
+    return "exprolename";
+  }
+  if(escape(localStorage.okrolelist).match(txt)){
+    return "okrolename";
+  }
+  
   return "unrolename";
 }
 function updatelist(elm,txt,rolelist,okng){
@@ -117,14 +121,20 @@ function updatelist(elm,txt,rolelist,okng){
     rolelist+=etxt
   }
   
-  if(okng){
+  if(okng == 2){
     localStorage.okrolelist = unescape(rolelist);
-  }else{
+  }
+  if(okng ==1){
+    localStorage.exprolelist = unescape(rolelist);
+  }
+  if(okng ==0){
     localStorage.ngrolelist = unescape(rolelist);
   }
   elm.id=matchrolelist(txt)
   console.log(localStorage.ngrolelist+" NG");
   console.log(localStorage.okrolelist+" OK");
+  console.log(localStorage.exprolelist+" EXPENSIVE");
+
 }
 
 
@@ -148,13 +158,18 @@ function marktitdiv(elm,txt){
   //elm.className=matchrolelist(txt)
   elm.id=matchrolelist(txt)
   
-  elmdiv.innerHTML+=txt+"<a id='mark_ngp' class='mark_ng' href=\"javascript:void();\">[  NG  ]</a>" +
-           "<a id='mark_ok' class='mark_ok' href=\"javascript:void();\">[  OK  ]</a>"
+  elmdiv.innerHTML+=txt+"<a id='mark_ng' class='mark_ng' href=\"javascript:void();\">[NG]</a>" + "-"+
+					    "<a id='mark_ok' class='mark_ok' href=\"javascript:void();\">[OK]</a>"+ "-"+
+		                "<a id='mark_exp' class='mark_exp' href=\"javascript:void();\">[EXPENSIVE]</a>"
+
   
   elm.innerHTML=""
   elm.appendChild(elmdiv)
-  elm.getElementsByClassName('mark_ng')[0].addEventListener('click',function(){updatelist(elm,txt,localStorage.ngrolelist,false);},false)
-  elm.getElementsByClassName('mark_ok')[0].addEventListener('click',function(){updatelist(elm,txt,localStorage.okrolelist,true);},false)
+  elm.getElementsByClassName('mark_ok')[0].addEventListener('click',function(){updatelist(elm,txt,localStorage.okrolelist,2);},false)
+  elm.getElementsByClassName('mark_exp')[0].addEventListener('click',function(){updatelist(elm,txt,localStorage.exprolelist,1);},false)
+  elm.getElementsByClassName('mark_ng')[0].addEventListener('click',function(){updatelist(elm,txt,localStorage.ngrolelist,0);},false)
+
+
    
 }
 
@@ -219,8 +234,6 @@ if (localStorage.wantedskills){
   document.getElementById("wantedskills").value = localStorage.wantedskills
 } else {
   localStorage.wantedskills = "神风诀 心佛 五郎八卦 古谱 九宫剑法 鸳鸯双刀 虬枝 金蛇剑法 玲珑骰 修罗刀 辟邪 神行无踪 雪斋"
-  localStorage.ngrolelist = ""
-  localStorage.okrolelist = ""
 }
 if(!localStorage.ngrolelist){
   localStorage.ngrolelist=""
@@ -228,10 +241,15 @@ if(!localStorage.ngrolelist){
 if(!localStorage.okrolelist){
   localStorage.okrolelist=""
 }
+if(!localStorage.exprolelist){
+  localStorage.exprolelist=""
+}
 
 addGlobalStyle('.controllbar{position:absolute;right:10%;top:30%;}');
 addGlobalStyle('#ngrolename{background:gray;}');
 addGlobalStyle('#okrolename{background:green;}');
+addGlobalStyle('#exprolename{background:yellow;}');
+
 
 document.getElementById('btshow_all').addEventListener('click',function(){runview();},false);
 document.getElementById('btupdate').addEventListener('click',function(){updateskills();},false);
