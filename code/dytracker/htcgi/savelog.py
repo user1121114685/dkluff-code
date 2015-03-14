@@ -8,7 +8,6 @@ form = cgi.FieldStorage()
 
 f = open('/tmp/hb.log','a')
 print >>f ,form.value
-f.close()
 
 print "Content-Type: text/html \r"
 print "\r"
