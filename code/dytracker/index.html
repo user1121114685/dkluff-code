@@ -1,21 +1,104 @@
 <!DOCTYPE html>
-<html>
-    <body>
-        
-        <div id="result">Result: </div>
-        
-        <script>
-            // Check browser support
-            if (typeof(Storage) != "undefined") {
-                // Store
-                //localStorage.setItem("lastname", "Smith");
-                // Retrieve
-                document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-            } else {
-                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-            }
-            localStorage.clear();
-        </script>
-        
-    </body>
+<html lang="en" manifest="app.manifest">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I will be Reborn</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+             
+  </head>
+  <body>
+    <div class="container" id="maincnt" ng-app="hbRecorder" ng-controller="hbCtrlMain">
+      <h1>Progress: $<span id="curmoney">{{ curmoney }}/{{ targetmoney }}</span></h1>
+      <br>
+
+      <div class="progress">
+        <div class="progress-bar" 
+          role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" 
+          style="min-width: 2em; width: {{ curmoney*100.00/targetmoney }}%;">
+          <span id="prgbar-span">{{ curmoney*100.00/targetmoney | number:2 }}% Complete</span>
+          </div>
+      </div>
+      <h1/>
+
+      <ul class="list-group" id="btns">
+        <li class="list-group-item" ng-repeat="x in hbs">
+          <div class="btn-group">
+            <button type="button" class="btn btn-lg {{ gettheme(x.isBadhb)}}" 
+              ng-click="recordHB(x)">{{ x.name | uppercase }} 
+            <span class="badge">{{ x.count }}</span>
+          </button> 
+          <button type="button" 
+            class="btn btn-lg dropdown-toggle {{ gettheme(x.isBadhb)}}" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span> 
+                <span class="sr-only">Toggle Dropdown</span> 
+          </button> 
+                <ul class="dropdown-menu" role="menu"> 
+                <li><a href="#" ng-click="undoHB(x)">Undo</a></li> 
+                <li class="_divider"></li> 
+                <li><a href="#" ng-click="resetHB(x)">Reset</a></li> \
+                </ul>
+          </div>
+        </li>
+      </ul>
+
+          <!-- info log div-->
+          <pre>{{ hblog }}</pre>
+
+
+
+
+          <div>
+            <button class="btn btn-default btn-block" type="button" ng-click="resetAll()" >Reset All</button>
+            <br>
+            <br>
+          </div>
+
+      <div >
+          <div class="btn-block">
+            <div class="input-group" >
+              <input type="text" class="form-control" placeholder="StartMoney: $" ng-model="istartm">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" ng-click="chgstartmoney()">
+                        Change StartMoney
+                      </button>
+                     </span>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="btn-block">
+            <div class="input-group" >
+              <input type="text" class="form-control" placeholder="TargetMoney: $" ng-model="itargetm">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" ng-click="chgtargetmoney()">
+                        Change TargetMoney
+                      </button>
+                     </span>
+            </div>
+          <div>
+
+          </div><!-- end row div-->
+
+    </div>
+
+
+    <script src="angular.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+    </script>
+  </body>
 </html>
