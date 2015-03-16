@@ -2,12 +2,14 @@
 import cgi
 import socket
 import os
-
+import tempfile
 
 form = cgi.FieldStorage()
+tmplog = tempfile.mkstemp(dir='/logtmp/')[1]
 
-f = open('/tmp/hb.log','a')
-print >>f ,form.value
+with open(tmplog,'a') as f:
+  print >>f ,form.value
+  #f.writelines(form.value)
 
 print "Content-Type: text/html \r"
 print "\r"

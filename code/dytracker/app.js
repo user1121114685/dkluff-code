@@ -16,9 +16,11 @@ app.controller("hbCtrlMain", function($scope,$http) {
     {"name":"smoking","count":0,"isBadhb":true,"weight":-1},
     {"name":"lsleep","count":0,"isBadhb":true,"weight":-10},
     {"name":"mt","count":0,"isBadhb":true,"weight":-50},
+    {"name":"badthing-10","count":0,"isBadhb":true,"weight":-10},
     {"name":"test","count":0,"isBadhb":false,"weight":0},
     {"name":"gym","count":0,"isBadhb":false,"weight":10},
     {"name":"esleep","count":0,"isBadhb":false,"weight":10},
+    {"name":"goodthing+10","count":0,"isBadhb":false,"weight":10},
   ];
   if(!localStorage.startmoney){
         localStorage.startmoney=200;
@@ -78,9 +80,10 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.resetAll = function () {
     r=confirm("ResetALL? Are you sure?");
     if(r){
-      $http.post('/htcgi/savelog.py', $scope.hblog).success();
       localStorage.clear();
-      //location.reload();
+      $http.post('/htcgi/savelog.py', $scope.hblog).success(function (){
+        location.reload();
+      });
     }
   }
 
