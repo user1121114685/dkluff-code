@@ -4,18 +4,19 @@ var app = angular.module("hbRecorder", []);
 
 app.controller("hbCtrlMain", function($scope,$http) {
   //init
-  $scope.sumlog=""
   $scope.ChkSleep =  function (){
     var goodcount = 0;
+    var ttcount = 0;
     //to reverse sleep weight
     this.chk = function (){
+      ttcount+=1;
       n = new Date();
       k = n.getHours();
       $scope.hblog += "TotalSmoked,"+$scope.hbs[0].count+","+n.toDateString()+"\n";
       $scope.hbs[0].count = 0; //new day,reset smoking count
       if(k <= 23 && k>12){
         goodcount+=1;
-        $scope.hblog += "TotalGoodSleep,"+goodcount+","+n.toDateString()+"\n";
+        $scope.hblog += "TotalGoodSleep,"+goodcount+"/"+ttcount+","+n.toDateString()+"\n";
         return -1;
       }
       return 1;
@@ -39,7 +40,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
 
   if(!localStorage.startmoney){
-        localStorage.startmoney=200;
+        localStorage.startmoney=300;
   }
   if(!localStorage.targetmoney){
     localStorage.targetmoney=parseInt(localStorage.startmoney)+300;
@@ -74,7 +75,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   }
 
   $scope.calmoney = function (c,t){
-    w=t.weight;;
+    w=t.weight;
     if(t.fchk){ w*=t.fchk.chk();}
     if(t.goal >= t.count+(c<0?1:0)){w=0;}
     $scope.curmoney = parseInt($scope.curmoney)+c*w;
