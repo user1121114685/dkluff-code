@@ -73,6 +73,15 @@
             <br>
             <br>
             <button class="btn btn-default btn-block" type="button" ng-click="resetAll(1)" >Reset & Save</button>
+            <br>
+            <br>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="{{ startdate }}" ng-model="tmpdate">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="setstartdate()">Change Start Date</button>
+                </span>
+            </div><!-- /input-group -->
+
           </div>
 
 

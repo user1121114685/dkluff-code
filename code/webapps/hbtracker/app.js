@@ -57,6 +57,9 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
   //End init
 
+  $scope.setstartdate = function (){
+    $scope.startdate = new Date($scope.tmpdate);
+  }
 
   $scope.settheme = function (t){
     if((t.goal-t.count)*t.weight >0){
@@ -97,6 +100,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
       $scope.hblog = "Log Saved\n";
     });
   }
+
   $scope.resetAll = function (c) {
     r=confirm("ResetALL? Are you sure?");
     if(r){
