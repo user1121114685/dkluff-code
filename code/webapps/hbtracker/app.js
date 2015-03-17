@@ -97,10 +97,14 @@ app.controller("hbCtrlMain", function($scope,$http) {
       $scope.hblog = "Log Saved\n";
     });
   }
-  $scope.resetAll = function () {
+  $scope.resetAll = function (c) {
     r=confirm("ResetALL? Are you sure?");
     if(r){
       localStorage.clear();
+      if(c<0){
+        location.reload();
+        return 1;
+      }
       $http.post('/htcgi/savelog.py', $scope.hblog).success(function (){
         location.reload();
       });
