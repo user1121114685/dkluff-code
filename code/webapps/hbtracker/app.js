@@ -27,10 +27,10 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.hbs =  [
     {"name":"smoking","count":0,"weight":-10,"goal":10},
     {"name":"mt","count":0,"weight":-50,"goal":1},
-    {"name":"badthing-10","count":0,"weight":-10,"goal":0},
+    {"name":"badthing","count":0,"weight":-10,"goal":0},
     {"name":"test","count":0,"weight":0,"goal":10},
     {"name":"gym","count":0,"weight":50,"goal":3},
-    {"name":"goodthing+10","count":0,"weight":10,"goal":1},
+    {"name":"goodthing","count":0,"weight":10,"goal":1},
     {"name":"sleep","count":0,"weight":-50,"goal":1,"fchk":new $scope.ChkSleep()},
   ];
 
