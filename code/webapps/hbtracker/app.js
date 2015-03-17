@@ -57,7 +57,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
   //End init
 
-  $scope.setVars = function (){
+  $scope.setstartdate = function (){
     $scope.startdate = new Date($scope.tmpdate);
   }
 
