@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="app.manifest">
+<html lang="en" manifest="-app.manifest">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
   </head>
   <body>
     <div class="container" id="maincnt" ng-app="hbRecorder" ng-controller="hbCtrlMain">
-      <h1>Progress: $<span id="curmoney">{{ curmoney }}/{{ targetmoney }}</span></h1>
+      <h3>$<span id="curmoney">{{ curmoney }}/{{ targetmoney }} --Start@: {{ startdate.toDateString()}}</span></h3>
       <br>
 
       <div class="progress">
@@ -31,21 +31,29 @@
           </div>
       </div>
       <h1/>
+      <div class="progress">
+        <div class="progress-bar progress-bar-warning" 
+          role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" 
+          style="min-width: 2em; width: {{ (nowdate.getDate() - startdate.getDate()+1)*100.00/accperiod }}%;">
+          <span id="prgbar-span">{{ nowdate.getDate() - startdate.getDate() +1 }}/{{ accperiod }} Days</span>
+          </div>
+      </div>
+      <h1/>
 
       <ul class="list-group" id="btns">
         <li class="list-group-item" ng-repeat="x in hbs">
           <div class="btn-group">
-            <button type="button" class="btn btn-lg {{ gettheme(x.isBadhb)}}" 
-              ng-click="recordHB(x)">{{ x.name | uppercase }} 
+            <button type="button" class="btn btn-lg {{ x.theme }}" 
+              ng-click="recordHB(x,1)">{{ x.name | uppercase }} 
             <span class="badge">{{ x.count }}</span>
           </button> 
           <button type="button" 
-            class="btn btn-lg dropdown-toggle {{ gettheme(x.isBadhb)}}" data-toggle="dropdown" aria-expanded="false">
+            class="btn btn-lg dropdown-toggle {{ x.theme }}" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span> 
                 <span class="sr-only">Toggle Dropdown</span> 
           </button> 
                 <ul class="dropdown-menu" role="menu"> 
-                <li><a href="#" ng-click="undoHB(x)">Undo</a></li> 
+                <li><a href="#" ng-click="recordHB(x,-1)">Undo</a></li> 
                 <li class="_divider"></li> 
                 <li><a href="#" ng-click="resetHB(x)">Reset</a></li> \
                 </ul>
@@ -57,39 +65,15 @@
           <pre>{{ hblog }}</pre>
 
 
-
-
           <div>
+            <button class="btn btn-default btn-block" type="button" ng-click="savelog()" >Save Log ...</button>
+            <br>
+            <br>
             <button class="btn btn-default btn-block" type="button" ng-click="resetAll()" >Reset All</button>
             <br>
             <br>
           </div>
 
-      <div >
-          <div class="btn-block">
-            <div class="input-group" >
-              <input type="text" class="form-control" placeholder="StartMoney: $" ng-model="istartm">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" ng-click="chgstartmoney()">
-                        Change StartMoney
-                      </button>
-                     </span>
-            </div>
-          </div>
-          <br>
-          <br>
-          <div class="btn-block">
-            <div class="input-group" >
-              <input type="text" class="form-control" placeholder="TargetMoney: $" ng-model="itargetm">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" ng-click="chgtargetmoney()">
-                        Change TargetMoney
-                      </button>
-                     </span>
-            </div>
-          <div>
-
-          </div><!-- end row div-->
 
     </div>
 

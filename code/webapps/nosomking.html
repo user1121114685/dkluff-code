@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2015 by anonymous (http://jsbin.com/vagideyizi/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta http-equiv="Content-type" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+  <title>No Smoking</title>
+<style id="jsbin-css">
+.btn {
+  width:100%;
+  height:50px;
+}
+
+
+</style>
+</head>
+<body>
+  <div id='maindiv' >
+<p id='result'>Earned: </p>
+
+    <button class="btn" id='smoking' onclick='pluscig(bid="smoking")'>Smoking</button>
+    <br>
+    <br>
+    <button class="btn" id='mtb' onclick='pluscig(bid="mtb")'>MT</button>
+    <br>
+    <br>
+    <button class="btn" id='gym' onclick='pluscig(bid="gym")'>GYM</button>
+
+    
+    
+    <br>
+    <p>LOGGING:</p>
+    <button onclick='undocig("smoking")'>Undo Cig</button>
+    <button onclick='undocig("mtb")'>Undo MT</button>
+    <button onclick='undocig("gym")'>Undo GYM</button>
+    
+    <ol id='smokinglog'>
+    </ol>
+    <ol id='mtblog'>
+    </ol>
+    <ol id='gymlog'>
+    </ol>
+    <br>
+    <br>
+    <button onclick="reset()">Reset</button>
+    
+  </div>
+<script id="jsbin-javascript">
+var c = {"smoking":0,"mtb":0,"gym":0};
+var startmoney=200;
+
+function calresult(){
+  s=startmoney+c["gym"]*10-c["smoking"]-c["mtb"]*10;
+  document.getElementById('result').innerHTML="Earned: "+s;
+}
+
+function pluscig(bid){
+  c[bid]+=1;
+ 
+  document.getElementById(bid).innerHTML=bid.toUpperCase()+": [ "+c[bid]+" ]";
+  
+  var p=document.createElement('li');
+  p.innerHTML = bid+" , "+Date();
+
+  document.getElementById(bid+"log").appendChild(p);
+  calresult();
+}
+
+function reset(){
+  r=confirm("Are you sure?");
+  if(r && upload()){
+    startmoney=200;
+    c = {"smoking":0,"mtb":0,"gym":0};
+    document.getElementById("smokinglog").innerHTML ="";
+    document.getElementById("mtblog").innerHTML ="";
+    document.getElementById("gymlog").innerHTML ="";
+    document.getElementById("smoking").innerHTML ="Smoking";
+    document.getElementById("mtb").innerHTML ="MT";
+    document.getElementById("gym").innerHTML ="GYM";
+    
+  }
+}
+function upload(){
+  return true;
+}
+
+function undocig(bid){
+  c[bid]-=1;
+  document.getElementById(bid).innerHTML=bid.toUpperCase()+": [ "+c[bid]+" ]";
+  calresult();
+  log=document.getElementById(bid+"log");
+  log.removeChild(log.lastChild);
+  
+}
+</script>
+</body>
+</html>
