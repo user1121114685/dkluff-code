@@ -72,8 +72,8 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
   $scope.calmoney = function (c,t){
     w=t.weight;;
-    if(t.fchk && c>0){ c*=t.fchk.chk();}
-    if(t.goal >= t.count){w=0;}
+    if(t.fchk){ w*=t.fchk.chk();}
+    if(t.goal >= t.count && c>0){w=0;}
     $scope.curmoney = parseInt($scope.curmoney)+c*w;
     localStorage.curmoney = $scope.curmoney;
     $scope.dohblog(c,t);
