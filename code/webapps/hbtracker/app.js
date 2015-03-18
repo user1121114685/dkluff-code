@@ -37,29 +37,28 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.accperiod = 6;
   $scope.startdate = new Date();
   $scope.nowdate = $scope.startdate;
+  $scope.curmoney = 300;
+  $scope.targetmoney = $scope.curmoney*2;
 
 
-  if(!localStorage.startmoney){
-        localStorage.startmoney=300;
+  function savevars(){
+    localStorage.curmoney = $scope.curmoney;
+    localStorage.startdate = $scope.startdate;
   }
-  if(!localStorage.targetmoney){
-    localStorage.targetmoney=parseInt(localStorage.startmoney)+300;
+  function readvars(){
+    $scope.curmoney = localStorage.curmoney
+    $scope.startdate = new Date(localStorage.startdate);
   }
-  if(!localStorage.curmoney | localStorage.curmoney<=0){
-    localStorage.curmoney=localStorage.startmoney
-  }
-
-  function readmoney(){
-    $scope.curmoney = localStorage.curmoney;
-    $scope.targetmoney = localStorage.targetmoney;
-    $scope.startmoney = localStorage.startmoney;
-  }
-  readmoney();
+  if(localStorage.curmoney) {readvars()};
 
   //End init
 
-  $scope.setstartdate = function (){
-    $scope.startdate = new Date($scope.tmpdate);
+  $scope.updatevars = function (){
+    if($scope.tmpdate){$scope.startdate = new Date($scope.tmpdate);}
+    if($scope.tmpcurm){$scope.curmoney = parseInt($scope.tmpcurm);}
+    if($scope.tmptargetmoney){$scope.targetmoney = parseInt($scope.tmptartgetm);}
+    if($scope.tmpacc){$scope.accperiod = parseInt($scope.tmpacc);}
+    savevars();
   }
 
   $scope.settheme = function (t){
@@ -78,8 +77,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
     w=t.weight;
     if(t.fchk){ w*=t.fchk.chk();}
     if(t.goal >= t.count+(c<0?1:0)){w=0;}
-    $scope.curmoney = parseInt($scope.curmoney)+c*w;
-    localStorage.curmoney = $scope.curmoney;
+    $scope.curmoney += c*w;
     $scope.dohblog(c,t);
     $scope.nowdate = new Date();
   }

@@ -76,10 +76,18 @@
             <br>
             <br>
             <div class="input-group">
+              <p><a href="#" ng-click="updatevars()">UndateVars</a></p>
+                <br>StartDate:
                 <input type="text" class="form-control" placeholder="{{ startdate }}" ng-model="tmpdate">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="setstartdate()">Change Start Date</button>
-                </span>
+                <br>Accperiod Days:
+                <input type="text" class="form-control" placeholder="{{ accperiod }}" ng-model="tmpacc">
+                <br>Curmoney:
+                <input type="text" class="form-control" placeholder="{{ curmoney }}" ng-model="tmpcurm">
+                <br>TargetMoney:
+                <input type="text" class="form-control" placeholder="{{ targetmoney }}" ng-model="tmptartgetm">
+                <br>
+                <br>
+                <a href="#" ng-click="updatevars()">UndateVars</a>
             </div><!-- /input-group -->
 
           </div>
