@@ -81,6 +81,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
     $scope.curmoney = parseInt($scope.curmoney)+c*w;
     localStorage.curmoney = $scope.curmoney;
     $scope.dohblog(c,t);
+    $scope.nowdate = new Date();
   }
 
 
