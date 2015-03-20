@@ -79,9 +79,9 @@ app.controller("hbCtrlMain", function($scope,$http) {
       l=this.tmpsmoking.pop()
       if(l<=b.basecount){
         bf.extcount+=c;
-        b.count = l;
         awd = c*bf.award;
       }
+      b.count = l;
     }
     bf.setextinfo();
     $scope.curmoney += awd;
