@@ -1,3 +1,5 @@
-sed -i '$d' app.manifest
-echo "#`date`" >> app.manifest
+appmf="app.manifest"
+[ -e $appmf ] || mv "$appmf.test" $appmf
+sed -i '$d' $appmf
+echo "#`date`" >> $appmf
 python main.py

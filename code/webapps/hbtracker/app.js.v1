@@ -2,97 +2,38 @@ var app = angular.module("hbRecorder", []);
 // to convert js time to python: time.strptime("Wed Mar 18 2015 01:13:06",'%a %b %d %Y %H:%M:%S')
 
 //common lib
-function chkv_time(min,max){
-  n = new Date();
-  k = n.getHours();
-  if(k>=min && k<=max){
-    return true;
-  }
-  return false;
-}
 
 app.controller("hbCtrlMain", function($scope,$http) {
   //init
-  $scope.Chkfunc = function (){
-    this.extcount = 0;
-    this.extinfo = "";
-    this.setextinfo = function(){
-      this.extinfo = " - /Good:"+this.extcount+"/";
-    }
-    this.chcount = function (t,c){
-      return c;
-    }
-    this.chweight = function(t,w){
-      return w;
+  $scope.ChkSleep =  function (){
+    var goodcount = 0;
+    var ttcount = 0;
+    //to reverse sleep weight
+    this.chk = function (){
+      ttcount+=1;
+      n = new Date();
+      k = n.getHours();
+      $scope.hblog += "TotalSmoked,"+$scope.hbs[0].count+","+n.toDateString()+"\n";
+      $scope.hbs[0].count = 0; //new day,reset smoking count
+      if(k <= 23 && k>12){
+        goodcount+=1;
+        $scope.hblog += "TotalGoodSleep,"+goodcount+"/"+ttcount+","+n.toDateString()+"\n";
+        return -1;
+      }
+      return 1;
     }
   }
 
 
   $scope.hbs =  [
-    {"name":"smoking","count":0,"weight":-10,"basecount":10,"chkfname":"smokingchkf"},
+    {"name":"smoking","count":0,"weight":-10,"basecount":10},
     {"name":"mt","count":0,"weight":-50,"basecount":1},
     {"name":"badthing","count":0,"weight":-10,"basecount":0},
-    {"name":"test","count":0,"weight":0,"basecount":10,"chkfname":""},
+    {"name":"test","count":0,"weight":0,"basecount":10},
     {"name":"gym","count":0,"weight":50,"basecount":3},
     {"name":"goodthing","count":0,"weight":10,"basecount":0},
-    {"name":"sleep","count":0,"weight":-50,"basecount":0,"chkfname":"sleepchkf"},
+    {"name":"sleep","count":0,"weight":-50,"basecount":0,"fchk":new $scope.ChkSleep()},
   ];
-
-
-
-  //set sleep chk
-  $scope.Sleepchkf = new $scope.Chkfunc();
-  $scope.Sleepchkf.chweight = function (t,w){
-    var ww = 1;
-    if(chkv_time(12,23)){
-      ww = -1;
-    }
-    return ww*w;
-  }
-
-  $scope.Sleepchkf.chcount = function (t,c){
-    if(chkv_time(12,23)){ this.extcount+=c;}
-    this.setextinfo();
-
-    //day check
-    this.daycheck_smoking(t,c);
-    return c;
-  }
-
-  $scope.Sleepchkf.tmpsmoking = [];
-  $scope.Sleepchkf.daycheck_smoking = function (t,c){
-    //day count smoking
-    b=$scope.hbs[0];
-    bf = $scope.chkflist[b.chkfname]
-    awd = 0;
-    if(c>0){
-      if(b.count<=b.basecount){
-        bf.extcount+=c;
-        awd = c*bf.award;
-      }
-      this.tmpsmoking.push(b.count);
-      b.count = 0;
-    }
-    if(c<0){
-      l=this.tmpsmoking.pop()
-      if(l<=b.basecount){
-        bf.extcount+=c;
-        b.count = l;
-        awd = c*bf.award;
-      }
-    }
-    bf.setextinfo();
-    if($scope.ifcalchk){$scope.curmoney += awd;}
-  }
-
-  $scope.Smokingchkf = new $scope.Chkfunc();
-  $scope.Smokingchkf.award = 50;
-
-
-  $scope.chkflist = {
-    "sleepchkf":$scope.Sleepchkf,
-    "smokingchkf":$scope.Smokingchkf,
-  }
 
   $scope.accperiod = 6;
   $scope.startdate = new Date();
@@ -102,15 +43,14 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.ifcalchk = true;
   $scope.ifcalchktxt = "";
 
+
   function savevars(){
     localStorage.curmoney = $scope.curmoney;
     localStorage.startdate = $scope.startdate;
-    localStorage.hbs = JSON.stringify($scope.hbs);
   }
   function readvars(){
-    $scope.curmoney = parseInt(localStorage.curmoney);
+    $scope.curmoney = localStorage.curmoney
     $scope.startdate = new Date(localStorage.startdate);
-    $scope.hbs = JSON.parse(localStorage.hbs);
   }
   if(localStorage.curmoney) {readvars()};
 
@@ -132,7 +72,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   }
 
   $scope.hblog = "";
-  $scope.dohblog = function (t,c){
+  $scope.dohblog = function (c,t){
     $scope.hblog += t.name+","+Date()+","+c+","+$scope.curmoney+"\n";
   }
   
@@ -146,32 +86,28 @@ app.controller("hbCtrlMain", function($scope,$http) {
     $scope.ifcalchktxt = "";
   }
 
-  $scope.calmoney = function (t,c){
+  $scope.calmoney = function (c,t){
     if(!$scope.ifcalchk){
       return
     }
     w=t.weight;
-    if(t.chkfname){ w=$scope.chkflist[t.chkfname].chweight(t,w);}
+    if(t.fchk){ w*=t.fchk.chk();}
     if(t.basecount >= t.count+(c<0?1:0)){w=0;}
     $scope.curmoney += c*w;
-    $scope.dohblog(t,c);
+    $scope.dohblog(c,t);
     $scope.nowdate = new Date();
   }
 
 
   $scope.recordHB = function (t,c){
-    if(t.chkfname){c=$scope.chkflist[t.chkfname].chcount(t,c);}
     t.count+=c;
     if(t.count <= 0){ t.count = 0;}
     t.theme = $scope.settheme(t);
-    $scope.calmoney(t,c);
-    savevars();
+    $scope.calmoney(c,t);
   }
 
   $scope.resetHB = function (t) {
     t.count = 0;
-    if(t.chkfname){$scope.chkflist[t.chkfname].extcount=0;}
-    savevars();
   }
 
 

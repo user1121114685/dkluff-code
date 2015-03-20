@@ -49,8 +49,8 @@
           <div class="btn-group">
             <button type="button" class="btn btn-lg {{ x.theme }}" 
               ng-click="recordHB(x,1)">{{ x.name+" "+x.weight | uppercase }} 
-            <span class="badge">{{ x.count }}</span>
-          </button>  {{ ifcalchktxt }}
+              <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+          </button> 
           <button type="button" 
             class="btn btn-lg dropdown-toggle {{ x.theme }}" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span> 
@@ -61,7 +61,7 @@
                 <li class="_divider"></li> 
                 <li><a href="#" ng-click="resetHB(x)">Reset</a></li> \
                 </ul>
-          </div>
+          </div> {{ ifcalchktxt }}
         </li>
       </ul>
 
