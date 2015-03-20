@@ -38,7 +38,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.startdate = new Date();
   $scope.nowdate = $scope.startdate;
   $scope.curmoney = 300;
-  $scope.targetmoney = $scope.curmoney*2;
+  $scope.targetmoney = 600;
   $scope.ifcalchk = true;
   $scope.ifcalchktxt = "";
 
@@ -58,7 +58,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.updatevars = function (){
     if($scope.tmpdate){$scope.startdate = new Date($scope.tmpdate);}
     if($scope.tmpcurm){$scope.curmoney = parseInt($scope.tmpcurm);}
-    if($scope.tmptargetmoney){$scope.targetmoney = parseInt($scope.tmptartgetm);}
+    if($scope.tmptgtm){$scope.targetmoney = parseInt($scope.tmptgtm);}
     if($scope.tmpacc){$scope.accperiod = parseInt($scope.tmpacc);}
     savevars();
   }
