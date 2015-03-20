@@ -25,13 +25,13 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
 
   $scope.hbs =  [
-    {"name":"smoking","count":0,"weight":-10,"goal":10},
-    {"name":"mt","count":0,"weight":-50,"goal":1},
-    {"name":"badthing","count":0,"weight":-10,"goal":0},
-    {"name":"test","count":0,"weight":0,"goal":10},
-    {"name":"gym","count":0,"weight":50,"goal":3},
-    {"name":"goodthing","count":0,"weight":10,"goal":1},
-    {"name":"sleep","count":0,"weight":-50,"goal":1,"fchk":new $scope.ChkSleep()},
+    {"name":"smoking","count":0,"weight":-10,"basecount":10},
+    {"name":"mt","count":0,"weight":-50,"basecount":1},
+    {"name":"badthing","count":0,"weight":-10,"basecount":0},
+    {"name":"test","count":0,"weight":0,"basecount":10},
+    {"name":"gym","count":0,"weight":50,"basecount":3},
+    {"name":"goodthing","count":0,"weight":10,"basecount":0},
+    {"name":"sleep","count":0,"weight":-50,"basecount":0,"fchk":new $scope.ChkSleep()},
   ];
 
   $scope.accperiod = 6;
@@ -39,6 +39,8 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.nowdate = $scope.startdate;
   $scope.curmoney = 300;
   $scope.targetmoney = $scope.curmoney*2;
+  $scope.ifcalchk = true;
+  $scope.ifcalchktxt = "";
 
 
   function savevars(){
@@ -62,7 +64,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   }
 
   $scope.settheme = function (t){
-    if((t.goal-t.count)*t.weight >0){
+    if((t.basecount-t.count)*t.weight >0){
       return "btn-danger"; 
     }
     return "btn-success";
@@ -72,11 +74,24 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.dohblog = function (c,t){
     $scope.hblog += t.name+","+Date()+","+c+","+$scope.curmoney+"\n";
   }
+  
+
+
+  $scope.chkbox = function (){
+    if(!$scope.ifcalchk){
+      $scope.ifcalchktxt = "Cal Off";
+      return
+    }
+    $scope.ifcalchktxt = "";
+  }
 
   $scope.calmoney = function (c,t){
+    if(!$scope.ifcalchk){
+      return
+    }
     w=t.weight;
     if(t.fchk){ w*=t.fchk.chk();}
-    if(t.goal >= t.count+(c<0?1:0)){w=0;}
+    if(t.basecount >= t.count+(c<0?1:0)){w=0;}
     $scope.curmoney += c*w;
     $scope.dohblog(c,t);
     $scope.nowdate = new Date();

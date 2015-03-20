@@ -19,8 +19,14 @@
              
   </head>
   <body>
-    <div class="container" id="maincnt" ng-app="hbRecorder" ng-controller="hbCtrlMain">
-      <h3>$<span id="curmoney">{{ curmoney }}/{{ targetmoney }} --Start@: {{ startdate.toDateString()}}</span></h3>
+    <div class="container" ng-app="hbRecorder" ng-controller="hbCtrlMain">
+      <h3>$<span>{{ curmoney }}/{{ targetmoney }} --Start@: {{ startdate.toDateString()}}</span>
+        <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="ifcalchk" ng-click="chkbox()"> Cal Money
+            </label>
+        </div>
+      </h3>
       <br>
 
       <div class="progress">
@@ -30,7 +36,6 @@
           <span id="prgbar-span">{{ curmoney*100.00/targetmoney | number:2 }}% Complete</span>
           </div>
       </div>
-      <h1/>
       <div class="progress">
         <div class="progress-bar progress-bar-warning" 
           role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" 
@@ -38,7 +43,6 @@
           <span id="prgbar-span">{{ nowdate.getDate() - startdate.getDate() +1 }}/{{ accperiod }} Days</span>
           </div>
       </div>
-      <h1/>
 
       <ul class="list-group" id="btns">
         <li class="list-group-item" ng-repeat="x in hbs">
@@ -46,7 +50,7 @@
             <button type="button" class="btn btn-lg {{ x.theme }}" 
               ng-click="recordHB(x,1)">{{ x.name+" "+x.weight | uppercase }} 
             <span class="badge">{{ x.count }}</span>
-          </button> 
+          </button>  {{ ifcalchktxt }}
           <button type="button" 
             class="btn btn-lg dropdown-toggle {{ x.theme }}" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span> 
@@ -75,16 +79,21 @@
             <button class="btn btn-default btn-block" type="button" ng-click="resetAll(1)" >Reset & Save</button>
             <br>
             <br>
+            <br>
             <div class="input-group">
               <p><a href="#" ng-click="updatevars()">UndateVars</a></p>
-                <br>StartDate:
-                <input type="text" class="form-control" placeholder="{{ startdate }}" ng-model="tmpdate">
-                <br>Accperiod Days:
-                <input type="text" class="form-control" placeholder="{{ accperiod }}" ng-model="tmpacc">
+                <br>
+                StartDate:
+                <br>
+                <input type="date" class="form-control" placeholder="{{ startdate }}" ng-model="tmpdate">
+                <br>
+                <br>
+                Accperiod Days:
+                <input type="number" class="form-control" placeholder="{{ accperiod }}" ng-model="tmpacc">
                 <br>Curmoney:
-                <input type="text" class="form-control" placeholder="{{ curmoney }}" ng-model="tmpcurm">
+                <input type="number" class="form-control" placeholder="{{ curmoney }}" ng-model="tmpcurm">
                 <br>TargetMoney:
-                <input type="text" class="form-control" placeholder="{{ targetmoney }}" ng-model="tmptartgetm">
+                <input type="number" class="form-control" placeholder="{{ targetmoney }}" ng-model="tmptartgetm">
                 <br>
                 <br>
                 <a href="#" ng-click="updatevars()">UndateVars</a>
