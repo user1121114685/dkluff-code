@@ -55,7 +55,9 @@ app.controller("hbCtrlMain", function($scope,$http) {
     this.setextinfo();
 
     //day check
-    this.daycheck_smoking(t,c);
+    if($scope.ifcalchk){
+      this.daycheck_smoking(t,c);
+    }
     return c;
   }
 
@@ -82,7 +84,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
       }
     }
     bf.setextinfo();
-    if($scope.ifcalchk){$scope.curmoney += awd;}
+    $scope.curmoney += awd;
   }
 
   $scope.Smokingchkf = new $scope.Chkfunc();
