@@ -179,7 +179,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
 
   $scope.savelog = function (){
     $http.post('/htcgi/savelog.py', $scope.hblog).success(function (){
-      $scope.hblog = "Log Saved\n";
+      $scope.hblog = "#Info:Log Saved\n";
     });
   }
 
