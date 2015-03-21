@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" manifest="app.manifest">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>--Reborn--</title>
+    <title>--Cash--</title>
 
     <!-- Bootstrap -->
     <link href="js/bootstrap.min.css" rel="stylesheet">
@@ -23,8 +23,12 @@
       <h3>$<span>{{ curmoney }}/{{ targetmoney }} --Start@: {{ startdate.toDateString()}}</span>
         <div class="checkbox">
             <label>
-              <input type="checkbox" ng-model="ifcalchk" ng-click="chkbox()"> Cal Money
+              <input type="checkbox" ng-model="ifcalchk" ng-click="chkbox()"> Input Mode
             </label>
+
+            <button type="button" class="btn btn-md" ng-click="Undo()">
+              -Undo-
+            </button>
         </div>
       </h3>
       <br>
@@ -44,30 +48,52 @@
           </div>
       </div>
 
-      <ul class="list-group" id="btns">
-        <li class="animate-repeat list-group-item" ng-repeat="x in hbs">
-          <div class="btn-group">
-            <button type="button" class="btn btn-lg {{ x.theme }}" 
-              ng-click="recordHB(x,1)">{{ x.name+" "+x.weight | uppercase }} 
+      <!-- strat loop -->
+      <table class="table">
+        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,0)}}">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
+                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+              </button>
+        </td></tr>
+        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,1)}}">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
+                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+              </button>
+        </td></tr>
+        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,2)}}">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
+                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+              </button>
+        </td></tr>
+        <tr><td ng-repeat="x in hbs | filter:'cash' " ng-show="$even">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
+                                          <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+                                                    </button>
+        </td></tr>
+        <tr><td ng-repeat="x in hbs | filter:'cash' " ng-show="$odd">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
+                                          <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
+                                                    </button>
+        </td></tr>
+      </table>
+      <!-- end loop -->
+
+      <!-- ul class="list-group">
+        <li class="list-group-item" ng-repeat="x in hbs">
+            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
+              {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
               <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
           </button> 
-          <button type="button" 
-            class="btn btn-lg dropdown-toggle {{ x.theme }}" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span> 
-                <span class="sr-only">Toggle Dropdown</span> 
-          </button> 
-                <ul class="dropdown-menu" role="menu"> 
-                <li><a href="#" ng-click="recordHB(x,-1)">Undo</a></li> 
-                <li class="_divider"></li> 
-                <li><a href="#" ng-click="resetHB(x)">Reset</a></li>
-                </ul>
-          </div> {{ ifcalchktxt }}
         </li>
-      </ul>
+      </ul -->
 
           <!-- info log div-->
           <pre>{{ hblog }}</pre>
-
 
           <div>
             <button class="btn btn-default btn-block" type="button" ng-click="savelog()" >Save Log ...</button>
@@ -108,7 +134,7 @@
     <script src="js/angular.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/app.cash.js"></script>
     <script>
     </script>
   </body>

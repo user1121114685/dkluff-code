@@ -7,7 +7,7 @@ from time import sleep
 
 
 class Handler(CGIHTTPServer.CGIHTTPRequestHandler):
-    cgi_directories = ["/htcgi",]
+    cgi_directories = ["/htcgi","/cashtracker/htcgi",]
 
 PORT = 80
 

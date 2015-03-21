@@ -10,6 +10,13 @@ function chkv_time(min,max){
   }
   return false;
 }
+function clearlocalvars(s){
+  for(var i in localStorage){
+    if(i.match(s+"$")){
+      localStorage.removeItem(i);
+    }
+  }
+}
 
 app.controller("hbCtrlMain", function($scope,$http) {
   //init
@@ -105,16 +112,16 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.ifcalchktxt = "";
 
   function savevars(){
-    localStorage.curmoney = $scope.curmoney;
-    localStorage.startdate = $scope.startdate;
-    localStorage.hbs = JSON.stringify($scope.hbs);
+    localStorage.curmoney_hbs = $scope.curmoney;
+    localStorage.startdate_hbs = $scope.startdate;
+    localStorage.hbs_hbs = JSON.stringify($scope.hbs);
   }
   function readvars(){
-    $scope.curmoney = parseInt(localStorage.curmoney);
-    $scope.startdate = new Date(localStorage.startdate);
-    $scope.hbs = JSON.parse(localStorage.hbs);
+    $scope.curmoney = parseInt(localStorage.curmoney_hbs);
+    $scope.startdate = new Date(localStorage.startdate_hbs);
+    $scope.hbs = JSON.parse(localStorage.hbs_hbs);
   }
-  if(localStorage.curmoney) {readvars()};
+  if(localStorage.curmoney_hbs) {readvars()};
 
   //End init
 
@@ -186,7 +193,8 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.resetAll = function (c) {
     r=confirm("ResetALL? Are you sure?");
     if(r){
-      localStorage.clear();
+      //localStorage.clear();
+      clearlocalvars("_hbs");
       if(c<0){
         location.reload();
         return 1;
