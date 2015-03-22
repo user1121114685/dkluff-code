@@ -133,7 +133,7 @@ app.controller("ctr1", function($scope,$http) {
   $scope.uifilter1 = function (i){
     t=$scope.q_txt;
     p=i.skilltext.gettxt()+" "+i.gender+" "+i.equtext.gettxt()+" "+i.rolemark;
-    if(t.length == 0){return true;}
+    if(t.length == 0 && i.rolemark.match("ngrolename")){return true;}
     t=t.split(" ");
     if(matchArr(t,p).trim()){
       return true;
