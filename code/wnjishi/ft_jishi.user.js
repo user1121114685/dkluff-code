@@ -559,7 +559,9 @@ elmBtdiv2.id="angtable1";
 elmBtdiv2.innerHTML="<div ng-app='apptb1' ng-controller='ctr1'>"+
                     "<a  href='#angtable'>[GoTO Top]</a>  "+
                     "<button id='angtable' ng-click='runangtable()'>[Ang Table]</button>"+
+                    "<button id='angtable' ng-click='fetchdata()'>[Refresh]</button>"+
                     "<br>start loop<br><div>"+
+                    "<h3><input type='checkbox' ng-model='iformodel' >OrModel </h3>"+
 
                     "<label ng-repeat='w in wantedskills'>"+
                     "<input type='checkbox' ng-click='chkboxf(w)' >{{ w }}"+
@@ -570,15 +572,12 @@ elmBtdiv2.innerHTML="<div ng-app='apptb1' ng-controller='ctr1'>"+
                     "</label><br>--------------------------------------<br>"+
 
                     "Checkbox_txt:<input type='text' ng-model='q_txt'/> - "+
-                    "Comtxt:<input type='text' ng-model='q_comtxt'/> - "+
+                    " -- Any:<input type='text' ng-model='q_comtxt.$'/> - "+
 
                     "Price:<input type='number' ng-model='q_price1'/> - "+
                     "<input type='number' ng-model='q_price2'/><br>"+
 
                     "JM: <input type='number' ng-model='q_jmlen'/><br>"+
-
-                    "<input type='checkbox' ng-model='hdtxt' >Hide Txt:"+
-                    "<p ng-show='hdtxt'>{{ctslocal}}</p><br>"+
 
                     "Table:<br><table id='maintable'>"+
           "<tr ng-repeat='xxx in ctslocal | filter:uifilter1 | filter:uifilter2 | filter:q_comtxt | orderBy:tborder ' >"+
@@ -604,26 +603,38 @@ addGlobalStyle('tr,td {border: 1px solid black;}');
 
 var app = angular.module("apptb1", []);
 app.controller("ctr1", function($scope,$http) {
+
   $scope.runangtable = function (){
     $scope.ctslocal  = $scope.cts;
     markrolej();
   }
 
   $scope.cts = [];
-  $scope.url_all = "http://jishi.woniu.com/9yin/findSellingGoods.html?filterItem=4&pageIndex=";
-  $scope.ttpage = 1;
+  $scope.url_all = [];
+  $scope.url_all[0] = "http://jishi.woniu.com/9yin/findSellingGoods.html?filterItem=4&pageIndex=";
+  $scope.url_all[1] = "http://jishi.woniu.com/9yin/findNoticeGoods.html?pageIndex="
 
   //start main http
   var serverName=getCookie("serverName");
-  $http.get($scope.url_all+1).success(function(data, status, headers, config){
-    $scope.ttpage = data[0].pageInfo.totalPages
-    $scope.additemobj(data[0].pageData);
-    for(var i = $scope.ttpage;i>1;i--){
-      $http.get($scope.url_all+i).success(function(data, status, headers, config){
-       $scope.additemobj(data[0].pageData);
-      });
+  $scope.mainhttp = function (url) {
+    $http.get(url+1).success(function(data, status, headers, config){
+      var ttpage = data[0].pageInfo.totalPages
+      $scope.additemobj(data[0].pageData);
+      for(var i = ttpage;i>1;i--){
+        $http.get(url+i).success(function(data, status, headers, config){
+         $scope.additemobj(data[0].pageData);
+        });
+      }
+    });
+  }
+
+  $scope.fetchdata  = function (){
+    $scope.cts = [];
+    for(var i in $scope.url_all){
+      $scope.mainhttp($scope.url_all[i]);
     }
-  });
+  }
+  $scope.fetchdata();
   //end main http
 
   $scope.roleurl = "http://jishi.woniu.com/9yin/tradeItemDetail.html?catagory=2&itemId=";
@@ -676,6 +687,7 @@ app.controller("ctr1", function($scope,$http) {
   $scope.q_price1 = 0;
   $scope.q_price2 = 1000;
   $scope.q_jmlen = 1;
+  $scope.iformodel = true;
 
   $scope.uifilter1 = function (i){
     t=$scope.q_txt;
@@ -683,7 +695,14 @@ app.controller("ctr1", function($scope,$http) {
     p=i.skilltext.gettxt()+" "+i.gender+" "+i.equtext.gettxt()+" "+i.rolemark;
     if(t.length == 0 && i.rolemark.match("ngrolename")){return false;}
     if(t.length == 0 && !i.rolemark.match("ngrolename")){return true;}
+
     t=t.split(" ");
+    if(!$scope.iformodel){
+      for(var ti in t){
+        if(!p.match(t[ti])){return false;}
+      }
+      return true;
+    }
     if(matchArr(t,p).trim()){
       return true;
     }
