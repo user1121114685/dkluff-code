@@ -87,7 +87,7 @@ app.controller("ctr1", function($scope,$http) {
       $scope.mainhttp($scope.url_all[i]);
     }
   }
-  $scope.fetchdata();
+  //$scope.fetchdata();
   //end main http
 
   $scope.roleurl = "http://jishi.woniu.com/9yin/tradeItemDetail.html?catagory=2&itemId=";
