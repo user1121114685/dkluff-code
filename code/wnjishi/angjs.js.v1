@@ -10,11 +10,11 @@ addGlobalStyle('.controllbar2{position:absolute;right:10%;top:20%;}');
 var elmBtdiv2 = document.createElement('div');
 elmBtdiv2.id="angtable1";
 elmBtdiv2.innerHTML="<div ng-app='apptb1' ng-controller='ctr1'>"+
-                    "<a  href='#btshow_all'>[GoTO Top]</a>  "+
+                    "<a  href='#angtable'>[GoTO Top]</a>  "+
+                    "<button id='angtable' ng-click='runangtable()'>[Ang Table]</button>"+
                     "<button id='angtable' ng-click='fetchdata()'>[Refresh]</button>"+
-                    "- - - <button  ng-click='ptable()'>[PaintTable]</button>"+
-                    "<h3><input type='checkbox' ng-model='iformodel' >OrModel </h3>"+
                     "<br>start loop<br><div>"+
+                    "<h3><input type='checkbox' ng-model='iformodel' >OrModel </h3>"+
 
                     "<label ng-repeat='w in wantedskills'>"+
                     "<input type='checkbox' ng-click='chkboxf(w)' >{{ w }}"+
@@ -40,10 +40,10 @@ elmBtdiv2.innerHTML="<div ng-app='apptb1' ng-controller='ctr1'>"+
                     "<td>{{ xxx.gradeName }}</td>"+
                     "<td>{{ xxx.price }}</td>"+
                     "<td>{{ xxx.guild }}</td>"+
-                    "<td id='{{ xxx.rolemark }}'>{{ xxx.skilltext }}</td>"+
-                    "<td>- {{ xxx.equtext }}</td>"+
-                    "<td>{{ xxx.jmtext }}</td>"+
-                    "<td>{{ xxx.jmtext.split(',')[0] }}</td>"+
+                    "<td id='{{ xxx.rolemark }}'>{{ xxx.skilltext.gettxt() }}</td>"+
+                    "<td>- {{ xxx.equtext.gettxt() }}</td>"+
+                    "<td>{{ xxx.jmtext.gettxt() }}</td>"+
+                    "<td>{{ xxx.jmtext.getjmlen() }}</td>"+
                     "<td id='{{ xxx.rolemark }}'>{{ xxx.rolemark }}</td>"+
            "</tr>"+
                     "</table>"+
@@ -57,8 +57,12 @@ addGlobalStyle('tr,td {border: 1px solid black;}');
 var app = angular.module("apptb1", []);
 app.controller("ctr1", function($scope,$http) {
 
+  $scope.runangtable = function (){
+    $scope.ctslocal  = $scope.cts;
+    markrolej();
+  }
+
   $scope.cts = [];
-  $scope.ctslocal = [];
   $scope.url_all = [];
   $scope.url_all[0] = "http://jishi.woniu.com/9yin/findSellingGoods.html?filterItem=4&pageIndex=";
   $scope.url_all[1] = "http://jishi.woniu.com/9yin/findNoticeGoods.html?pageIndex="
@@ -82,7 +86,6 @@ app.controller("ctr1", function($scope,$http) {
     for(var i in $scope.url_all){
       $scope.mainhttp($scope.url_all[i]);
     }
-
   }
   //$scope.fetchdata();
   //end main http
@@ -94,27 +97,31 @@ app.controller("ctr1", function($scope,$http) {
   $scope.equurl="http://jishi.woniu.com/9yin/roleMsg.html?serverId="+serverName+"&type=EquipBox"+"&roleUid=";
   $scope.additemobj = function (p){
     for(var i in p){
-      p[i]["skilltext"] = "";
-      p[i]["equtext"] = "";
-      p[i]["jmtext"] = "";
-
-      $scope.getroledata(p[i],"skilltext",$scope.skillurl+p[i].sellerGameId,$scope.wantedskills);
-      $scope.getroledata(p[i],"equtext",$scope.equurl+p[i].sellerGameId,$scope.chktxt);
-      $scope.getroledata(p[i],"jmtext",$scope.jmurl+p[i].sellerGameId,"");
+      p[i]["skilltext"] = new $scope.getroledata($scope.skillurl+p[i].sellerGameId,$scope.wantedskills,0);
+      p[i]["equtext"] = new $scope.getroledata($scope.equurl+p[i].sellerGameId,$scope.chktxt,0);
+      p[i]["jmtext"] = new $scope.getroledata($scope.jmurl+p[i].sellerGameId,"",1)
       p[i]["rolemark"] = $scope.matchrolej(p[i].itemName);
       $scope.cts.push(p[i]);
     }
   }
-  $scope.getroledata = function (p,key,url,mtg){
+  $scope.getroledata = function (url,mtg,j){
+    var txt = "";
+    var len = 0;
+    this.gettxt = function (){
+      return txt;
+    }
+    this.getjmlen = function (){
+      return len;
+    }
     $http.get(url).success(function(data, status, headers, config){
-        txt = data[0].msg;
-        if(key == "skilltext" || key == "equtext"){
-          txt = matchArr(mtg,txt);
+        if(j==0){
+          txt = matchArr(mtg,data[0].msg);
         }
-        if(key == "jmtext"){
-          txt = fixjmtextj(txt).toString();
+        if(j==1){
+          t = fixjmtextj(data[0].msg);
+          txt = t[1];
+          len = t[0];
         }
-        p[key] = txt;
     });
   }
 
@@ -138,7 +145,7 @@ app.controller("ctr1", function($scope,$http) {
   $scope.uifilter1 = function (i){
     t=$scope.q_txt;
     i.rolemark = $scope.matchrolej(i.itemName);
-    p=i.skilltext+" "+i.gender+" "+i.equtext+" "+i.rolemark;
+    p=i.skilltext.gettxt()+" "+i.gender+" "+i.equtext.gettxt()+" "+i.rolemark;
     if(t.length == 0 && i.rolemark.match("ngrolename")){return false;}
     if(t.length == 0 && !i.rolemark.match("ngrolename")){return true;}
 
@@ -157,7 +164,7 @@ app.controller("ctr1", function($scope,$http) {
 
   $scope.uifilter2 = function (i){
     p=i.price;
-    j=parseInt(i.jmtext.split(",")[0]);
+    j=parseInt(i.jmtext.getjmlen());
     if(p>=$scope.q_price1 && p<=$scope.q_price2 && j>=$scope.q_jmlen){
       return true;
     }
@@ -173,18 +180,9 @@ app.controller("ctr1", function($scope,$http) {
       $scope.q_txt=$scope.q_txt.replace(eval("/ "+s+"/g"),"");
     }
   }
-
   $scope.matchrolej = function (txt){
      return matchrolelist(txt);
   }
-  $scope.ptable = function (){
-    if($scope.cts.length == 0){
-      $scope.fetchdata();
-    }
-    $scope.ctslocal = $scope.cts;
-    markrolej();
-  }
-
 
 });
 
