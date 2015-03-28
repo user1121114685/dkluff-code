@@ -29,6 +29,9 @@
             <button type="button" class="btn btn-md" ng-click="Undo()">
               -Undo-
             </button>
+            <button type="button" class="btn btn-ms btn-primary" ng-click="recordx()">
+              =Record=
+            </button>
         </div>
       </h3>
       <br>
@@ -49,37 +52,18 @@
       </div>
 
       <!-- strat loop -->
+      <div class="row">
+      <input type="txt" class="col-xs-4" ng-model="caltxt"/>
+      <button class="col-xs-4 btn-primary" ng-click="bkspace(1)"> BK </button>
+      <button class="col-xs-4 btn-primary" ng-click="bkspace(0)"> AC </button>
+      </div>
+      <br>
       <table class="table">
-        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,0)}}">
-            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
-                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
-                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
-              </button>
-        </td></tr>
-        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,1)}}">
-            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
-                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
-                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
-              </button>
-        </td></tr>
-        <tr><td ng-repeat="x in hbs | filter:uifilter1 " ng-show="{{uifilter2($index,3,2)}}">
-            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
-                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
-                                      <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
-              </button>
-        </td></tr>
-        <tr><td ng-repeat="x in hbs | filter:'cash' " ng-show="$even">
-            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
-                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
-                                          <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
-                                                    </button>
-        </td></tr>
-        <tr><td ng-repeat="x in hbs | filter:'cash' " ng-show="$odd">
-            <button type="button" class="btn btn-lg {{ btn_c_theme }}" ng-click="recordHB(x,1)">
-                            {{ x.name+" "+(ifcalchk?"":"\+")+(ifcalchk?x.weight:x.weight*-1) | uppercase }}
-                                          <span class="badge">{{ x.count }}{{ chkflist[x.chkfname].extinfo}} </span>
-                                                    </button>
-        </td></tr>
+        <tr ng-repeat="x in [0,4,8,12]">
+          <td ng-repeat="y in [0,1,2,3]"><button class="btn-lg btn-success" 
+              ng-click="inputchar(tochar(57-x-y))">{{ tochar(57-x-y)}}</button>
+          </td>
+        </tr>
       </table>
       <!-- end loop -->
 

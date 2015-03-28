@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           DK9yinjishi
 // @namespace      http://userscripts.org/dkluffy002
-// @include        http://jishi.woniu.com/*
+// @include        http://jishi.woniu.com/9yin/index.html
 // @include        http://192.168.137.176/*
 // ==/UserScript==
 
@@ -301,7 +301,6 @@ elmBtdiv3.className="controllbar2";
 elmBtdiv3.innerHTML="<a  href='#angtable1'>[GoTO Ang Table]</a>";
 document.body.appendChild(elmBtdiv3);
 addGlobalStyle('.controllbar2{position:absolute;right:10%;top:20%;}');
-//document.getElementById('angtable').addEventListener('click',function(){alert(1);},false);
 
 //start table
 var elmBtdiv2 = document.createElement('div');
@@ -333,12 +332,12 @@ elmBtdiv2.innerHTML="<div ng-app='apptb1' ng-controller='ctr1'>"+
           "<tr ng-repeat='xxx in ctslocal | filter:uifilter1 | filter:uifilter2 | filter:q_comtxt | orderBy:tborder ' >"+
                     "<td class='titjj' rolename='{{ xxx.itemName }}'>{{ xxx.itemName }}</td>"+
     "<td id='{{xxx.rolemark}}'>[{{$index+1}}]<a href='{{roleurl+xxx.id}}' target='_blank'>{{ xxx.itemName }}</a></td>"+
+                    "<td>- {{ xxx.equtext }}</td>"+
                     "<td>{{ xxx.gender }}<br></td>"+
                     "<td>{{ xxx.gradeName }}</td>"+
                     "<td>{{ xxx.price }}</td>"+
                     "<td>{{ xxx.guild }}</td>"+
                     "<td id='{{ xxx.rolemark }}'>{{ xxx.skilltext }}</td>"+
-                    "<td>- {{ xxx.equtext }}</td>"+
                     "<td>{{ xxx.jmtext }}</td>"+
                     "<td>{{ xxx.jmtext.split(',')[0] }}</td>"+
                     "<td id='{{ xxx.rolemark }}'>{{ xxx.rolemark }}</td>"+

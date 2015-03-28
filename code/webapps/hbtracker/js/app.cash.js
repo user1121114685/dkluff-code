@@ -48,6 +48,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   }
 
 
+
   $scope.hbs =  [
     {"name":"cig","count":0,"weight":-18,"basecount":0},
     {"name":"充值","count":0,"weight":-100,"basecount":0},
@@ -67,7 +68,7 @@ app.controller("hbCtrlMain", function($scope,$http) {
   $scope.startdate = new Date();
   $scope.nowdate = $scope.startdate;
   $scope.curmoney = 0;
-  $scope.targetmoney = -3000;
+  $scope.targetmoney = 3000;
   $scope.ifcalchk = true;
   $scope.ifcalchktxt = "";
 
@@ -178,6 +179,34 @@ app.controller("hbCtrlMain", function($scope,$http) {
         location.reload();
       });
     }
+  }
+
+  //lib2
+  $scope.caltxt="";
+  $scope.tochar = function (i){
+    return String.fromCharCode(i);
+  }
+  $scope.inputchar = function (i){
+    $scope.caltxt += i;
+
+  }
+  $scope.bkspace = function (i){
+    if(i==0){
+      $scope.caltxt="";
+      return;
+    }
+    a=$scope.caltxt;
+    $scope.caltxt = a.slice(0,a.length-1);
+  }
+  $scope.recordx = function (){
+    s=$scope.caltxt
+    for(;;){
+      if(s.match(/[0-9]$/)){break;}
+      s=s.replace(/[^0-9]*$/,"");
+    }
+    s=s.replace(/[^0-9\/*+-.]/,"");
+    r=eval(s);
+    console.log(r);
   }
 
 }); //hbCtrlMain
