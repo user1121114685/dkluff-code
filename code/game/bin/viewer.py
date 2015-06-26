@@ -8,6 +8,7 @@ import pdb
 
 ABI='/root/otg_game/units/datacook/cook_item/'
 ITEM='/root/otg_game/units/datacook/cook_ability/'
+CMDOT='/root/otg_game/cook/cmd.txt'
 
 def optxtdb(fdir):
     a=[]
@@ -43,9 +44,10 @@ def readbyIDD(idd,arr,k=1):
 
 def updatearr(arr,src,dst):
     for k in arr:
-        re.sub(src,dst,k)
+        if not k==None:
+            re.sub(src,dst,k)
 
-def prtarr(arr):
+def prtarr(arr,f=None):
     s=""
     for k in arr:
         try:
@@ -53,6 +55,8 @@ def prtarr(arr):
         except Exception:
             s+=str(k)+" "
     print s
+    if f:
+        print >>f,s
 
 def duprecord(idd,newidd,dic):
     for k in dic:
@@ -123,6 +127,10 @@ def prcmd(s,txtdb,slkdb,abi_txtdb,abi_slkdb,cmd=None):
     incmd=s.split()
     incmd[0]=incmd[0].lower()
 
+    if incmd[0] == 'cm':
+        cmd.append(['\n'+'#']+incmd[1:])
+        return
+
     if incmd[0] == 'u':
         print "cmd: ",cmd
         if len(cmd)>0 :
@@ -153,7 +161,7 @@ def prcmd(s,txtdb,slkdb,abi_txtdb,abi_slkdb,cmd=None):
                 prt_txt(j,txtdb,slkdb,abi_txtdb,abi_slkdb)
         return
 
-    if incmd[0].startswith('k'):
+    if incmd[0] == 'ki' or incmd[0] =='ka':
         #kit - item txt
         #kis - item slk
         if incmd[0] =='ki':
@@ -165,12 +173,17 @@ def prcmd(s,txtdb,slkdb,abi_txtdb,abi_slkdb,cmd=None):
             duprecord(incmd[1],incmd[2],abi_txtdb)
             duprecord(incmd[1],incmd[2],abi_slkdb)
 
-        cmd.append([incmd[0]+'t']+incmd[1:])
+        cmd.append([incmd[0]+'t']+incmd[1:]+["cp"])
         cmd.append([incmd[0]+'s',incmd[1],1,"\""+incmd[2]+"\"","cp"])
 
+    if incmd[0].startswith('k') and len(incmd[0])==3:
+        cmd.append(incmd)
+
 def prtcmd(cmd):
+    cmdf=open(CMDOT,'a')
     for k in cmd:
-        prtarr(k)
+        prtarr(k,cmdf)
+    print >>cmdf,"\n"
 
 def run(txtdb,slkdb,abi_txtdb,abi_slkdb,cmd):
     while 1:
@@ -178,6 +191,8 @@ def run(txtdb,slkdb,abi_txtdb,abi_slkdb,cmd):
         prcmd(incmd,txtdb,slkdb,abi_txtdb,abi_slkdb,cmd)
         if incmd == 'x':
             break
+        if incmd == 'px':
+            prtarr(cmd)
 
 def test(txtdb,slkdb,abi_txtdb,abi_slkdb):
     #pdb.set_trace()
@@ -204,7 +219,7 @@ if __name__ == "__main__":
     cmd = []
     newtxtdb,newslkdb,newabi_txtdb,newabi_slkdb = {},{},{},{}
     run(txtdb,slkdb,abi_txtdb,abi_slkdb,cmd)
-    prtarr(cmd)
+    prtcmd(cmd)
 
 
 

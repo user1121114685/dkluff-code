@@ -1,8 +1,11 @@
 #!/bin/sh
-filelist=$1/csvfilelist.txt
-db=$1/all.db
-dst=$1/data
+db=all.db
+dst=./data
 
-for f in `cat $filelist | grep -v ^# |grep -v ^$ `;do
-     cat $db | sed "/$f/!d;s/$f//g;s/ /\n/g;G" >$dst/$f
+cat $db | grep -v ^# | grep -v ^$ | awk '{print $1}' | sort -u | while read nf;do
+    echo >$dst/$nf
+done
+
+for f in `ls $dst | grep "txt$"`;do
+    cat $db |grep $f| sed "s/$f //g;s/ /\n/g;G" >>$dst/$f
 done

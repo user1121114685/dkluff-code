@@ -3,7 +3,7 @@
 
 org=$1
 cookdir=$2
-dst="/root/otg_game/units/"
+dst="./data/"
 
 if [ "$1" == "cp" ];then
     cp output/* $dst/.

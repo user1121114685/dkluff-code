@@ -77,11 +77,12 @@ def pr1data(pa,cmd,newp=None):
         pa[int(cmd[1])]=eval(pa[int(cmd[1])]+cmd[3]+cmd[2])
 
     if len(cmd)==4 and cmd[3] == 'cp' and newp != None:
-        newp[cmd[0]] = cp(pa)
-        newp[cmd[0]][int(cmd[1])] = cmd[2]
+        newp[cmd[2]] = cp(pa)
+        newp[cmd[2]][int(cmd[1])] = cmd[2]
 
 def modSLK(p,func,cmd,newp=None):
     for k in p:
+        if p[k][1] == None: continue
         if cmd[0] in p[k][1]:
             func(p[k],cmd,newp)
         if cmd[0] == '*':
