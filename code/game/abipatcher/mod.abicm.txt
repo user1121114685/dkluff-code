@@ -1,0 +1,324 @@
+
+#攻击
+kat AIat A1a1 cp
+kas AIat 1 "A1a1" cp 
+kas A1a1 23 VAL
+
+#攻击
+kat AIat A2a1 cp
+kas AIat 1 "A2a1" cp 
+kas A2a1 23 VAL
+
+#攻击
+kat AIat A3a1 cp
+kas AIat 1 "A3a1" cp 
+kas A3a1 23 VAL
+
+#攻击
+kat AIat A4a1 cp
+kas AIat 1 "A4a1" cp 
+kas A4a1 23 VAL
+
+#攻击
+kat AIat A5a1 cp
+kas AIat 1 "A5a1" cp 
+kas A5a1 23 VAL
+
+#攻击
+kat AIat A6a1 cp
+kas AIat 1 "A6a1" cp 
+kas A6a1 23 VAL
+
+#攻击
+kat AIat A7a1 cp
+kas AIat 1 "A7a1" cp 
+kas A7a1 23 VAL
+
+#攻击
+kat AIat A8a1 cp
+kas AIat 1 "A8a1" cp 
+kas A8a1 23 VAL
+
+#攻击
+kat AIat A9a1 cp
+kas AIat 1 "A9a1" cp 
+kas A9a1 23 VAL
+
+#致命一击
+kas AIcs 1 "A1a2" cp 
+kat AIcs A1a2 cp 
+kas A1a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A2a2" cp 
+kat AIcs A2a2 cp 
+kas A2a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A3a2" cp 
+kat AIcs A3a2 cp 
+kas A3a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A4a2" cp 
+kat AIcs A4a2 cp 
+kas A4a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A5a2" cp 
+kat AIcs A5a2 cp 
+kas A5a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A6a2" cp 
+kat AIcs A6a2 cp 
+kas A6a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A7a2" cp 
+kat AIcs A7a2 cp 
+kas A7a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A8a2" cp 
+kat AIcs A8a2 cp 
+kas A8a2 24 VAL
+
+#致命一击
+kas AIcs 1 "A9a2" cp 
+kat AIcs A9a2 cp 
+kas A9a2 24 VAL
+
+#分裂攻击
+kas ANca 1 "A1a3" cp 
+kat ANca A1a3 cp 
+kas A1a3 23 VAL
+kas A1a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A2a3" cp 
+kat ANca A2a3 cp 
+kas A2a3 23 VAL
+kas A2a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A3a3" cp 
+kat ANca A3a3 cp 
+kas A3a3 23 VAL
+kas A3a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A4a3" cp 
+kat ANca A4a3 cp 
+kas A4a3 23 VAL
+kas A4a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A5a3" cp 
+kat ANca A5a3 cp 
+kas A5a3 23 VAL
+kas A5a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A6a3" cp 
+kat ANca A6a3 cp 
+kas A6a3 23 VAL
+kas A6a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A7a3" cp 
+kat ANca A7a3 cp 
+kas A7a3 23 VAL
+kas A7a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A8a3" cp 
+kat ANca A8a3 cp 
+kas A8a3 23 VAL
+kas A8a3 21 VAM
+
+#分裂攻击
+kas ANca 1 "A9a3" cp 
+kat ANca A9a3 cp 
+kas A9a3 23 VAL
+kas A9a3 21 VAM
+
+#吸血 
+kas AIva 1 "A1a4" cp 
+kat AIva A1a4 cp 
+kas A1a4 23 VAL
+
+#吸血 
+kas AIva 1 "A2a4" cp 
+kat AIva A2a4 cp 
+kas A2a4 23 VAL
+
+#吸血 
+kas AIva 1 "A3a4" cp 
+kat AIva A3a4 cp 
+kas A3a4 23 VAL
+
+#吸血 
+kas AIva 1 "A4a4" cp 
+kat AIva A4a4 cp 
+kas A4a4 23 VAL
+
+#吸血 
+kas AIva 1 "A5a4" cp 
+kat AIva A5a4 cp 
+kas A5a4 23 VAL
+
+#吸血 
+kas AIva 1 "A6a4" cp 
+kat AIva A6a4 cp 
+kas A6a4 23 VAL
+
+#吸血 
+kas AIva 1 "A7a4" cp 
+kat AIva A7a4 cp 
+kas A7a4 23 VAL
+
+#吸血 
+kas AIva 1 "A8a4" cp 
+kat AIva A8a4 cp 
+kas A8a4 23 VAL
+
+#吸血 
+kas AIva 1 "A9a4" cp 
+kat AIva A9a4 cp 
+kas A9a4 23 VAL
+
+#攻击速度
+kas AIsx 1 "A1a5" cp 
+kat AIsx A1a5 cp 
+kas A1a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A2a5" cp 
+kat AIsx A2a5 cp 
+kas A2a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A3a5" cp 
+kat AIsx A3a5 cp 
+kas A3a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A4a5" cp 
+kat AIsx A4a5 cp 
+kas A4a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A5a5" cp 
+kat AIsx A5a5 cp 
+kas A5a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A6a5" cp 
+kat AIsx A6a5 cp 
+kas A6a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A7a5" cp 
+kat AIsx A7a5 cp 
+kas A7a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A8a5" cp 
+kat AIsx A8a5 cp 
+kas A8a5 23 VAL
+
+#攻击速度
+kas AIsx 1 "A9a5" cp 
+kat AIsx A9a5 cp 
+kas A9a5 23 VAL
+
+# 多重箭 
+kat Aroc A1a6 cp 
+kas Aroc 1 "A1a6" cp 
+kas A1a6 25 VAL
+
+# 多重箭 
+kat Aroc A2a6 cp 
+kas Aroc 1 "A2a6" cp 
+kas A2a6 25 VAL
+
+# 多重箭 
+kat Aroc A3a6 cp 
+kas Aroc 1 "A3a6" cp 
+kas A3a6 25 VAL
+
+# 多重箭 
+kat Aroc A4a6 cp 
+kas Aroc 1 "A4a6" cp 
+kas A4a6 25 VAL
+
+# 多重箭 
+kat Aroc A5a6 cp 
+kas Aroc 1 "A5a6" cp 
+kas A5a6 25 VAL
+
+# 多重箭 
+kat Aroc A6a6 cp 
+kas Aroc 1 "A6a6" cp 
+kas A6a6 25 VAL
+
+# 多重箭 
+kat Aroc A7a6 cp 
+kas Aroc 1 "A7a6" cp 
+kas A7a6 25 VAL
+
+# 多重箭 
+kat Aroc A8a6 cp 
+kas Aroc 1 "A8a6" cp 
+kas A8a6 25 VAL
+
+# 多重箭 
+kat Aroc A9a6 cp 
+kas Aroc 1 "A9a6" cp 
+kas A9a6 25 VAL
+
+# 护甲 
+kat AId0 A1b1 cp 
+kas AId0 1 "A1b1" cp 
+kas A1b1 23 VAL
+
+# 护甲 
+kat AId0 A2b1 cp 
+kas AId0 1 "A2b1" cp 
+kas A2b1 23 VAL
+
+# 护甲 
+kat AId0 A3b1 cp 
+kas AId0 1 "A3b1" cp 
+kas A3b1 23 VAL
+
+# 护甲 
+kat AId0 A4b1 cp 
+kas AId0 1 "A4b1" cp 
+kas A4b1 23 VAL
+
+# 护甲 
+kat AId0 A5b1 cp 
+kas AId0 1 "A5b1" cp 
+kas A5b1 23 VAL
+
+# 护甲 
+kat AId0 A6b1 cp 
+kas AId0 1 "A6b1" cp 
+kas A6b1 23 VAL
+
+# 护甲 
+kat AId0 A7b1 cp 
+kas AId0 1 "A7b1" cp 
+kas A7b1 23 VAL
+
+# 护甲 
+kat AId0 A8b1 cp 
+kas AId0 1 "A8b1" cp 
+kas A8b1 23 VAL
+
+# 护甲 
+kat AId0 A9b1 cp 
+kas AId0 1 "A9b1" cp 
+kas A9b1 23 VAL

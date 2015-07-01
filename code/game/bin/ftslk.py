@@ -168,18 +168,5 @@ def test(a,b):
 
 if __name__ == "__main__":
     h,slk=parseSLK(sys.argv[1])
-    ref=getreflist(sys.argv[2])
-
-
-    slknew1 = {}
-    for cmd in ref:
-        modSLK(slk,pr1data,cmd,slknew1)
-        modSLK(slknew1,pr1data,cmd)
-
-    bj,y,x,hk = svB(h)
-    y,slk=joinSLK(slk,slknew1)
-    h[bj]=rRecord("B",y,x,"")[:-1]+hk
-
-    #prtCSV(slk)
-    prtSLK(h,slk)
+    prtCSV(slk,True)
 

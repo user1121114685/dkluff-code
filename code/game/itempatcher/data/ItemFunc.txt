@@ -1141,165 +1141,165 @@ Requires=hcas
 Art=ReplaceableTextures\CommandButtons\BTNTinyCastle.blp
 
 
-[I1A1]
+[i1A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I2A1]
+[i2A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I3A1]
+[i3A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I4A1]
+[i4A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I5A1]
+[i5A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I6A1]
+[i6A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I7A1]
+[i7A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I8A1]
+[i8A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I9A1]
+[i9A1]
 Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp
 
 
-[I1A2]
+[i1A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I2A2]
+[i2A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I3A2]
+[i3A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I4A2]
+[i4A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I5A2]
+[i5A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I6A2]
+[i6A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I7A2]
+[i7A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I8A2]
+[i8A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I9A2]
+[i9A2]
 Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp
 
 
-[I1A3]
+[i1A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I2A3]
+[i2A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I3A3]
+[i3A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I4A3]
+[i4A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I5A3]
+[i5A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I6A3]
+[i6A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I7A3]
+[i7A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I8A3]
+[i8A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I9A3]
+[i9A3]
 Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp
 
 
-[I1B1]
+[i1B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I2B1]
+[i2B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I3B1]
+[i3B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I4B1]
+[i4B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I5B1]
+[i5B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I6B1]
+[i6B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I7B1]
+[i7B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I8B1]
+[i8B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I9B1]
+[i9B1]
 Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
 
-[I1B2]
+[i1B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I2B2]
+[i2B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I3B2]
+[i3B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I4B2]
+[i4B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I5B2]
+[i5B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I6B2]
+[i6B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I7B2]
+[i7B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I8B2]
+[i8B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 
-[I9B2]
+[i9B2]
 Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
 

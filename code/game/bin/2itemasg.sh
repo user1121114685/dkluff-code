@@ -2,11 +2,11 @@
 
 newitem(){
 echo "
-ratf I0A1 A0a1 攻击之爪-I0 增加攻击
-clfm I0A2 A0b1 龙血风衣-I0 加一定跑速度，并增加防御
-rugt I0A3 A0a2,A0a1 爆裂血爪-I0 加攻击，加暴击
-ratf I0B1 A0a5,A0a6 龙骨弓-I0 远程可以多重攻击，并加攻击速度 ReplaceableTextures/CommandButtons/BTNSkeletalLongevity.blp
-ratf I0B2 A0a5,A0a3 龙鳞枪-I0 近战可以分裂攻击，并加攻击速度 ReplaceableTextures/PassiveButtons/PASBTNCleavingAttack.blp
+ratf i0A1 A0a1 攻击之爪-I0 增加攻击
+clfm i0A2 A0b1 龙血风衣-I0 加一定跑速度，并增加防御
+rugt i0A3 A0a2,A0a1,A0a4 爆裂血爪-I0 加攻击，加暴击，吸血
+ratf i0B1 A0a5,A0a6 龙骨弓-I0 远程可以多重攻击，并加攻击速度 ReplaceableTextures/CommandButtons/BTNSkeletalLongevity.blp
+ratf i0B2 A0a5,A0a3 龙鳞枪-I0 近战可以分裂攻击，并加攻击速度 ReplaceableTextures/PassiveButtons/PASBTNCleavingAttack.blp
 
 "
 
@@ -18,7 +18,7 @@ newitem | grep -v ^#| grep -v ^$ | while read l
 do
     i=1
     while [ $i -lt 10 ];do
-        echo $l | sed "s/I0/I$i/g;s/A0/A$i/g" 
+        echo $l | sed "s/[iI]0/i$i/g;s/A0/A$i/g" 
         i=$((i+1))
     done
 done
@@ -55,3 +55,5 @@ assignAbi(){
 }
 
 prtfromItemtemplate | assignAbi 
+echo "kis * 23 0"
+echo "kis * 22 0"

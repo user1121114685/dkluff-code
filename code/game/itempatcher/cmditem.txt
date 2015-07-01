@@ -1,0 +1,227 @@
+kis ratf 1 "i1A1" cp
+kis i1A1 8 "A1a1" 
+1kit itemstrings.txt [i1A1] Name=攻击之爪-i1 Tip=购买|cffffcc00攻击之爪-i1|r Ubertip="增加攻击,DATA-|cffffcc00<A1a1,DataA1>|r" 
+#- ratf i1A1
+
+kis ratf 1 "i2A1" cp
+kis i2A1 8 "A2a1" 
+1kit itemstrings.txt [i2A1] Name=攻击之爪-i2 Tip=购买|cffffcc00攻击之爪-i2|r Ubertip="增加攻击,DATA-|cffffcc00<A2a1,DataA1>|r" 
+#- ratf i2A1
+
+kis ratf 1 "i3A1" cp
+kis i3A1 8 "A3a1" 
+1kit itemstrings.txt [i3A1] Name=攻击之爪-i3 Tip=购买|cffffcc00攻击之爪-i3|r Ubertip="增加攻击,DATA-|cffffcc00<A3a1,DataA1>|r" 
+#- ratf i3A1
+
+kis ratf 1 "i4A1" cp
+kis i4A1 8 "A4a1" 
+1kit itemstrings.txt [i4A1] Name=攻击之爪-i4 Tip=购买|cffffcc00攻击之爪-i4|r Ubertip="增加攻击,DATA-|cffffcc00<A4a1,DataA1>|r" 
+#- ratf i4A1
+
+kis ratf 1 "i5A1" cp
+kis i5A1 8 "A5a1" 
+1kit itemstrings.txt [i5A1] Name=攻击之爪-i5 Tip=购买|cffffcc00攻击之爪-i5|r Ubertip="增加攻击,DATA-|cffffcc00<A5a1,DataA1>|r" 
+#- ratf i5A1
+
+kis ratf 1 "i6A1" cp
+kis i6A1 8 "A6a1" 
+1kit itemstrings.txt [i6A1] Name=攻击之爪-i6 Tip=购买|cffffcc00攻击之爪-i6|r Ubertip="增加攻击,DATA-|cffffcc00<A6a1,DataA1>|r" 
+#- ratf i6A1
+
+kis ratf 1 "i7A1" cp
+kis i7A1 8 "A7a1" 
+1kit itemstrings.txt [i7A1] Name=攻击之爪-i7 Tip=购买|cffffcc00攻击之爪-i7|r Ubertip="增加攻击,DATA-|cffffcc00<A7a1,DataA1>|r" 
+#- ratf i7A1
+
+kis ratf 1 "i8A1" cp
+kis i8A1 8 "A8a1" 
+1kit itemstrings.txt [i8A1] Name=攻击之爪-i8 Tip=购买|cffffcc00攻击之爪-i8|r Ubertip="增加攻击,DATA-|cffffcc00<A8a1,DataA1>|r" 
+#- ratf i8A1
+
+kis ratf 1 "i9A1" cp
+kis i9A1 8 "A9a1" 
+1kit itemstrings.txt [i9A1] Name=攻击之爪-i9 Tip=购买|cffffcc00攻击之爪-i9|r Ubertip="增加攻击,DATA-|cffffcc00<A9a1,DataA1>|r" 
+#- ratf i9A1
+
+kis clfm 1 "i1A2" cp
+kis i1A2 8 "A1b1" 
+1kit itemstrings.txt [i1A2] Name=龙血风衣-i1 Tip=购买|cffffcc00龙血风衣-i1|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A1b1,DataA1>|r" 
+#- clfm i1A2
+
+kis clfm 1 "i2A2" cp
+kis i2A2 8 "A2b1" 
+1kit itemstrings.txt [i2A2] Name=龙血风衣-i2 Tip=购买|cffffcc00龙血风衣-i2|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A2b1,DataA1>|r" 
+#- clfm i2A2
+
+kis clfm 1 "i3A2" cp
+kis i3A2 8 "A3b1" 
+1kit itemstrings.txt [i3A2] Name=龙血风衣-i3 Tip=购买|cffffcc00龙血风衣-i3|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A3b1,DataA1>|r" 
+#- clfm i3A2
+
+kis clfm 1 "i4A2" cp
+kis i4A2 8 "A4b1" 
+1kit itemstrings.txt [i4A2] Name=龙血风衣-i4 Tip=购买|cffffcc00龙血风衣-i4|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A4b1,DataA1>|r" 
+#- clfm i4A2
+
+kis clfm 1 "i5A2" cp
+kis i5A2 8 "A5b1" 
+1kit itemstrings.txt [i5A2] Name=龙血风衣-i5 Tip=购买|cffffcc00龙血风衣-i5|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A5b1,DataA1>|r" 
+#- clfm i5A2
+
+kis clfm 1 "i6A2" cp
+kis i6A2 8 "A6b1" 
+1kit itemstrings.txt [i6A2] Name=龙血风衣-i6 Tip=购买|cffffcc00龙血风衣-i6|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A6b1,DataA1>|r" 
+#- clfm i6A2
+
+kis clfm 1 "i7A2" cp
+kis i7A2 8 "A7b1" 
+1kit itemstrings.txt [i7A2] Name=龙血风衣-i7 Tip=购买|cffffcc00龙血风衣-i7|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A7b1,DataA1>|r" 
+#- clfm i7A2
+
+kis clfm 1 "i8A2" cp
+kis i8A2 8 "A8b1" 
+1kit itemstrings.txt [i8A2] Name=龙血风衣-i8 Tip=购买|cffffcc00龙血风衣-i8|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A8b1,DataA1>|r" 
+#- clfm i8A2
+
+kis clfm 1 "i9A2" cp
+kis i9A2 8 "A9b1" 
+1kit itemstrings.txt [i9A2] Name=龙血风衣-i9 Tip=购买|cffffcc00龙血风衣-i9|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A9b1,DataA1>|r" 
+#- clfm i9A2
+
+kis rugt 1 "i1A3" cp
+kis i1A3 8 "A1a2,A1a1,A1a4" 
+1kit itemstrings.txt [i1A3] Name=爆裂血爪-i1 Tip=购买|cffffcc00爆裂血爪-i1|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A1a2,DataA1>|r" 
+#- rugt i1A3
+
+kis rugt 1 "i2A3" cp
+kis i2A3 8 "A2a2,A2a1,A2a4" 
+1kit itemstrings.txt [i2A3] Name=爆裂血爪-i2 Tip=购买|cffffcc00爆裂血爪-i2|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A2a2,DataA1>|r" 
+#- rugt i2A3
+
+kis rugt 1 "i3A3" cp
+kis i3A3 8 "A3a2,A3a1,A3a4" 
+1kit itemstrings.txt [i3A3] Name=爆裂血爪-i3 Tip=购买|cffffcc00爆裂血爪-i3|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A3a2,DataA1>|r" 
+#- rugt i3A3
+
+kis rugt 1 "i4A3" cp
+kis i4A3 8 "A4a2,A4a1,A4a4" 
+1kit itemstrings.txt [i4A3] Name=爆裂血爪-i4 Tip=购买|cffffcc00爆裂血爪-i4|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A4a2,DataA1>|r" 
+#- rugt i4A3
+
+kis rugt 1 "i5A3" cp
+kis i5A3 8 "A5a2,A5a1,A5a4" 
+1kit itemstrings.txt [i5A3] Name=爆裂血爪-i5 Tip=购买|cffffcc00爆裂血爪-i5|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A5a2,DataA1>|r" 
+#- rugt i5A3
+
+kis rugt 1 "i6A3" cp
+kis i6A3 8 "A6a2,A6a1,A6a4" 
+1kit itemstrings.txt [i6A3] Name=爆裂血爪-i6 Tip=购买|cffffcc00爆裂血爪-i6|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A6a2,DataA1>|r" 
+#- rugt i6A3
+
+kis rugt 1 "i7A3" cp
+kis i7A3 8 "A7a2,A7a1,A7a4" 
+1kit itemstrings.txt [i7A3] Name=爆裂血爪-i7 Tip=购买|cffffcc00爆裂血爪-i7|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A7a2,DataA1>|r" 
+#- rugt i7A3
+
+kis rugt 1 "i8A3" cp
+kis i8A3 8 "A8a2,A8a1,A8a4" 
+1kit itemstrings.txt [i8A3] Name=爆裂血爪-i8 Tip=购买|cffffcc00爆裂血爪-i8|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A8a2,DataA1>|r" 
+#- rugt i8A3
+
+kis rugt 1 "i9A3" cp
+kis i9A3 8 "A9a2,A9a1,A9a4" 
+1kit itemstrings.txt [i9A3] Name=爆裂血爪-i9 Tip=购买|cffffcc00爆裂血爪-i9|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A9a2,DataA1>|r" 
+#- rugt i9A3
+
+kis ratf 1 "i1B1" cp
+kis i1B1 8 "A1a5,A1a6" 
+1kit itemstrings.txt [i1B1] Name=龙骨弓-i1 Tip=购买|cffffcc00龙骨弓-i1|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
+2kit ItemFunc.txt [i1B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i2B1" cp
+kis i2B1 8 "A2a5,A2a6" 
+1kit itemstrings.txt [i2B1] Name=龙骨弓-i2 Tip=购买|cffffcc00龙骨弓-i2|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
+2kit ItemFunc.txt [i2B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i3B1" cp
+kis i3B1 8 "A3a5,A3a6" 
+1kit itemstrings.txt [i3B1] Name=龙骨弓-i3 Tip=购买|cffffcc00龙骨弓-i3|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
+2kit ItemFunc.txt [i3B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i4B1" cp
+kis i4B1 8 "A4a5,A4a6" 
+1kit itemstrings.txt [i4B1] Name=龙骨弓-i4 Tip=购买|cffffcc00龙骨弓-i4|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
+2kit ItemFunc.txt [i4B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i5B1" cp
+kis i5B1 8 "A5a5,A5a6" 
+1kit itemstrings.txt [i5B1] Name=龙骨弓-i5 Tip=购买|cffffcc00龙骨弓-i5|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
+2kit ItemFunc.txt [i5B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i6B1" cp
+kis i6B1 8 "A6a5,A6a6" 
+1kit itemstrings.txt [i6B1] Name=龙骨弓-i6 Tip=购买|cffffcc00龙骨弓-i6|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
+2kit ItemFunc.txt [i6B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i7B1" cp
+kis i7B1 8 "A7a5,A7a6" 
+1kit itemstrings.txt [i7B1] Name=龙骨弓-i7 Tip=购买|cffffcc00龙骨弓-i7|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
+2kit ItemFunc.txt [i7B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i8B1" cp
+kis i8B1 8 "A8a5,A8a6" 
+1kit itemstrings.txt [i8B1] Name=龙骨弓-i8 Tip=购买|cffffcc00龙骨弓-i8|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
+2kit ItemFunc.txt [i8B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i9B1" cp
+kis i9B1 8 "A9a5,A9a6" 
+1kit itemstrings.txt [i9B1] Name=龙骨弓-i9 Tip=购买|cffffcc00龙骨弓-i9|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
+2kit ItemFunc.txt [i9B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+
+kis ratf 1 "i1B2" cp
+kis i1B2 8 "A1a5,A1a3" 
+1kit itemstrings.txt [i1B2] Name=龙鳞枪-i1 Tip=购买|cffffcc00龙鳞枪-i1|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
+2kit ItemFunc.txt [i1B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i2B2" cp
+kis i2B2 8 "A2a5,A2a3" 
+1kit itemstrings.txt [i2B2] Name=龙鳞枪-i2 Tip=购买|cffffcc00龙鳞枪-i2|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
+2kit ItemFunc.txt [i2B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i3B2" cp
+kis i3B2 8 "A3a5,A3a3" 
+1kit itemstrings.txt [i3B2] Name=龙鳞枪-i3 Tip=购买|cffffcc00龙鳞枪-i3|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
+2kit ItemFunc.txt [i3B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i4B2" cp
+kis i4B2 8 "A4a5,A4a3" 
+1kit itemstrings.txt [i4B2] Name=龙鳞枪-i4 Tip=购买|cffffcc00龙鳞枪-i4|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
+2kit ItemFunc.txt [i4B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i5B2" cp
+kis i5B2 8 "A5a5,A5a3" 
+1kit itemstrings.txt [i5B2] Name=龙鳞枪-i5 Tip=购买|cffffcc00龙鳞枪-i5|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
+2kit ItemFunc.txt [i5B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i6B2" cp
+kis i6B2 8 "A6a5,A6a3" 
+1kit itemstrings.txt [i6B2] Name=龙鳞枪-i6 Tip=购买|cffffcc00龙鳞枪-i6|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
+2kit ItemFunc.txt [i6B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i7B2" cp
+kis i7B2 8 "A7a5,A7a3" 
+1kit itemstrings.txt [i7B2] Name=龙鳞枪-i7 Tip=购买|cffffcc00龙鳞枪-i7|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
+2kit ItemFunc.txt [i7B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i8B2" cp
+kis i8B2 8 "A8a5,A8a3" 
+1kit itemstrings.txt [i8B2] Name=龙鳞枪-i8 Tip=购买|cffffcc00龙鳞枪-i8|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
+2kit ItemFunc.txt [i8B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis ratf 1 "i9B2" cp
+kis i9B2 8 "A9a5,A9a3" 
+1kit itemstrings.txt [i9B2] Name=龙鳞枪-i9 Tip=购买|cffffcc00龙鳞枪-i9|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
+2kit ItemFunc.txt [i9B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+
+kis * 23 0
+kis * 22 0

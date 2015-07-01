@@ -1,48 +1,47 @@
-
 #攻击
 kat AIat A1a1 cp
 kas AIat 1 "A1a1" cp 
-kas A1a1 23 80
+kas A1a1 23 550
 
 #攻击
 kat AIat A2a1 cp
 kas AIat 1 "A2a1" cp 
-kas A2a1 23 160
+kas A2a1 23 700
 
 #攻击
 kat AIat A3a1 cp
 kas AIat 1 "A3a1" cp 
-kas A3a1 23 320
+kas A3a1 23 850
 
 #攻击
 kat AIat A4a1 cp
 kas AIat 1 "A4a1" cp 
-kas A4a1 23 640
+kas A4a1 23 1000
 
 #攻击
 kat AIat A5a1 cp
 kas AIat 1 "A5a1" cp 
-kas A5a1 23 1280
+kas A5a1 23 1150
 
 #攻击
 kat AIat A6a1 cp
 kas AIat 1 "A6a1" cp 
-kas A6a1 23 2560
+kas A6a1 23 1300
 
 #攻击
 kat AIat A7a1 cp
 kas AIat 1 "A7a1" cp 
-kas A7a1 23 5120
+kas A7a1 23 1450
 
 #攻击
 kat AIat A8a1 cp
 kas AIat 1 "A8a1" cp 
-kas A8a1 23 10240
+kas A8a1 23 1600
 
 #攻击
 kat AIat A9a1 cp
 kas AIat 1 "A9a1" cp 
-kas A9a1 23 20480
+kas A9a1 23 1750
 
 #致命一击
 kas AIcs 1 "A1a2" cp 
@@ -89,194 +88,149 @@ kas AIcs 1 "A9a2" cp
 kat AIcs A9a2 cp 
 kas A9a2 24 10
 
-# 护甲 
-kat AId0 A1b1 cp 
-kas AId0 1 "A1b1" cp 
-kas A1b1 23 10
-
-# 护甲 
-kat AId0 A2b1 cp 
-kas AId0 1 "A2b1" cp 
-kas A2b1 23 80
-
-# 护甲 
-kat AId0 A3b1 cp 
-kas AId0 1 "A3b1" cp 
-kas A3b1 23 150
-
-# 护甲 
-kat AId0 A4b1 cp 
-kas AId0 1 "A4b1" cp 
-kas A4b1 23 220
-
-# 护甲 
-kat AId0 A5b1 cp 
-kas AId0 1 "A5b1" cp 
-kas A5b1 23 290
-
-# 护甲 
-kat AId0 A6b1 cp 
-kas AId0 1 "A6b1" cp 
-kas A6b1 23 360
-
-# 护甲 
-kat AId0 A7b1 cp 
-kas AId0 1 "A7b1" cp 
-kas A7b1 23 430
-
-# 护甲 
-kat AId0 A8b1 cp 
-kas AId0 1 "A8b1" cp 
-kas A8b1 23 500
-
-# 护甲 
-kat AId0 A9b1 cp 
-kas AId0 1 "A9b1" cp 
-kas A9b1 23 570
-
-#攻击速度
-kas AIsx 1 "A1a5" cp 
-kat AIsx A1a5 cp 
-kas A1a5 23 1
-
-#攻击速度
-kas AIsx 1 "A2a5" cp 
-kat AIsx A2a5 cp 
-kas A2a5 23 1.5
-
-#攻击速度
-kas AIsx 1 "A3a5" cp 
-kat AIsx A3a5 cp 
-kas A3a5 23 2
-
-#攻击速度
-kas AIsx 1 "A4a5" cp 
-kat AIsx A4a5 cp 
-kas A4a5 23 2.5
-
-#攻击速度
-kas AIsx 1 "A5a5" cp 
-kat AIsx A5a5 cp 
-kas A5a5 23 3
-
-#攻击速度
-kas AIsx 1 "A6a5" cp 
-kat AIsx A6a5 cp 
-kas A6a5 23 3.5
-
-#攻击速度
-kas AIsx 1 "A7a5" cp 
-kat AIsx A7a5 cp 
-kas A7a5 23 4
-
-#攻击速度
-kas AIsx 1 "A8a5" cp 
-kat AIsx A8a5 cp 
-kas A8a5 23 4.5
-
-#攻击速度
-kas AIsx 1 "A9a5" cp 
-kat AIsx A9a5 cp 
-kas A9a5 23 5
-
 #分裂攻击
 kas ANca 1 "A1a3" cp 
 kat ANca A1a3 cp 
-kas A1a3 23 0.5
-kas A1a3 21 320
+kas A1a3 23 0.3
+kas A1a3 21 800
 
 #分裂攻击
 kas ANca 1 "A2a3" cp 
 kat ANca A2a3 cp 
-kas A2a3 23 1
-kas A2a3 21 400
+kas A2a3 23 0.6
+kas A2a3 21 800
 
 #分裂攻击
 kas ANca 1 "A3a3" cp 
 kat ANca A3a3 cp 
-kas A3a3 23 1.5
-kas A3a3 21 480
+kas A3a3 23 0.9
+kas A3a3 21 800
 
 #分裂攻击
 kas ANca 1 "A4a3" cp 
 kat ANca A4a3 cp 
-kas A4a3 23 2
-kas A4a3 21 560
+kas A4a3 23 1.2
+kas A4a3 21 800
 
 #分裂攻击
 kas ANca 1 "A5a3" cp 
 kat ANca A5a3 cp 
-kas A5a3 23 2.5
-kas A5a3 21 640
+kas A5a3 23 1.5
+kas A5a3 21 800
 
 #分裂攻击
 kas ANca 1 "A6a3" cp 
 kat ANca A6a3 cp 
-kas A6a3 23 3
-kas A6a3 21 720
+kas A6a3 23 1.8
+kas A6a3 21 800
 
 #分裂攻击
 kas ANca 1 "A7a3" cp 
 kat ANca A7a3 cp 
-kas A7a3 23 3.5
+kas A7a3 23 2.1
 kas A7a3 21 800
 
 #分裂攻击
 kas ANca 1 "A8a3" cp 
 kat ANca A8a3 cp 
-kas A8a3 23 4
-kas A8a3 21 880
+kas A8a3 23 2.4
+kas A8a3 21 800
 
 #分裂攻击
 kas ANca 1 "A9a3" cp 
 kat ANca A9a3 cp 
-kas A9a3 23 4.5
-kas A9a3 21 960
+kas A9a3 23 2.7
+kas A9a3 21 800
 
 #吸血 
 kas AIva 1 "A1a4" cp 
 kat AIva A1a4 cp 
-kas A1a4 23 1
+kas A1a4 23 0.3
 
 #吸血 
 kas AIva 1 "A2a4" cp 
 kat AIva A2a4 cp 
-kas A2a4 23 1.5
+kas A2a4 23 0.6
 
 #吸血 
 kas AIva 1 "A3a4" cp 
 kat AIva A3a4 cp 
-kas A3a4 23 2
+kas A3a4 23 0.9
 
 #吸血 
 kas AIva 1 "A4a4" cp 
 kat AIva A4a4 cp 
-kas A4a4 23 2.5
+kas A4a4 23 1.2
 
 #吸血 
 kas AIva 1 "A5a4" cp 
 kat AIva A5a4 cp 
-kas A5a4 23 3
+kas A5a4 23 1.5
 
 #吸血 
 kas AIva 1 "A6a4" cp 
 kat AIva A6a4 cp 
-kas A6a4 23 3.5
+kas A6a4 23 1.8
 
 #吸血 
 kas AIva 1 "A7a4" cp 
 kat AIva A7a4 cp 
-kas A7a4 23 4
+kas A7a4 23 2.1
 
 #吸血 
 kas AIva 1 "A8a4" cp 
 kat AIva A8a4 cp 
-kas A8a4 23 4.5
+kas A8a4 23 2.4
 
 #吸血 
 kas AIva 1 "A9a4" cp 
 kat AIva A9a4 cp 
-kas A9a4 23 5
+kas A9a4 23 2.7
+
+#攻击速度
+kas AIsx 1 "A1a5" cp 
+kat AIsx A1a5 cp 
+kas A1a5 23 0.5
+
+#攻击速度
+kas AIsx 1 "A2a5" cp 
+kat AIsx A2a5 cp 
+kas A2a5 23 1
+
+#攻击速度
+kas AIsx 1 "A3a5" cp 
+kat AIsx A3a5 cp 
+kas A3a5 23 1.5
+
+#攻击速度
+kas AIsx 1 "A4a5" cp 
+kat AIsx A4a5 cp 
+kas A4a5 23 2
+
+#攻击速度
+kas AIsx 1 "A5a5" cp 
+kat AIsx A5a5 cp 
+kas A5a5 23 2.5
+
+#攻击速度
+kas AIsx 1 "A6a5" cp 
+kat AIsx A6a5 cp 
+kas A6a5 23 3
+
+#攻击速度
+kas AIsx 1 "A7a5" cp 
+kat AIsx A7a5 cp 
+kas A7a5 23 3.5
+
+#攻击速度
+kas AIsx 1 "A8a5" cp 
+kat AIsx A8a5 cp 
+kas A8a5 23 4
+
+#攻击速度
+kas AIsx 1 "A9a5" cp 
+kat AIsx A9a5 cp 
+kas A9a5 23 4.5
 
 # 多重箭 
 kat Aroc A1a6 cp 
@@ -367,12 +321,48 @@ kas A9a6 24 10000
 kas A9a6 23 500
 kas A9a6 21 1000
 #kat Missileart=Abilities\Weapons\Arrow\ArrowMissile.mdl
-kas A1a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A2a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A3a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A4a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A5a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A6a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A7a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A8a3 15 "ground,structure,debris,enemy,neutral,air"
-kas A9a3 15 "ground,structure,debris,enemy,neutral,air"
+
+# 护甲 
+kat AId0 A1b1 cp 
+kas AId0 1 "A1b1" cp 
+kas A1b1 23 50
+
+# 护甲 
+kat AId0 A2b1 cp 
+kas AId0 1 "A2b1" cp 
+kas A2b1 23 100
+
+# 护甲 
+kat AId0 A3b1 cp 
+kas AId0 1 "A3b1" cp 
+kas A3b1 23 150
+
+# 护甲 
+kat AId0 A4b1 cp 
+kas AId0 1 "A4b1" cp 
+kas A4b1 23 200
+
+# 护甲 
+kat AId0 A5b1 cp 
+kas AId0 1 "A5b1" cp 
+kas A5b1 23 250
+
+# 护甲 
+kat AId0 A6b1 cp 
+kas AId0 1 "A6b1" cp 
+kas A6b1 23 300
+
+# 护甲 
+kat AId0 A7b1 cp 
+kas AId0 1 "A7b1" cp 
+kas A7b1 23 350
+
+# 护甲 
+kat AId0 A8b1 cp 
+kas AId0 1 "A8b1" cp 
+kas A8b1 23 400
+
+# 护甲 
+kat AId0 A9b1 cp 
+kas AId0 1 "A9b1" cp 
+kas A9b1 23 450

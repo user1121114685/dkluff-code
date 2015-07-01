@@ -544,93 +544,93 @@ itemstrings.txt [ssan] Name=避难权杖 Hotkey=N Tip=购买避难权杖(|cffffc
 ItemFunc.txt [ssan] Art=ReplaceableTextures\CommandButtons\BTNStaffOfSanctuary.blp Requires=hcas Buttonpos=1,2 
 itemstrings.txt [tcas] Name=小城堡 Hotkey=A Tip=购买小城堡(|cffffcc00A|r) Ubertip="能在目标区域内创建出一座城堡来。" Description="能在目标区域内创建出一座城堡来。" 
 ItemFunc.txt [tcas] Requires=hcas Art=ReplaceableTextures\CommandButtons\BTNTinyCastle.blp 
-ItemFunc.txt [I1A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I2A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I3A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I4A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I5A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I6A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I7A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I8A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I9A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
-ItemFunc.txt [I1A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I2A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I3A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I4A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I5A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I6A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I7A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I8A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I9A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
-ItemFunc.txt [I1A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I2A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I3A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I4A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I5A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I6A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I7A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I8A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-ItemFunc.txt [I9A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
-itemstrings.txt [I1A1] Name=攻击之爪-I1 Tip=购买|cffffcc00攻击之爪-I1|r Ubertip="增加攻击,DATA-|cffffcc00<A1a1,DataA1>|r" 
-itemstrings.txt [I2A1] Name=攻击之爪-I2 Tip=购买|cffffcc00攻击之爪-I2|r Ubertip="增加攻击,DATA-|cffffcc00<A2a1,DataA1>|r" 
-itemstrings.txt [I3A1] Name=攻击之爪-I3 Tip=购买|cffffcc00攻击之爪-I3|r Ubertip="增加攻击,DATA-|cffffcc00<A3a1,DataA1>|r" 
-itemstrings.txt [I4A1] Name=攻击之爪-I4 Tip=购买|cffffcc00攻击之爪-I4|r Ubertip="增加攻击,DATA-|cffffcc00<A4a1,DataA1>|r" 
-itemstrings.txt [I5A1] Name=攻击之爪-I5 Tip=购买|cffffcc00攻击之爪-I5|r Ubertip="增加攻击,DATA-|cffffcc00<A5a1,DataA1>|r" 
-itemstrings.txt [I6A1] Name=攻击之爪-I6 Tip=购买|cffffcc00攻击之爪-I6|r Ubertip="增加攻击,DATA-|cffffcc00<A6a1,DataA1>|r" 
-itemstrings.txt [I7A1] Name=攻击之爪-I7 Tip=购买|cffffcc00攻击之爪-I7|r Ubertip="增加攻击,DATA-|cffffcc00<A7a1,DataA1>|r" 
-itemstrings.txt [I8A1] Name=攻击之爪-I8 Tip=购买|cffffcc00攻击之爪-I8|r Ubertip="增加攻击,DATA-|cffffcc00<A8a1,DataA1>|r" 
-itemstrings.txt [I9A1] Name=攻击之爪-I9 Tip=购买|cffffcc00攻击之爪-I9|r Ubertip="增加攻击,DATA-|cffffcc00<A9a1,DataA1>|r" 
-itemstrings.txt [I1A2] Name=龙血风衣-I1 Tip=购买|cffffcc00龙血风衣-I1|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A1b1,DataA1>|r" 
-itemstrings.txt [I2A2] Name=龙血风衣-I2 Tip=购买|cffffcc00龙血风衣-I2|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A2b1,DataA1>|r" 
-itemstrings.txt [I3A2] Name=龙血风衣-I3 Tip=购买|cffffcc00龙血风衣-I3|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A3b1,DataA1>|r" 
-itemstrings.txt [I4A2] Name=龙血风衣-I4 Tip=购买|cffffcc00龙血风衣-I4|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A4b1,DataA1>|r" 
-itemstrings.txt [I5A2] Name=龙血风衣-I5 Tip=购买|cffffcc00龙血风衣-I5|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A5b1,DataA1>|r" 
-itemstrings.txt [I6A2] Name=龙血风衣-I6 Tip=购买|cffffcc00龙血风衣-I6|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A6b1,DataA1>|r" 
-itemstrings.txt [I7A2] Name=龙血风衣-I7 Tip=购买|cffffcc00龙血风衣-I7|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A7b1,DataA1>|r" 
-itemstrings.txt [I8A2] Name=龙血风衣-I8 Tip=购买|cffffcc00龙血风衣-I8|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A8b1,DataA1>|r" 
-itemstrings.txt [I9A2] Name=龙血风衣-I9 Tip=购买|cffffcc00龙血风衣-I9|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A9b1,DataA1>|r" 
-itemstrings.txt [I1A3] Name=爆裂血爪-I1 Tip=购买|cffffcc00爆裂血爪-I1|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A1a2,DataA1>|r" 
-itemstrings.txt [I2A3] Name=爆裂血爪-I2 Tip=购买|cffffcc00爆裂血爪-I2|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A2a2,DataA1>|r" 
-itemstrings.txt [I3A3] Name=爆裂血爪-I3 Tip=购买|cffffcc00爆裂血爪-I3|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A3a2,DataA1>|r" 
-itemstrings.txt [I4A3] Name=爆裂血爪-I4 Tip=购买|cffffcc00爆裂血爪-I4|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A4a2,DataA1>|r" 
-itemstrings.txt [I5A3] Name=爆裂血爪-I5 Tip=购买|cffffcc00爆裂血爪-I5|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A5a2,DataA1>|r" 
-itemstrings.txt [I6A3] Name=爆裂血爪-I6 Tip=购买|cffffcc00爆裂血爪-I6|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A6a2,DataA1>|r" 
-itemstrings.txt [I7A3] Name=爆裂血爪-I7 Tip=购买|cffffcc00爆裂血爪-I7|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A7a2,DataA1>|r" 
-itemstrings.txt [I8A3] Name=爆裂血爪-I8 Tip=购买|cffffcc00爆裂血爪-I8|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A8a2,DataA1>|r" 
-itemstrings.txt [I9A3] Name=爆裂血爪-I9 Tip=购买|cffffcc00爆裂血爪-I9|r Ubertip="加攻击，加暴击,DATA-|cffffcc00<A9a2,DataA1>|r" 
-itemstrings.txt [I1B1] Name=龙骨弓-I1 Tip=购买|cffffcc00龙骨弓-I1|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
-ItemFunc.txt [I1B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I2B1] Name=龙骨弓-I2 Tip=购买|cffffcc00龙骨弓-I2|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
-ItemFunc.txt [I2B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I3B1] Name=龙骨弓-I3 Tip=购买|cffffcc00龙骨弓-I3|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
-ItemFunc.txt [I3B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I4B1] Name=龙骨弓-I4 Tip=购买|cffffcc00龙骨弓-I4|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
-ItemFunc.txt [I4B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I5B1] Name=龙骨弓-I5 Tip=购买|cffffcc00龙骨弓-I5|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
-ItemFunc.txt [I5B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I6B1] Name=龙骨弓-I6 Tip=购买|cffffcc00龙骨弓-I6|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
-ItemFunc.txt [I6B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I7B1] Name=龙骨弓-I7 Tip=购买|cffffcc00龙骨弓-I7|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
-ItemFunc.txt [I7B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I8B1] Name=龙骨弓-I8 Tip=购买|cffffcc00龙骨弓-I8|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
-ItemFunc.txt [I8B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I9B1] Name=龙骨弓-I9 Tip=购买|cffffcc00龙骨弓-I9|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
-ItemFunc.txt [I9B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
-itemstrings.txt [I1B2] Name=龙鳞枪-I1 Tip=购买|cffffcc00龙鳞枪-I1|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
-ItemFunc.txt [I1B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I2B2] Name=龙鳞枪-I2 Tip=购买|cffffcc00龙鳞枪-I2|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
-ItemFunc.txt [I2B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I3B2] Name=龙鳞枪-I3 Tip=购买|cffffcc00龙鳞枪-I3|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
-ItemFunc.txt [I3B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I4B2] Name=龙鳞枪-I4 Tip=购买|cffffcc00龙鳞枪-I4|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
-ItemFunc.txt [I4B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I5B2] Name=龙鳞枪-I5 Tip=购买|cffffcc00龙鳞枪-I5|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
-ItemFunc.txt [I5B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I6B2] Name=龙鳞枪-I6 Tip=购买|cffffcc00龙鳞枪-I6|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
-ItemFunc.txt [I6B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I7B2] Name=龙鳞枪-I7 Tip=购买|cffffcc00龙鳞枪-I7|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
-ItemFunc.txt [I7B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I8B2] Name=龙鳞枪-I8 Tip=购买|cffffcc00龙鳞枪-I8|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
-ItemFunc.txt [I8B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
-itemstrings.txt [I9B2] Name=龙鳞枪-I9 Tip=购买|cffffcc00龙鳞枪-I9|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
-ItemFunc.txt [I9B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+ItemFunc.txt [i1A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i2A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i3A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i4A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i5A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i6A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i7A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i8A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i9A1] Art=ReplaceableTextures\CommandButtons\BTNClawsOfAttack.blp 
+ItemFunc.txt [i1A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i2A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i3A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i4A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i5A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i6A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i7A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i8A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i9A2] Art=ReplaceableTextures\CommandButtons\BTNCloakOfFlames.blp 
+ItemFunc.txt [i1A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i2A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i3A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i4A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i5A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i6A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i7A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i8A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+ItemFunc.txt [i9A3] Art=ReplaceableTextures\CommandButtons\BTNImprovedUnholyStrength.blp 
+itemstrings.txt [i1A1] Name=攻击之爪-i1 Tip=购买|cffffcc00攻击之爪-i1|r Ubertip="增加攻击,DATA-|cffffcc00<A1a1,DataA1>|r" 
+itemstrings.txt [i2A1] Name=攻击之爪-i2 Tip=购买|cffffcc00攻击之爪-i2|r Ubertip="增加攻击,DATA-|cffffcc00<A2a1,DataA1>|r" 
+itemstrings.txt [i3A1] Name=攻击之爪-i3 Tip=购买|cffffcc00攻击之爪-i3|r Ubertip="增加攻击,DATA-|cffffcc00<A3a1,DataA1>|r" 
+itemstrings.txt [i4A1] Name=攻击之爪-i4 Tip=购买|cffffcc00攻击之爪-i4|r Ubertip="增加攻击,DATA-|cffffcc00<A4a1,DataA1>|r" 
+itemstrings.txt [i5A1] Name=攻击之爪-i5 Tip=购买|cffffcc00攻击之爪-i5|r Ubertip="增加攻击,DATA-|cffffcc00<A5a1,DataA1>|r" 
+itemstrings.txt [i6A1] Name=攻击之爪-i6 Tip=购买|cffffcc00攻击之爪-i6|r Ubertip="增加攻击,DATA-|cffffcc00<A6a1,DataA1>|r" 
+itemstrings.txt [i7A1] Name=攻击之爪-i7 Tip=购买|cffffcc00攻击之爪-i7|r Ubertip="增加攻击,DATA-|cffffcc00<A7a1,DataA1>|r" 
+itemstrings.txt [i8A1] Name=攻击之爪-i8 Tip=购买|cffffcc00攻击之爪-i8|r Ubertip="增加攻击,DATA-|cffffcc00<A8a1,DataA1>|r" 
+itemstrings.txt [i9A1] Name=攻击之爪-i9 Tip=购买|cffffcc00攻击之爪-i9|r Ubertip="增加攻击,DATA-|cffffcc00<A9a1,DataA1>|r" 
+itemstrings.txt [i1A2] Name=龙血风衣-i1 Tip=购买|cffffcc00龙血风衣-i1|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A1b1,DataA1>|r" 
+itemstrings.txt [i2A2] Name=龙血风衣-i2 Tip=购买|cffffcc00龙血风衣-i2|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A2b1,DataA1>|r" 
+itemstrings.txt [i3A2] Name=龙血风衣-i3 Tip=购买|cffffcc00龙血风衣-i3|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A3b1,DataA1>|r" 
+itemstrings.txt [i4A2] Name=龙血风衣-i4 Tip=购买|cffffcc00龙血风衣-i4|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A4b1,DataA1>|r" 
+itemstrings.txt [i5A2] Name=龙血风衣-i5 Tip=购买|cffffcc00龙血风衣-i5|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A5b1,DataA1>|r" 
+itemstrings.txt [i6A2] Name=龙血风衣-i6 Tip=购买|cffffcc00龙血风衣-i6|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A6b1,DataA1>|r" 
+itemstrings.txt [i7A2] Name=龙血风衣-i7 Tip=购买|cffffcc00龙血风衣-i7|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A7b1,DataA1>|r" 
+itemstrings.txt [i8A2] Name=龙血风衣-i8 Tip=购买|cffffcc00龙血风衣-i8|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A8b1,DataA1>|r" 
+itemstrings.txt [i9A2] Name=龙血风衣-i9 Tip=购买|cffffcc00龙血风衣-i9|r Ubertip="加一定跑速度，并增加防御,DATA-|cffffcc00<A9b1,DataA1>|r" 
+itemstrings.txt [i1A3] Name=爆裂血爪-i1 Tip=购买|cffffcc00爆裂血爪-i1|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A1a2,DataA1>|r" 
+itemstrings.txt [i2A3] Name=爆裂血爪-i2 Tip=购买|cffffcc00爆裂血爪-i2|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A2a2,DataA1>|r" 
+itemstrings.txt [i3A3] Name=爆裂血爪-i3 Tip=购买|cffffcc00爆裂血爪-i3|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A3a2,DataA1>|r" 
+itemstrings.txt [i4A3] Name=爆裂血爪-i4 Tip=购买|cffffcc00爆裂血爪-i4|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A4a2,DataA1>|r" 
+itemstrings.txt [i5A3] Name=爆裂血爪-i5 Tip=购买|cffffcc00爆裂血爪-i5|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A5a2,DataA1>|r" 
+itemstrings.txt [i6A3] Name=爆裂血爪-i6 Tip=购买|cffffcc00爆裂血爪-i6|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A6a2,DataA1>|r" 
+itemstrings.txt [i7A3] Name=爆裂血爪-i7 Tip=购买|cffffcc00爆裂血爪-i7|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A7a2,DataA1>|r" 
+itemstrings.txt [i8A3] Name=爆裂血爪-i8 Tip=购买|cffffcc00爆裂血爪-i8|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A8a2,DataA1>|r" 
+itemstrings.txt [i9A3] Name=爆裂血爪-i9 Tip=购买|cffffcc00爆裂血爪-i9|r Ubertip="加攻击，加暴击，吸血,DATA-|cffffcc00<A9a2,DataA1>|r" 
+itemstrings.txt [i1B1] Name=龙骨弓-i1 Tip=购买|cffffcc00龙骨弓-i1|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
+ItemFunc.txt [i1B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i2B1] Name=龙骨弓-i2 Tip=购买|cffffcc00龙骨弓-i2|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
+ItemFunc.txt [i2B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i3B1] Name=龙骨弓-i3 Tip=购买|cffffcc00龙骨弓-i3|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
+ItemFunc.txt [i3B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i4B1] Name=龙骨弓-i4 Tip=购买|cffffcc00龙骨弓-i4|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
+ItemFunc.txt [i4B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i5B1] Name=龙骨弓-i5 Tip=购买|cffffcc00龙骨弓-i5|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
+ItemFunc.txt [i5B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i6B1] Name=龙骨弓-i6 Tip=购买|cffffcc00龙骨弓-i6|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
+ItemFunc.txt [i6B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i7B1] Name=龙骨弓-i7 Tip=购买|cffffcc00龙骨弓-i7|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
+ItemFunc.txt [i7B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i8B1] Name=龙骨弓-i8 Tip=购买|cffffcc00龙骨弓-i8|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
+ItemFunc.txt [i8B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i9B1] Name=龙骨弓-i9 Tip=购买|cffffcc00龙骨弓-i9|r Ubertip="远程可以多重攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
+ItemFunc.txt [i9B1] Art=ReplaceableTextures\CommandButtons\BTNSkeletalLongevity.blp
+itemstrings.txt [i1B2] Name=龙鳞枪-i1 Tip=购买|cffffcc00龙鳞枪-i1|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A1a5,DataA1>|r" 
+ItemFunc.txt [i1B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i2B2] Name=龙鳞枪-i2 Tip=购买|cffffcc00龙鳞枪-i2|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A2a5,DataA1>|r" 
+ItemFunc.txt [i2B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i3B2] Name=龙鳞枪-i3 Tip=购买|cffffcc00龙鳞枪-i3|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A3a5,DataA1>|r" 
+ItemFunc.txt [i3B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i4B2] Name=龙鳞枪-i4 Tip=购买|cffffcc00龙鳞枪-i4|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A4a5,DataA1>|r" 
+ItemFunc.txt [i4B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i5B2] Name=龙鳞枪-i5 Tip=购买|cffffcc00龙鳞枪-i5|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A5a5,DataA1>|r" 
+ItemFunc.txt [i5B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i6B2] Name=龙鳞枪-i6 Tip=购买|cffffcc00龙鳞枪-i6|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A6a5,DataA1>|r" 
+ItemFunc.txt [i6B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i7B2] Name=龙鳞枪-i7 Tip=购买|cffffcc00龙鳞枪-i7|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A7a5,DataA1>|r" 
+ItemFunc.txt [i7B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i8B2] Name=龙鳞枪-i8 Tip=购买|cffffcc00龙鳞枪-i8|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A8a5,DataA1>|r" 
+ItemFunc.txt [i8B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
+itemstrings.txt [i9B2] Name=龙鳞枪-i9 Tip=购买|cffffcc00龙鳞枪-i9|r Ubertip="近战可以分裂攻击，并加攻击速度,DATA-|cffffcc00<A9a5,DataA1>|r" 
+ItemFunc.txt [i9B2] Art=ReplaceableTextures\PassiveButtons\PASBTNCleavingAttack.blp
