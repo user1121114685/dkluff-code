@@ -1,0 +1,2043 @@
+【天啸推荐】魔兽地图编辑器（World Editor）使用技巧
+5秒注册猴岛会员，获取更多免费资源登录注册用QQ号登陆用微博登陆游客临时登录
+QQ群 财富榜 社区服务 qq强制聊天 脑残体 纪念馆 账号安全 
+手机版紫霞游戏小说论坛用户中心帮助搜索银行
+紫霞游戏
+ 
+帖子
+搜索
+街机三国 傲剑2 女神联盟 三国魂 七杀
+QQ技术CF穿越火线QQ刷钻QQ交易跑跑卡丁车免费资源&网盘分享CF辅助跑跑辅助交流LOL英雄联盟QQ号码
+    密码: 验证码:点此显示验证码	    游客临时登录 忘记密码  QQ登录 |  新浪登录
+猴岛论坛魔兽争霸3--Warcraft III【天啸推荐】魔兽地图编辑器（World Editor）使用技巧
+发帖回复
+上一主题下一主题最近浏览的帖子最近浏览的版块? 返回列表
+4个回复
+【天啸推荐】魔兽地图编辑器（World Editor）使用技巧
+楼层直达
+　　　天啸°
+ZxID：13942419
+
+等级: 元老
+火线ID: 天啸
+天梯等级:黑铁级
+军衔:列兵
+最佳帅哥奖个性SHOW奖灌水天才奖财富大师奖宣传大使奖巨蟹座欢乐天使奖魅力会员奖猴岛网页游戏幽默大师奖鼎立支持奖版主勋章LOL版块专属
+来自:黑龙江省 联通
+举报 只看楼主 更多操作 楼主  发表于: 2011-07-27
+ 	
+分享到
+做3C地图那要先了解下编辑器.物品,技能,单位,触发器,地形,装饰物,游戏平行性.等等. 
+玩这么久的3C中看来先有识那个触发器.物品与技能其他人性化就行了. 
+最好的方法打开一张没有经过加密过的地图来学習下,看人点样设脚本与技能,物品等. 
+不过现在的3C基本上是加密过的,触发器看不了,除了你识jass语言. 
+下面是本人收藏回来的步骤,希望对你有用 
+(那些相关软件你去百度找下.) 
+************************ 
+了解地图修改地图基本步骤 
+什么是地图加密 
+地图加密就是通过特殊方法破坏地图文件，使它可以在魔兽中运行，却不能被World Editor读取。 
+目前有哪些加密方法 
+现在已有很多种加密War3地图的方法。 
+1: 破坏 MPQ 文件头大小信息 
+魔兽争霸III的地图就像一个Zip文件。 首先是一个 512 字节大小的地图文件头，它记录了一些信息。然后附带一个MPQ 档案， 
+这个MPQ 档案中包含了一个地图所需的全部文件。 MPQ 文件的前4个字节是一个标识符。它可以被识别为 ’MPQ’。接下来的4个字节 
+是文件头大小，通常是16进制 hex 0x20 00 00 00的形式。 有些加密者将 0x20 00 00 00 改成一个随机数值，例如hex 0xF6 6E BA 76这个 
+样子。 目前多数 MPQ 程序因为大小错误而无法打开这样的 MPQ 档案。而 Warcraft3 似乎忽略了这种错误的文件头大小，所以这些地图 
+仍可以在魔兽中运行。 
+这种加密只要把数值改回 0x20 00 00 00就可以轻易破解掉。 
+为了能够正常打开地图并提取文件信息，本网站(wc3sear.ch)将自动修复这类加密文件。 
+（：这一段的术语翻译可能并不正确，因为我对文件结构本就知之甚少。望谅解） 
+
+2: 删除地图内的 war3map.wtg文件 
+war3map.wtg 文件中包含了地图中所用到的变量，触发，数组等必需信息。但这个文件只对World-Editor有用。 
+war3map.wtg 文件丢失或者被改动都将导致 World-Editor 无法读取地图。 
+当然，这种加密也可以完美地解除。 通过一个小程序你就可以利用war3map.j 文件中存储的信息来重建 war3map.wtg 文件。 
+本网站忽略掉war3map.wtg 文件，而是直接从war3map.j 文件中提取诸如触发数目，变量数目等信息。 
+你可能注意到，既然一个简单的 PHP 脚本就可以提取出 war3map.j，那么使用其它脚本就有可能重建war3map.wtg 文件。 
+2b: 删除 war3map.w3c， war3map.w3s， war3map.w3r 文件 
+war3map.w3c 存储了world editor的镜头设置。 war3map.w3s 存储了world editor在地图中所设置的声音。 war3map.w3r 存储了world editor中的区域设定。 
+这几个文件同样只对World Editor有用，而且同样可以通过 war3map.j 文件进行重建。参见上面的 “删除地图内的 war3map.wtg 文件“ 。 
+
+3: 隐藏 war3map.j 文件 
+有些耍小聪明的加密者找到了隐藏 war3map.j 的办法，这样我们就无法用一个网页脚本来轻易将它解出了。 
+正规的地图中 war3map.j 是直接保存在根目录里的。而这些加密者发现把它移动到 “Scripts\“下面也可以正常运行。 
+只要知道了这一点，就很容易破解这种加密 ;-) 非常感谢 BahamutZERO 和Quantam 帮我解决这种方法。 
+
+4: 打乱war3map.j 文件 
+有些加密者认为自己很聪明，他们用随机数字重命名了所有的变量和函数。这使常人很难读懂 war3map.j 文件。但这对脚本是不起作用的。 
+我为这个网站所写的脚本根本不在乎关键字，它只搜索模式，所以我仍然可以从地图中提取我所需要的信息 ;-) 
+只要借助能够重建 war3map.wtg 的脚本，这种加密方法同样可以破解。恐怕你唯一没法改变的就是已经重命名的变量和函数。 
+但这并不重要，因为你仍然可以用world editor打开它。 ;-) 
+加密的安全性如何 
+正如你所读到的，地图加密也许可以避免菜鸟们用world editor打开你的地图。 
+但事实是只要魔兽可以运行你的地图，就有办法修复它，从而可以用 World Editor打开它。 
+地图加密的利弊 
+有利面： 
+- 让菜鸟们不能打开你的地图并篡改它。 
+- 让你显得很聪明 
+- 因为删除了某些文件而使地图变小。 
+不利面： 
+- 它实际上是没用的 
+- 大家不能研究你的地图 
+- 自己丢失原版后将无法对地图进行修改 
+地图的破译 
+大家拿到文件包以后可以看到里边有很多文件， 
+这个都是用mpqediten解开地图以后的文件 
+只不过我根据这些文件的文件头整理了一下，重新命了一次名。 
+这些文件都是地图的原始数据我们可以*直接修改它们来达到修改地图的内容。 
+下边是一些有用的文件的列表 
+war3map.w3u 单位 
+war3map.w3t 物品 
+war3map.w3b 可破坏的 
+war3map.w3d 地形装饰物 
+war3map.w3a 技能 
+war3map.w3h 魔法特效 
+war3map.w3q 升级 
+等等,这些都是地图的基本设置文件， 
+我们可以用WE中的物品编辑器直接导入进行编辑。 
+war3map.wtg 触发事件 
+这个是保存各种触发事件的地方。我们在地图里搞装备合成，刷怪，作任务 
+等，都是依*触发指令来完成的。但是一般的加密地图都把war3map.wtg和war3map.wts删除了。 
+war3map.j jass数据库 
+这个是地图的核心，所有跟地图设置有关的资料如地图摆放的建筑物、角色、技能、触发事件的指令等等，只可惜是用jass语言保存的。如果你懂jass的话可以在这个文件里任意改动任何数据。包括触发指令。 
+war3map.shd 地层数据 
+war3map.wpm mp3,wav等媒体文件的设置 
+war3mapPreview.tga 地图缩略图 
+war3mapmap.blp 图形文件的设置 
+war3mapmisc.txt 游戏平衡常数 
+下边是最重要的，因为很多人把文件修改完以后都不知道该怎么还原。 
+我们现在就要用到mpqediten或MPQWorkshop了 
+新建一个MPQ文件，然后把那些文件全部添加进去再保存。 
+现在你们得到一个MPQ文件了。下一步是添加w3x地图文件的文件头 
+你们用UltraEdit-32随便打开一个w3x魔兽地图文件和自己的mpq文件。 
+对比一下，你们就会发现w3x文件比MPQ文件多了一个16字节的文件头 
+后边的事我不用说了吧，w3x文件中复制，然后在MPQ中粘贴这个 
+16字节的文件头，然后把后缀名MPQ改成w3x就可以了。 
+修改地图就是这么简单，欢迎大家修改地图，尤其是好地图 
+-======= 基本常规问题类 =======- [G-1] 
+-=怎么手动加密地图啊？？=- 
+1) 首先 FILE -> EXPORT SCRIPTS ~~导出一个脚本文件命名为 WAR3MAP.J ~~ 
+2) 建立两个空文件~~命名为 WAR3MAP.WTG 、WAR3MAP.WCT ~~ 
+3) 建立一个空文件命名为 (listfile) ~~ 
+4) 把上面四个文件都用 IMPORT MANAGER 导入~~ 
+5) 全部自己定义路径~~具体如下： 
+SCRIPTS\WAR3MAP.J 
+WAR3MAP.WTG 
+WAR3MAP.WCT 
+(listfile) 
+-=怎么才能让英雄可以超过10级啊？=- 
+Menu(菜单) -> Advenced(高阶) -> Gameplay Constant(游戏<平衡>常数) -> Hero - Max Level(英雄 - 最大等级) 
+-=怎麼让五级以上英雄打野生动物也能得到经验？=- 
+Menu -> Advenced -> Gameplay Constant -> Hero Xp Gained - Creep Reduction Table(英雄经验获取 - 野生单位经验表) 
+表中每一项表示每一等级可以获得的经验百分比~~如： 
+第一个数值为等级 1 的英雄杀掉野生动物可得到的经验的百分比~~ 
+第二个数值为等级 2 的英雄~~如此类推~~ 
+-=怎么修改游戏读取时显示的小地图图片啊？=- 
+1] 先做好你希望显示的小地图图片，格式要求是 24/32bit 的 TGA 格式，尺寸为 256x256。 
+2] 然后使用 TGA<->BLP工具 转换成 BLP 格式。>>点击下载转换工具<< 
+3] 用 WE 开启地图，打开 IMPORT MANAGER(F12) ~~将图片导入。 
+4] 如果希望图片仅在读取事有效，则重命名为 WAR3MAPPREVIEW.BLP 。 
+5] 如果希望覆盖掉游戏中的小地图，则重命名为 WAR3MAPMAP.BLP 。 
+-=关于 Angle Attack 究竟是什么呢？=- 
+Angle Attack 就是视角~~ 
+很多人不明白具体的角度代表什么位置的视角~~这个图片可以很清楚的表示出来`~ 
+今天翻以前的教程找到的~~：）~~ 
+来点掌声哦！ 
+啊？我用WE感觉好慢！=- 
+Menu(菜单) -> Window(窗口) -> Brush List(图刷列表) 
+把这个列表关闭后速度就会得到很大程度的提升了~~ 
+-=我想把地图A的触发复制到地图B，但是为什么总是缺少变量而出错啊？=- 
+因为在复制TRIGGER的时候不会复制TRIGGER用到的变量，所以就会出错了，解决方法是打开复制未知变量的功能： 
+Menu -> File -> Preferences -> General -> Automatically create unknown variables while pasting triggers 
+-=怎么才能给字加上颜色啊？=- 
+在WAR3中~~经常可以看到带颜色的字~~无论是地图名称~~还是技能道具说明~~或者对话什么什么地方~~都可以用 显色标签 来为特定的字加颜色~~ 
+标签的格式是 |CTTRRGGBBTEXT|R 
+‘|C’ 是显色标签的开始部分~~ 
+‘|R’ 是显色标签的结束部分~~ 
+‘TTRRGGBB’ 是色彩代码~~采用4组2位16进制来确定颜色~~ 
+第一组 ‘TT’ 表示透明度~~ 
+第二组 ‘RR’ 表示红色~~ 
+第二组 ‘GG’ 表示绿色~~ 
+第二组 ‘BB’ 表示蓝色~~ 
+‘TEXT’ 位置就是你需要显色的文字了~~ 
+[例]：|cff004444DANEXX是猪|r -> DANEXX是猪 
+[注]：16进制为 0123456789ABCDEF ~~ 
+Set Player_colors[1] = |cffff0303 
+Set Player_colors[2] = |cff0042ff 
+Set Player_colors[3] = |cff1ce6b9 
+Set Player_colors[4] = |cff540081 
+Set Player_colors[5] = |cfffffc00 
+Set Player_colors[6] = |cfffe8a0e 
+Set Player_colors[7] = |cff20c000 
+Set Player_colors[8] = |cffe55bb0 
+Set Player_colors[9] = |cff959697 
+Set Player_colors[10] = |cff7ebff1 
+Set Player_colors[11] = |cff106246 
+Set Player_colors[12] = |cff492a04 
+-=为啥我在这里下的有些地图电脑说太大了玩不了啊？为什么我要开始游戏的时候总是说我缺少一个对手不能开始游戏呢？=- 
+这种地图需要在 SINGLE PLAYER(单一玩家) -> CUSTOM GAME(自定义游戏) 中进入~~ 
+-=扩展名为 .W3N 的战役要放在哪里~~怎么才能玩啊？=- 
+W3N 文件需要放在游戏目录下的 CAMPAIGNS 文件夹下面~~ 在 SINGLE PLAYER(单一玩家) -> CUSTOM CAMPAIGNS(自定义战役) 中进入~ 
+
+                       第一章 ★ Trigger事件     第一节
+　Trigger是由事件、条件、动作组成。事件是Trigger的开端，所有事件都是并行的，也就是说，在多个事件的情况下，只要触发一个事件就会执行触发器。大部分事件可以直接指定，但有部分事件却需要后期添加或者必须要有指定类型的变量才可以添加，后期添加也比较方便，后面会介绍到“动态注册事件”，这里我们先说一下具体的事件内容。
+　　还有需要注意到触发的关联性，比如“玩家事件”产生的触发是不可能会有“触发单位”这样的单位函数的，对应的只是“触发玩家”之类的玩家函数，但可以通过一些特殊情况转换，比如可以通过单位组动作的条件来选取玩家的单位，而且“触发单位所属玩家”就是一个很典型的单位事件调用玩家的函数。
+                              第一节 ☆ 单位事件 
+Unit - Specific Unit Event 
+指定单位事件
+Unit - Player-Owned Unit Event 
+玩家单位事件 
+Unit - Generic Unit Event 
+一般单位事件 
+Unit - Unit Enters Region 
+单位进入区域 
+Unit - Unit Leaves Region 
+单位离开区域 
+Unit - Unit Within Range 
+接近指定单位 
+Unit - Life 
+单位生命变化 
+Unit - Mana 
+单位法力变化 
+
+　　这里先说明一下“指定单位”的定义，顾名思义，这个需要针对已经存在的可以直接选取的具体的单位；不单单是事件，还包括一些条件和动作；不过不同事件可以用“动态注册”来达到添加事件的目的，而条件和动作可以通过“单位类型”的变量来读取。 
+三种单位事件所对应的事件稍有不同，如下表： 
+Dies 
+单位死亡 
+共有 
+Decas 
+单位腐烂 
+共有 
+Changes owner 
+改变单位所属 
+共有 
+Damaged 
+单位接受伤害 
+指定单位事件 
+Gains a level 
+单位提升一个等级 
+共有 
+Learns a Skill 
+单位学習一个技能 
+共有 
+Becomes revivable 
+单位变为可重生的 
+共有 
+Uses an item 
+单位使用一个物品 
+共有 
+Acquires an item 
+单位获得一个物品 
+共有 
+Loses an item 
+单位掉落一个物品 
+共有 
+Sells a unit 
+出售一个单位 
+共有 
+Sells an item (from shop) 
+购买物品（从商店） 
+共有 
+Pawns an item (to shop) 
+出售物品（到商店） 
+共有 
+Is attacked 
+单位被攻击 
+共有 
+Is rescued 
+单位被营救 
+共有 
+Selected 
+单位被选择 
+指定单位事件 
+Deselected 
+单位被取消选择 
+指定单位事件 
+Spawns a summoned unit 
+召唤一个单位 
+共有 
+Begins channeling an alility 
+准备施放技能 
+共有 
+Begins casting an ability 
+开始施放技能 
+共有 
+Stops casting an ability 
+停止施放技能 
+共有 
+Starts the effect of an ability 
+发动技能效果 
+共有 
+Finishes casting an ability 
+技能施放结束 
+共有 
+Is loaded into a transport 
+被运输机装载的单位 
+共有 
+Acquired target 
+获得一个目标 
+指定单位事件 
+Target in range 
+获得攻击范围内目标 
+指定单位事件 
+Begins training a unit 
+开始训练的单位 
+共有 
+Cancels training a unit 
+取消训练的单位 
+共有 
+Finishes training a unit 
+完成训练的单位 
+共有 
+Begins construction 
+开始建造的单位 
+玩家/一般单位事件 
+Cancels construction 
+取消建造的单位 
+玩家/一般单位事件 
+Finishes construction 
+完成建筑的单位 
+玩家/一般单位事件 
+Begins reviving 
+正在复活的单位 
+共有 
+Cancels reviving 
+取消复活的单位 
+共有 
+Finishes reviving 
+完成复活的单位 
+共有 
+Begins an upgrade 
+正在升级的单位 
+共有 
+Cancels an upgrade 
+取消升级的单位 
+共有 
+Finishes an upgrade 
+完成升级的单位 
+共有 
+Begins research 
+正在研究的单位 
+共有 
+Cancels research 
+取消研究的单位 
+共有 
+Finishes research 
+完成研究的单位 
+共有 
+Is issued an order targeting an object 
+单位目标是物品的命令 
+共有 
+Is issued an order targeting a point 
+单位目标是点的命令 
+共有 
+Is issued an order with no target 
+发布没有目标的命令 
+共有 
+
+　　在制作触发的时候，我们先要考虑到，自己需要在什么样的情况下运行这个触发器，然后再有选择的添加事件。 
+例题1：如何让敌对的某某玩家（玩家6）某某单位（圣骑士0000）死亡后执行游戏胜利 
+这里分别对应三种事件来说明各自的用法： 
+1、指定单位事件： 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+（圣骑士 0000） 死亡
+条件：
+（死亡单位）所属是（玩家6）
+动作：
+游戏－设置 （凶手单位）所属玩家 胜利
+
+2、玩家单位事件 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+（玩家6）的单位死亡
+条件：
+（死亡单位）是（圣骑士0000）
+动作：
+游戏－设置 （凶手单位）所属玩家 胜利
+
+3、一般单位事件 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+任意单位死亡
+条件：
+（死亡单位）是（圣骑士 0000）
+（死亡单位）所属是（玩家6 ）
+动作：
+游戏－设置 （凶手单位）所属玩家 胜利
+
+“单位进入区域”和“单位离开区域”这个就很好理解了，以练功房为例简单说明。 
+例题2：当（大法师0001）进入（区域0000）的时候开始刷兵，单位离开（区域0000）的时候停止刷兵－练功房区域。 
+1、 单位进入区域 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+单位进入（区域0000）
+条件：
+触发单位 等于 （大法师0001）
+动作：
+运行触发器 <刷兵>
+
+2、 单位离开区域 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+单位离开（区域0000）
+条件：
+触发单位 等于 （大法师0001）
+动作：
+关闭触发器 <刷兵>
+
+3、 刷兵<暂时只简单的调用一下，后面会细说> 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+每2秒触发事件
+条件：
+无
+动作：
+创建1个 步兵 在 区域0000 的中心点，面向 默认的建筑角度
+
+PS：这里的刷兵事件触发器默认是初始关闭的。 
+“接近指定单位事件”就像前面所说，需要用到具体的可指定的单位才可以使用。 
+例题3：（大法师0001）靠近（圣骑士0000）500码内会召唤水元素。 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+单位进入500 范围距离 （圣骑士0000）
+条件：
+触发单位 等于 （大法师0001）
+动作：
+单位 - 对 (触发单位) 发布 人族大法师 - 召唤水元素 命令
+
+“单位生命值变化”和“单位法力值变量”这个同样属于“指定单位”事件。 
+例题4：当（大法师0001）生命值少于100的时候使物品“生命药水”。 
+');//-->Trigger Tree    Present: Zoxc @ wc3campaigns  |  Migration: Greedwind    |    展开 | 收缩 | 复制
+事件：
+单位 - （大法师0001）的生命值变为小于 100.00
+条件：
+略
+动作：
+英雄 - 命令 （大法师0001） 使用 （大法师0001） 所持有的 生命药水
+
+                                第一节 完
+
+                            第二节 ☆ 玩家事件 
+
+Player - Chat Message
+聊天信息
+
+Player - Cinematic Skipped
+按下ESC
+Player - Selection Event
+选择事件
+Player - Keyboard Event
+键盘事件
+Player - Properties
+属性变化
+Player - Alliance Change(Any)
+同盟改变 (任何)
+Player - Alliance Change(Specific)
+同盟改变 (指定)
+Player - Victory
+胜利
+Player - Defeat
+失败
+Player - Leaves Game
+离开游戏
+
+　　玩家事件就是和玩家相关的事件（废话—。—），这个在制作事件的时候需要判断事件事件发生源是哪一个，这样才可以正确使用事件；另外玩家事件是针对单一玩家设置的，所以如果你想有几个玩家都可以触发就必须对应每一个需要触发的玩家添加事件。 
+　　聊天信息事件，是指捕获的玩家输入的信息，一般像输入密技之类都属于聊天信息；但这里需要说明的是，官方默认的密技是无法通过聊天信息捕获的，因此无法防止，也就是像现在大家为了防作弊而制作的各种各样的演示的原因。 
+　　聊天信息捕获有两种方式，一是完全匹配，二是部分匹配，以实例说明： 
+　　例5：让玩家输入GO来执行增加1000金币。 
+1、完全匹配 
+');//-->Trigger Tree    Present: |    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家1(红色) 输入的聊天信息包含 GO ,匹配方式: 完全匹配
+条件：
+动作：
+玩家 - 增加 1000 (触发玩家) 的 现有黄金
+2、 部分匹配 
+');//-->Trigger Tree    Present: |    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家1(红色) 输入的聊天信息包含 GO ,匹配方式: 包含字符串
+条件
+动作：
+玩家 - 增加 1000 (触发玩家) 的 现有黄金
+
+　　PS：这两个触发器运行会有什么不同呢？完全匹配的需要你输入的就是GO，而不能附带其它任何多余的字符，而包含字符串的话，类似于GOO或者GGO之类的，都会执行。 
+　　按下ESC键和键盘事件同属于按键事件，默认的键盘事件可以按方向键上下左右来触发，键盘事件和按下ESC事件的区别还在于，可以分别捕获按下和放开按键事件。 
+　　例6：按下ESC键来显示玩家当前的金币数 
+');//-->Trigger Tree    Present:|    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家1(红色) 按下Esc键
+条件：
+动作：
+游戏 - 对 (所有玩家) 发送文本信息: (转换 ((触发玩家) 现有黄金) 为字符串)
+
+　　PS：因为显示出来的文本必须是字符串，所以需要把属于整数的黄金数转换成字符串（后面详解） 
+　　选择事件，就是玩家选择了一个单位后执行的事件，选择事件包括选择和取消选择两个类型。 
+　　例7：使玩家锁定选择（血魔法师0003），无法选择其它单位<默认设置已选择该单位> 
+');//-->Trigger Tree    Present: 
+事件：
+玩家 - 玩家1(红色) 取消选择 一个单位
+条件：
+(触发单位) 等于 血魔法师 0003 <预设>
+动作：
+选择 - 选择 (触发单位) 对 (触发玩家)
+
+　　属性变化事件，是指玩家的某个属性发生改变，来执行触发，属性类型有如下： 
+现有黄金 
+现有木材 
+剩余可用英雄 
+金钱维持费率 
+木材维修费率 
+总黄金采集量 
+总木材采集量 
+已使用人口数 
+可使用人口数 
+最大人口数 
+游戏得分 
+
+例8：当立敌对的（兵步）只有2个以后，再次刷新10个兵步，步兵占用人口数2。 
+');//-->Trigger Tree    Present:    |    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家1(红色) 的 已使用人口数 变为 小于或等于 4.00
+条件：
+动作：
+单位 - 创建 10 个 步兵 给 (触发玩家) 在 ((可用地图区域) 的中心点) ,面向角度为 默认建筑朝向 度
+
+　　PS：这里需要说明一下，属性必须是发生变化的时候才会触发的；一般情况下，我们做地图会先选择英雄，然后就会占用5个人口（默认情况下），这个时候属性就已经发生变化了，不过进行比较的话，就需要改成小于或等于5才会触发。 
+　　同盟改变（任何）/ 同盟改变（指定），是基于同盟关系发生变化而触发事件，前者只需要任何一项关系发生改变就会执行，后者需要在特定的情况下才会执行，同盟关系如下： 
+结盟（不侵犯） 
+共享视野 
+共享单位 
+共享完全控制权 
+共享经验 
+盟友魔法锁定 
+救援请求 
+救援回应 
+
+　　例9：当玩家1（红色）对玩家2（蓝色）设置结盟（不侵犯）后奖励玩家1（红色）1000金币。 
+');//-->Trigger Tree    Present:|    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家1(红色) 更改 结盟(不侵犯) 设置
+条件：
+((触发玩家) 对 玩家2(蓝色) 开启 结盟(不侵犯)) 等于 TRUE
+动作：
+玩家 - 增加 1000 玩家1(红色) 的 现有黄金
+
+　　PS：这里需要说明的是，同盟改变是单向设置，也就是说，如果玩家1（红色）对玩家2（蓝色）设置结盟，而玩家2（蓝色）没有设置结盟；那结果就是玩家1（红色）的单位不会主动攻击玩家2（蓝色）的单位，而玩家2（蓝色）还会主动攻击玩家1（红色）的单位，因此在设置结盟的时候必须要双方都进行操作。 
+游戏胜利 / 游戏失败 / 离开游戏 
+这三个都是玩家的游戏状态，都是单独执行的，很容易进行判断。 
+例10：当玩家2（蓝色）离开游戏后，把所有金币给玩家1（红色） 
+');//-->Trigger Tree    Present: |    展开 | 收缩 | 复制
+事件：
+玩家 - 玩家2(蓝色) 离开游戏
+条件：
+动作：
+玩家 - 增加 (玩家2(蓝色) 现有黄金) 玩家1(红色) 的 现有黄金
+PS：在一些地图的设置中，当其中一个玩家离开就把金钱分给其它在线的玩家，就个只需要把离开玩家的金币除以在线的玩家数量，再把这个值给所有在线玩家（利用玩家组动作，后详）。 
+                                  第二节 完 
+
+                三节 ☆ 游戏事件&普通事件&时间事件&可破坏物事件
+Game - Time Of Day
+游戏中时间变化
+
+Game - Value Of Real Variable
+实数变量Real数值变化
+
+Game - Game Load
+游戏读取
+
+Game - Game Save
+游戏保存
+
+Game - Hero Abilities Button Clicked
+按下英雄升级技能按钮
+
+Game - Build Structure Button Clicked
+按下建造按钮
+
+　　游戏中的时间事件通过游戏时间流逝来进行判断，可利用不同时间做不同事。而实数变量，操作方式和时间事件是一样的，区别在于，必须创建一个实数变量才可以使用这个事件，而且必须要在游戏中制造改变这个变量的事件，就像游戏时间改变会触发游戏时间变化事件一样。 
+　　例11：当每天6点和18点的时候，给玩家1发放500金币的工钱。 
+');//-->Trigger Tree    Present:   展开 | 收缩 | 复制
+事件：
+游戏 - 游戏时间变为 等于 6.00
+游戏 - 游戏时间变为 等于 18.00
+条件：
+动作：
+玩家 - 增加 500 玩家1(红色) 的 现有黄金
+
+　　PS：这里用到了两个事件，前面已经提过，事件是并行的，所以这两个事件是会分别触发增加玩家黄金的事件。 
+　　游戏读取&游戏保存&按下英雄升级技能&按钮按下建造按钮 
+　　这几个事件基本上和现在的主流事件无关，适用于单机游戏时候；前两者就不用介绍了，看字面意思应该就能了解。而后两者，分别是英雄学習技能的那个红色十字被按下和农民建造按钮被按下，这两个都无法捕获触发单位，因此这几个事件可以忽略掉了。 
+
+Map Initialization
+地图初始化
+
+　　普通事件只有地图初始化事件，就是在读取地图的最后阶段执行的事件，一般作用于对变量进行赋值等并不涉及改变游戏数据的动作（比如创建多面版之类的不会被执行）。 
+
+Time - Time Elapsed
+时间流逝经过
+
+Time - Periodic Event
+周期性事件
+
+Time - Timer Expires
+计时器过期
+
+　　时间流逝事件，在正式进入地图以后开始计时，在一定程度上可以当成对游戏事件的补充，比如将时间经过设为0.01的话，就可以执行一些初始化操作而不受地图初始化的一些限制。周期性事件和时间流逝事件的区别在于，当周期性事件定义的时间到达的时候，会执行触发并重新计时，而时间流逝事件只会执行一次。 
+　　例12：每隔10秒创建3个骑士在（区域000），并命令他们攻击移动到（区域001） 
+');//-->Trigger Tree    Present: |    展开 | 收缩 | 复制
+事件：
+时间 - 每 10.00 秒触发事件
+条件：
+动作：
+For循环整数A从 1 到 3, 做动作
+Loop - 动作
+单位 - 创建 1 个 骑士 给 玩家1(红色) 在 (矩形区域 000 <预设> 的中心点) ,面向角度为 默认建筑朝向 度
+单位 - 对 (最后创建的单位) 发布 攻击移动 命令到目标点: (矩形区域 001 <预设> 的中心点) 
+
+　　PS：这里用到了FOR循环语句，执行3次同样的动作，这样可以针对每一个创建的单位发布命令而不需要担心因为数量过多而有些单位没有获得命令（超过12只时）。 
+
+Destructible - Destructible Dies
+可破坏物体被摧毁
+
+Destructible - Destructible Within Region Dies
+在区域中被摧毁
+
+　　可破坏物，就像树、门之类的装饰物，有一定生命值，会被破坏。 
+　　例13：当区域001内的夏树墙被摧毁后（区域判断上限为64），5秒后复活。 
+');//-->Trigger Tree    Present: |    展开 | 收缩 | 复制
+事件：
+可破坏物 - 可破坏物在 矩形区域 001 <预设> 内死亡
+条件：
+((死亡的可破坏物) 的类型) 等于 夏季树木
+动作：
+等待 5.00 秒
+可破坏物 - 复活 (死亡的可破坏物) 并设置生命值为 ((死亡的可破坏物) 的最大生命值) , 显示 复活动画
+
+　　PS：这里利用了等待语句，但如果死亡的可破坏物过多可能会造成无法复活或无法判断的情况，还有个方式就是利用周期性事件来执行刷新动作，利用选区范围内的可破坏物来复活。 
+
+                 第三节 完
+
+谭宇（tony）
+博客园    首页    新随笔    联系    订阅订阅    管理
+随笔 - 10  文章 - 62 评论 - 4 trackbacks - 0
+<	2015年5月	>
+日	一	二	三	四	五	六
+26	27	28	29	30	1	2
+3	4	5	6	7	8	9
+10	11	12	13	14	15	16
+17	18	19	20	21	22	23
+24	25	26	27	28	29	30
+31	1	2	3	4	5	6
+
+昵称：谭宇（tony）
+园龄：2年11个月
+粉丝：4
+关注：0
++加关注
+搜索
+
+ 
+ 
+常用链接
+
+我的随笔
+我的评论
+我的参与
+最新评论
+我的标签
+我的标签
+
+游戏引擎(27)
+语法(24)
+c++(24)
+Object-C(24)
+同步(7)
+网络游戏(6)
+DOOM(2)
+Dota(1)
+layer(1)
+cocos2d-x(1)
+更多
+随笔分类
+
+Cocos2D-x(2)
+War3 World Editor(8)
+随笔档案
+
+2012年7月 (1)
+2012年6月 (9)
+文章分类
+
+COCOS2D-X(2)
+OGRE
+编程语言(24)
+同步技术(7)
+游戏引擎(29)
+游戏引擎
+
+阅读排行榜
+
+1. (译)TMX地图格式(5591)
+2. (原)War3 脚本分析5-基础脚本资源(750)
+3. (转)War3 World Editor 菜单详解(743)
+4. (转) cocos2d-x自适应屏幕分辨率(528)
+5. (转)War3 地图编辑器脚本接口说明(523)
+(转)War3 地图编辑器脚本接口说明
+
+原文地址：http://www.ou99.com/thread-130388-1-1.html
+
+　　已经有大侠无私奉献出了自己整理的脚本接口说明虽然只有中文对照，而无参数说明和用法案例也已经着实不易，大家如果对War3脚本感兴趣且有足够的时间研究的话可以下载JassCraft，下载地址这里就不贴出来了，搜一下有很多下载点，工具里面有对接口函数的语法检测，当然你可以看到工具列出的所有用于语法检测的函数定义。
+
+MAP_SPEED_FAST="地图-较快游戏速度"
+AcosBJ="反余弦"
+AddHeroXPSwapped="增加英雄经验值"
+AddItemToAllStock="增加 物品-类型 (到所有商店)"
+AddItemToStockBJ="增加 物品-类型 (到商店)"
+AddLightningLoc="创建闪电效果于指定点"
+AddPerfLogLabel="** AddPerfLogLabel **"
+AddResourceAmountBJ="增加黄金到金矿"
+AddSpecialEffectLocBJ="对某点创造特殊效果"
+AddSpecialEffectTargetUnitBJ="对某单位创造特殊效果"
+AddTriggerEvent="增加新的事件"
+AddUnitAnimationPropertiesBJ="添加/删除 单位动画 标签"
+AddUnitToAllStock="增加 单位-类型 (到所有商店)"
+AddUnitToStockBJ="增加 单位-类型 (到商店)"
+AddWeatherEffectSaveLast="创造天气效果"
+AdjustCameraBoundsForPlayerBJ="扩展/收缩摄像绑定"
+AdjustPlayerStateBJ="增加玩家属性值"
+AI_DIFFICULTY_INSANE="AI难度-令人发疯的" "
+AI_DIFFICULTY_NEWBIE="AI难度-新手" "
+AI_DIFFICULTY_NORMAL="AI难度-正常" "
+ALLIANCE_HELP_REQUEST="联盟帮助要求" "
+ALLIANCE_HELP_RESPONSE="联盟帮助响应"
+ALLIANCE_PASSIVE="被动联盟" "
+ALLIANCE_RESCUABLE="联盟可营救" "
+ALLIANCE_SHARED_ADVANCED_CONTROL="联盟共享高级控制" "
+ALLIANCE_SHARED_CONTROL="联盟共享控制" "
+ALLIANCE_SHARED_SPELLS="联盟共享魔法" "
+ALLIANCE_SHARED_VISION="联盟共享视野" "
+ALLIANCE_SHARED_VISION_FORCED="联盟势力共享视野" "
+ALLIANCE_SHARED_XP="联盟共享优先权"
+AndMultiple="和, 多样的条件   比较"
+AngleBetweenPoints="两个坐标之间的角度"
+AsinBJ="反正弦"
+Atan2BJ="和正半轴角度"
+AtanBJ="反正切 (From Angle)"
+AttachSoundToUnitBJ="捆绑3D声音到单位"
+BLEND_MODE_ADDITIVE="合成算法-附加混合" "
+BLEND_MODE_BLEND="合成算法-普通混合" "
+BLEND_MODE_DONT_CARE="合成算法-" "
+BLEND_MODE_KEYALPHA="合成算法-关键的alpha混合" "
+BLEND_MODE_MODULATE="合成算法-调整混合" "
+BLEND_MODE_MODULATE_2X="合成算法-调整2x混合"
+BLEND_MODE_NONE="合成算法-无混合"
+BlightGoldMineForPlayer="设置金矿为不死族金矿"
+call=""
+CAMERA_FIELD_ANGLE_OF_ATTACK="镜头区域-攻击角度" "
+CAMERA_FIELD_FARZ="镜头区域-远端"
+CAMERA_FIELD_FIELD_OF_VIEW="镜头区域-区域观看" "
+CAMERA_FIELD_ROLL="镜头区域-滚动" "
+CAMERA_FIELD_ROTATION="镜头区域-旋转" "
+CAMERA_FIELD_TARGET_DISTANCE="镜头区域-距离到目标" "
+CAMERA_FIELD_ZOFFSET="镜头区域-高度位移"
+CAMERA_MARGIN_BOTTOM="镜头空白-底部"
+CAMERA_MARGIN_LEFT="镜头空白-左边"
+CAMERA_MARGIN_RIGHT="镜头空白-右边"
+CAMERA_MARGIN_TOP="镜头空白-顶部"
+CameraClearNoiseForPlayer="停止 摇摆/摇动 摄像机"
+CameraResetSmoothingFactorBJ="重置摄像机平滑参数"
+CameraSetEQNoiseForPlayer="摇动摄像机"
+CameraSetSmoothingFactorBJ="改变摄像机平滑参数"
+CameraSetSourceNoiseForPlayer="摇摆摄像机来源"
+CameraSetTargetNoiseForPlayer="摇摆摄像机目标"
+CameraSetupApplyForPlayer="应用摄像机 (限时)"
+CameraSetupGetDestPositionLoc="摄象机的目标"
+CameraSetupGetFieldSwap="摄像机的数值"
+CaptainAtGoal="进攻统帅到达目标"
+CaptainGroupSize="进攻组队规模"
+CaptainInCombat="进攻统帅在战斗"
+CaptainIsEmpty="进攻组队为空"
+CaptainIsFull="进攻组队完整"
+CaptainIsHome="进攻统帅在家"
+CaptainReadinessHP="进攻组队健康程度"
+CaptainReadinessMa="进攻组队魔法程度"
+CaptainRetreating="进攻统帅在撤退"
+ChangeElevatorHeight="设置升降机高度"
+ChangeElevatorWalls="打开/关闭 升降机"
+Cheat="** Cheat标签 **"
+CheckItemcodeStatus="物品 - 类型 状态检查"
+CheckItemStatus="物品状态检查"
+CheckLastCommand="最后一条命令"
+CheckLastCommandData="最后一条命令数据"
+ChooseRandomCreepBJ="随机的野生单位单位类型(有等级)"
+ChooseRandomItemBJ="随机物品-所有类别"
+ChooseRandomItemExBJ="随机物品-有类别"
+ChooseRandomNPBuildingBJ="随机的中立建筑物类型"
+CinematicFadeBJ="淡化的过滤器"
+CinematicFilterGenericBJ="高级的过滤器"
+CinematicModeBJ="切换影片模式"
+CinematicModeExBJ="切换影片模式(时间)"
+ClearMapMusicBJ="清空音乐列表"
+ClearSelection="清除所有选定"
+ClearSelectionForPlayer="清除选定对玩家"
+ClearTextMessagesBJ="清空文本信息"
+CommandAI="发送 AI 命令"
+CommandsWaiting="等待中指令数"
+CommentString="注释"
+Condition="限制条件为"
+ConditionalTriggerExecute="运行触发器 (检查条件)"
+ConvertedPlayer="将玩家索引转换为玩家"
+CopySaveGameBJ="复制游戏进度"
+CosBJ="余弦"
+CountLivingPlayerUnitsOfTypeId="玩家活着的某类型单位的数量"
+CountPlayersInForceBJ="玩家组中的玩家数量"
+CountUnitsInGroup="单位组的单位数量"
+CreateCorpseLocBJ="创造尸体"
+CreateDeadDestructableLocBJ="创造[可毁坏物](毁坏的)"
+CreateDefeatConditionBJ="创建任务失败条件"
+CreateDestructableLoc="创造 可毁坏物"
+CreateFogModifierRadiusLocBJ="创造 圆周 可见度修正器"
+CreateFogModifierRectBJ="创造 区域 可见度修正器"
+CreateImageBJ="创建图像"
+CreateItemLoc="创造物品"
+CreateLeaderboardBJ="创建排行榜"
+CreateMultiboardBJ="创建 多列面板"
+CreateNUnitsAtLoc="创造单位面对角度"
+CreateNUnitsAtLocFacingLocBJ="创造单位面对点"
+CreatePermanentCorpseLocBJ="创造永久的尸体"
+CreateQuestBJ="创建任务t"
+CreateQuestItemBJ="创建任务完成条件"
+CreateTextTagLocBJ="创建漂浮文字在 点"
+CreateTextTagUnitBJ="创建漂浮文字在单位"
+CreateTimerDialogBJ="创造计时器窗口"
+CreateUbersplatBJ="创建地面纹理"
+CreepsOnMap="地图上还有野外生物"
+CurrentAttackWave="当前攻势"
+CustomScriptCode="自定义脚本"
+CustomVictoryBJ="胜利"
+DecUnitAbilityLevelSwapped="降低单位技能等级"
+DefeatConditionSetDescriptionBJ="改变失败条件的内容"
+Deg2Rad="转换 度 到 弧度"
+DestroyDefeatConditionBJ="删除失败条件"
+DestroyEffectBJ="删除特殊效果"
+DestroyFogModifier="删除可见度修正器"
+DestroyImage="删除图像"
+DestroyLeaderboardBJ="删除排行榜"
+DestroyLightningBJ="删除闪电效果"
+DestroyMultiboardBJ="删除 多列面板"
+DestroyQuestBJ="删除任务"
+DestroyTextTagBJ="删除漂浮文字"
+DestroyTimerDialogBJ="删除计时器窗口"
+DestroyUbersplat="删除地面纹理"
+DestructableAddIndicatorBJ="闪动指示器为了可毁坏物"
+DestructableRestoreLife="复活 可毁坏物"
+DialogAddButtonBJ="创造对话按钮"
+DialogClearBJ="清除所有对话的标题和按钮"
+DialogDisplayBJ="显示/隐藏 对话框"
+DialogSetMessageBJ="改变 对话框 标题"
+DisableTrigger="关掉触发器"
+DisplayCineFilterBJ="显示/隐藏过滤器"
+DisplayTextToForce="文本消息(自动计时)"
+DisplayTimedTextToForce="文本消息(指定计时)"
+DistanceBetweenPoints="坐标之间的距离"
+DoesUnitGenerateAlarms="单位发出警报"
+DoNothing="不做任何动作"
+EFFECT_TYPE_CASTER="特效类型-施法者特效" "
+EFFECT_TYPE_EFFECT="特效类型-受影响特效" "
+EFFECT_TYPE_SPECIAL="特效类型-特殊特效" "
+EFFECT_TYPE_TARGET="特效类型-目标特效"
+else="否则"
+EnableCreepSleepBJ="允许/禁止 所有野生单位夜间睡眠"
+EnableDawnDusk="打开/关闭 日出/日落 的声音"
+EnableDragSelect="允许/禁止框选"
+EnableMinimapFilterButtons="允许/禁止小地图按钮"
+EnableOcclusionBJ="允许/禁止 闭合"
+EnablePreSelect="允许/禁止预选"
+EnableSelect="允许/禁止选择"
+EnableTrigger="打开触发器"
+EnableWeatherEffect="打开/关闭天气效果"
+EnableWorldFogBoundaryBJ="允许/禁止 边界色彩"
+endif="条件判断结束"
+EndThematicMusicBJ="停放主题曲"
+EnumDestructablesInCircleBJ="选取所有可毁坏物 在圆周 做 动作(单一的)"
+EnumDestructablesInCircleBJMultiple="选取所有可毁坏物 在圆周 做 多样的动作"
+EnumDestructablesInRectAll="选取所有可毁坏物 在区域 做 动作(单一的)"
+EnumDestructablesInRectAllMultiple="选取所有可毁坏物 在区域 做 多样的 动作"
+EnumItemsInRectBJ="选取所有物品在 区域 做动作(单一的)"
+EnumItemsInRectBJMultiple="选取所有物品在 区域 做多样的动作"
+EQUAL="等于"
+EVENT_DIALOG_BUTTON_CLICK="事件-对话按钮点击" "
+EVENT_DIALOG_CLICK="事件-对话点击" "
+EVENT_GAME_BUILD_SUBMENU="游戏事件-创建子菜单"
+EVENT_GAME_END_LEVEL="游戏事件-游戏本关结束"
+EVENT_GAME_ENTER_REGION="游戏事件-进入区域"
+EVENT_GAME_LEAVE_REGION="游戏事件-离开区域"
+EVENT_GAME_LOADED="游戏事件-游戏装载完毕"
+EVENT_GAME_SAVE="游戏事件-储存"
+EVENT_GAME_SHOW_SKILL="游戏事件-显示技能"
+EVENT_GAME_STATE_LIMIT="游戏事件-游戏状态限制"
+EVENT_GAME_TIMER_EXPIRED="游戏事件-游戏超时"
+EVENT_GAME_TOURNAMENT_FINISH_NOW="游戏事件-比赛完成"
+EVENT_GAME_TOURNAMENT_FINISH_SOON="游戏事件-比赛即将完成"
+EVENT_GAME_TRACKABLE_HIT="游戏事件-可跟踪打击"
+EVENT_GAME_TRACKABLE_TRACK="游戏事件-可跟踪跟踪"
+EVENT_GAME_VARIABLE_LIMIT="游戏事件-游戏变量限制"
+EVENT_GAME_VICTORY="游戏事件-游戏胜利"
+EVENT_PLAYER_ALLIANCE_CHANGED="玩家事件-盟友设置变化"
+EVENT_PLAYER_ARROW_DOWN_DOWN="玩家事件-按下键"
+EVENT_PLAYER_ARROW_DOWN_UP="玩家事件-释放下键"
+EVENT_PLAYER_ARROW_LEFT_DOWN="玩家事件-按左键"
+EVENT_PLAYER_ARROW_LEFT_UP="玩家事件-释放左键"
+EVENT_PLAYER_ARROW_RIGHT_DOWN="玩家事件-按右键"
+EVENT_PLAYER_ARROW_RIGHT_UP="玩家事件-释放右键"
+EVENT_PLAYER_ARROW_UP_DOWN="玩家事件-按上键"
+EVENT_PLAYER_ARROW_UP_UP="玩家事件-释放上键"
+EVENT_PLAYER_CHAT="玩家事件-聊天"
+EVENT_PLAYER_DEFEAT="玩家事件-失败"
+EVENT_PLAYER_END_CINEMATIC="玩家事件-结束电影"
+EVENT_PLAYER_HERO_LEVEL="玩家英雄事件-提升一个等级"
+EVENT_PLAYER_HERO_REVIVABLE="玩家英雄事件-变得可重生的"
+EVENT_PLAYER_HERO_REVIVE_CANCEL="玩家英雄事件-取消重生"
+EVENT_PLAYER_HERO_REVIVE_FINISH="玩家英雄事件-完成重生"
+EVENT_PLAYER_HERO_REVIVE_START="玩家英雄事件-开始重生"
+EVENT_PLAYER_HERO_SKILL="玩家英雄事件-学习一项技能"
+EVENT_PLAYER_LEAVE="玩家事件-离开"
+EVENT_PLAYER_STATE_LIMIT="玩家事件-状态限制"
+EVENT_PLAYER_UNIT_ATTACKED="玩家单位事件-被攻击的"
+EVENT_PLAYER_UNIT_CHANGE_OWNER="玩家单位事件-变化拥有者"
+EVENT_PLAYER_UNIT_CONSTRUCT_CANCEL="玩家单位事件-取消建造"
+EVENT_PLAYER_UNIT_CONSTRUCT_FINISH="玩家单位事件-完成建造"
+EVENT_PLAYER_UNIT_CONSTRUCT_START="玩家单位事件-开始建造"
+EVENT_PLAYER_UNIT_DEATH="玩家单位事件-死亡"
+EVENT_PLAYER_UNIT_DECAY="玩家单位事件-衰退"
+EVENT_PLAYER_UNIT_DESELECTED="玩家单位事件-取消选择"
+EVENT_PLAYER_UNIT_DETECTED="玩家单位事件-被发现"
+EVENT_PLAYER_UNIT_DROP_ITEM="玩家单位事件-丢失一件物品"
+EVENT_PLAYER_UNIT_HIDDEN="玩家单位事件-隐藏"
+EVENT_PLAYER_UNIT_ISSUED_ORDER="玩家单位事件-发布一个无目标的"
+EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER="玩家单位事件-发布一个锁定一个"
+EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER="玩家单位事件-发布一个目标指令"
+EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER="玩家单位事件-发布一个锁定一个"
+EVENT_PLAYER_UNIT_LOADED="玩家单位事件-装进了传送门"
+EVENT_PLAYER_UNIT_PAWN_ITEM="玩家单位事件-抵押物品(到商店)"
+EVENT_PLAYER_UNIT_PICKUP_ITEM="玩家单位事件-获得一件物品"
+EVENT_PLAYER_UNIT_RESCUED="玩家单位事件-被营救了"
+EVENT_PLAYER_UNIT_RESEARCH_CANCEL="玩家单位事件-取消研究"
+EVENT_PLAYER_UNIT_RESEARCH_FINISH="玩家单位事件-完成研究"
+EVENT_PLAYER_UNIT_RESEARCH_START="玩家单位事件-开始研究"
+EVENT_PLAYER_UNIT_SELECTED="玩家单位事件-被选择"
+EVENT_PLAYER_UNIT_SELL="玩家单位事件-贩卖一个单位"
+EVENT_PLAYER_UNIT_SELL_ITEM="玩家单位事件-购买物品(从商店)"
+EVENT_PLAYER_UNIT_SPELL_CAST="玩家单位事件-开始施放一种技能"
+EVENT_PLAYER_UNIT_SPELL_CHANNEL="玩家单位事件-开始一种持续性技"
+EVENT_PLAYER_UNIT_SPELL_EFFECT="玩家单位事件-开始一种技能的效"
+EVENT_PLAYER_UNIT_SPELL_ENDCAST="玩家单位事件-停止施放一种技能"
+EVENT_PLAYER_UNIT_SPELL_FINISH="玩家单位事件-施放技能结束"
+EVENT_PLAYER_UNIT_SUMMON="玩家单位事件-产生一个召唤单位"
+EVENT_PLAYER_UNIT_TRAIN_CANCEL="玩家单位事件-取消训练一个单位"
+EVENT_PLAYER_UNIT_TRAIN_FINISH="玩家单位事件-完成训练一个单位"
+EVENT_PLAYER_UNIT_TRAIN_START="玩家单位事件-开始训练一个单位"
+EVENT_PLAYER_UNIT_UPGRADE_CANCEL="玩家单位事件-取消升级"
+EVENT_PLAYER_UNIT_UPGRADE_FINISH="玩家单位事件-完成升级"
+EVENT_PLAYER_UNIT_UPGRADE_START="玩家单位事件-开始升级"
+EVENT_PLAYER_UNIT_USE_ITEM="玩家单位事件-使用一件物品"
+EVENT_PLAYER_VICTORY="玩家事件-胜利"
+EVENT_UNIT_ACQUIRED_TARGET="单位事件-获得一个目标"
+EVENT_UNIT_ATTACKED="单位事件-被攻击"
+EVENT_UNIT_CHANGE_OWNER="单位事件-变化拥有者"
+EVENT_UNIT_CONSTRUCT_CANCEL="单位事件-取消建造"
+EVENT_UNIT_CONSTRUCT_FINISH="单位事件-完成建造"
+EVENT_UNIT_DAMAGED="单位事件-接受伤害"
+EVENT_UNIT_DEATH="单位事件-死亡"
+EVENT_UNIT_DECAY="单位事件-衰退"
+EVENT_UNIT_DESELECTED="单位事件-取消选择"
+EVENT_UNIT_DETECTED="单位事件-被发现"
+EVENT_UNIT_DROP_ITEM="单位事件-丢失一件物品"
+EVENT_UNIT_HERO_LEVEL="英雄单位事件-提升一个等级"
+EVENT_UNIT_HERO_REVIVABLE="英雄单位事件-变得可重生的"
+EVENT_UNIT_HERO_REVIVE_CANCEL="英雄单位事件-取消重生"
+EVENT_UNIT_HERO_REVIVE_FINISH="英雄单位事件-完成重生"
+EVENT_UNIT_HERO_REVIVE_START="英雄单位事件-开始重生"
+EVENT_UNIT_HERO_SKILL="英雄单位事件-学习一项技能"
+EVENT_UNIT_HIDDEN="单位事件-隐藏"
+EVENT_UNIT_ISSUED_ORDER="单位事件-发布一个无目标的指令"
+EVENT_UNIT_ISSUED_POINT_ORDER="单位事件-发布一个锁定一个点的"
+EVENT_UNIT_ISSUED_TARGET_ORDER="单位事件-发布一个锁定目标的指"
+EVENT_UNIT_LOADED="单位事件-装进了传送门"
+EVENT_UNIT_PAWN_ITEM="单位事件-抵押物品(到商店)"
+EVENT_UNIT_PICKUP_ITEM="单位事件-获得一件物品"
+EVENT_UNIT_RESCUED="单位事件-被营救"
+EVENT_UNIT_RESEARCH_CANCEL="单位事件-取消研究"
+EVENT_UNIT_RESEARCH_FINISH="单位事件-完成研究"
+EVENT_UNIT_RESEARCH_START="单位事件-开始研究"
+EVENT_UNIT_SELECTED="单位事件-被选择"
+EVENT_UNIT_SELL="单位事件-贩卖一个单位"
+EVENT_UNIT_SELL_ITEM="单位事件-购买物品(从商店)"
+EVENT_UNIT_SPELL_CAST="单位事件-开始施放一种技能"
+EVENT_UNIT_SPELL_CHANNEL="单位事件-开始一种持续性技能"
+EVENT_UNIT_SPELL_EFFECT="单位事件-开始一种技能的效果"
+EVENT_UNIT_SPELL_ENDCAST="单位事件-停止施放一种技能"
+EVENT_UNIT_SPELL_FINISH="单位事件-施放技能结束"
+EVENT_UNIT_STATE_LIMIT="单位事件-状态限制"
+EVENT_UNIT_SUMMON="单位事件-产生一个召唤单位"
+EVENT_UNIT_TARGET_IN_RANGE="单位事件-注意范围内的一个目标"
+EVENT_UNIT_TRAIN_CANCEL="单位事件-取消训练一个单位"
+EVENT_UNIT_TRAIN_FINISH="单位事件-完成训练一个单位"
+EVENT_UNIT_TRAIN_START="单位事件-开始训练一个单位"
+EVENT_UNIT_UPGRADE_CANCEL="单位事件-取消升级"
+EVENT_UNIT_UPGRADE_FINISH="单位事件-完成升级"
+EVENT_UNIT_UPGRADE_START="单位事件-开始升级"
+EVENT_UNIT_USE_ITEM="单位事件-使用一件物品"
+EVENT_WIDGET_DEATH="事件-容器死亡"
+ExpansionNeeded="需要扩张点"
+ExplodeUnitBJ="使单位爆炸而死"
+false="假"
+FinishUbersplat="完成地面纹理"
+FlashQuestDialogButtonBJ="使任务按钮发光"
+FlushGameCacheBJ="清除所有缓存"
+FlushStoredMissionBJ="清除缓存[分类]"
+FOG_OF_WAR_FOGGED="可见效果-战争迷雾"
+FOG_OF_WAR_MASKED="可见效果-黑色迷雾"
+FOG_OF_WAR_VISIBLE="可见效果-可见"
+FogEnableOff="禁止战争迷雾"
+FogEnableOn="允许战争迷雾"
+FogMaskEnableOff="禁止黑色阴影"
+FogMaskEnableOn="允许黑色阴影"
+FogModifierStart="允许可见度修正器"
+FogModifierStop="禁止可见度修正器"
+FoodUsed="当前AI玩家的人口使用量"
+ForceAddPlayerSimple="添加玩家到玩家组"
+ForceCinematicSubtitlesBJ="副标题显示超过"
+ForceClear="清除玩家"
+ForcePickRandomPlayer="玩家组里的随机玩家"
+ForceRemovePlayerSimple="删除玩家到玩家组"
+ForceUICancelBJ="取消 UI 键"
+ForceUIKeyBJ="按下 UI 键"
+ForForce="选取所有玩家在玩家组做动作(单一的)"
+ForForceMultiple="选取所有玩家在玩家组做多样的动作"
+ForGroup="选取所有单位在单位组做 多动作"
+ForGroupMultiple="选取所有单位在单位组做 多样的动作"
+ForLoopA="对每一个 [循环整数 A], 做动作(单一的)"
+ForLoopAMultiple="对每一个 [循环整数 A], 做多样的动作"
+ForLoopB="对每一个 [循环整数 B],做动作(单一的)"
+ForLoopBMultiple="对每一个 [循环整数 B], 做多样的动作"
+ForLoopVar="对每一个 [ 循环整数变量 ], 做动作(单一的)"
+ForLoopVarMultiple="对每一个 [循环整数 变量], 做多样的动作"
+GAME_STATE_DISCONNECTED="游戏状态-断开"
+GAME_STATE_DIVINE_INTERVENTION="游戏状态-干涉"
+GAME_STATE_TIME_OF_DAY="游戏状态-时间"  "
+GAME_TYPE_BLIZ="游戏类型-官方地图"
+GAME_TYPE_FFA="游戏类型-自由竞赛"
+GAME_TYPE_FOUR_TEAM_PLAY="游戏类型-4队竞赛"
+GAME_TYPE_MELEE="游戏类型-对战"
+GAME_TYPE_ONE_ON_ONE="游戏类型-1 对 1"
+GAME_TYPE_THREE_TEAM_PLAY="游戏类型-3队竞赛"
+GAME_TYPE_TWO_TEAM_PLAY="游戏类型-2队竞赛"
+GAME_TYPE_USE_MAP_SETTINGS="游戏类型-使用地图设置"
+GetAbilityEffectBJ="技能效果图像"
+GetAbilityName="技能名字"
+GetAbilitySoundBJ="技能效果音"
+GetAIDifficulty="对战 AI"
+GetAllyColorFilterState="结盟滤色镜的设置值"
+GetAttackedUnitBJ="被攻击的单位"
+GetAttacker="攻击的单位"
+GetBooleanAnd="条件A和条件B    比较"
+GetBooleanOr="条件A或条件B    比较"
+GetBuyingUnit="在购买的单位"
+GetCameraBoundsMapRect="初始游戏时的摄象机范围"
+GetCameraEyePositionLoc="当前照相机的位置"
+GetCameraEyePositionX="当前摄象机的位置的 X 坐标"
+GetCameraEyePositionY="当前摄象机的位置的 Y 坐标"
+GetCameraEyePositionZ="当前摄象机的位置的 Z 坐标"
+GetCameraField="当前摄象机的数值"
+GetCameraTargetPositionLoc="当前摄象机的目标"
+GetCameraTargetPositionX="当前摄象机的目标的 X 坐标"
+GetCameraTargetPositionY="当前摄象机的目标的 Y 坐标"
+GetCameraTargetPositionZ="当前摄象机的目标的 Z 坐标"
+GetCancelledStructure="取消建造中的建筑"
+GetChangingUnit="改变了所有者的单位"
+GetChangingUnitPrevOwner="前一个所有者"
+GetClickedButtonBJ="事件响应: 单击对话按钮"
+GetClickedDialogBJ="事件响应 - 单击对话"
+GetConstructedStructure="已建造的建筑"
+GetConstructingStructure="正在建造的建筑"
+GetConvertedPlayerId="玩家索引"
+GetCreepCampFilterState="野生单位显示是开启的"
+GetCurrentCameraBoundsMapRectBJ="当前的摄象机范围"
+GetCurrentCameraSetup="当前的视角"
+GetDecayingUnit="尸体腐烂单位"
+GetDestructableLife="生命值 (可毁坏物)"
+GetDestructableLoc="可毁坏物的位置"
+GetDestructableMaxLife="最大生命值 (可毁坏物)"
+GetDestructableName="可毁坏物的名字"
+GetDestructableOccluderHeight="闭塞高度 (可毁坏物)"
+GetDestructableTypeId="建筑的类型"
+GetDyingDestructable="垂死的可毁坏物"
+GetDyingUnit="垂死的单位"
+GetElevatorHeight="升降机高度"
+GetEnteringUnit="正在进入的单位"
+GetEntireMapRect="全地图"
+GetEnumDestructable="选取的可毁坏物"
+GetEnumItem="选取的物品"
+GetEnumPlayer="选取的玩家"
+GetEnumUnit="选取的单位"
+GetEventDamage="被伤害的生命值"
+GetEventDamageSource="伤害来源"
+GetEventPlayerChatString="输入的聊天字符"
+GetEventPlayerChatStringMatched="匹配的聊天字符"
+GetEventTargetUnit="目标单位"
+GetExpiredTimer="事件响应 - 计时器期满"
+GetFilterDestructable="匹配的可毁坏物"
+GetFilterItem="匹配的物品"
+GetFilterPlayer="匹配的玩家"
+GetFilterUnit="匹配的单位"
+GetFoodMade="单位-类型 提供的人口"
+GetFoodUsed="单位-类型 使用的人口"
+GetForceOfPlayer="将玩家转换为玩家组"
+GetForLoopIndexA="循环整数 A"
+GetForLoopIndexB="循环整数 B"
+GetGameDifficulty="难度等级"
+GetGameSpeed="当前游戏速度"
+GetGold="当前金钱数"
+GetGoldOwned="拥有的金矿金钱数量"
+GetHeroLevel="英雄等级"
+GetHeroProperName="英雄的姓名"
+GetHeroSkillPoints="未用完的技能点数"
+GetHeroStatBJ="英雄的属性"
+GetHeroXP="英雄的经验值"
+GetIssuedOrderIdBJ="发出的命令"
+GetItemCharges="物品的数量"
+GetItemLevel="物品等级"
+GetItemLifeBJ="物品生命"
+GetItemLoc="物品的位置"
+GetItemName="物品名"
+GetItemOfTypeFromUnitBJ="英雄携带的物品类型"
+GetItemPlayer="物品的所有者"
+GetItemType="物品的类别"
+GetItemTypeId="物品的类型"
+GetItemUserData="物品自定义值"
+GetKillingUnitBJ="凶手单位"
+GetLastCreatedButtonBJ="最后创建的对话按钮"
+GetLastCreatedDefeatConditionBJ="最后创建的任务失败条件"
+GetLastCreatedDestructable="最后创建的可毁坏物"
+GetLastCreatedEffectBJ="最后创建的特殊效果"
+GetLastCreatedFogModifier="最后创建的可见度修正器"
+GetLastCreatedGameCacheBJ="最后创建的游戏缓存"
+GetLastCreatedGroup="最后创建的单位组"
+GetLastCreatedImage="最后创建的图像"
+GetLastCreatedItem="最后创造的物品"
+GetLastCreatedLeaderboard="最后创建的排行榜"
+GetLastCreatedLightningBJ="最后创建的闪电效果"
+GetLastCreatedMultiboard="最后创建的 多列面板"
+GetLastCreatedQuestBJ="最后创建的任务"
+GetLastCreatedQuestItemBJ="最后创建的任务完成条件"
+GetLastCreatedTerrainDeformation="最后创建的可毁坏物"
+GetLastCreatedTimerBJ="最后创建的计时器"
+GetLastCreatedTimerDialogBJ="最后创建的计时器窗口"
+GetLastCreatedUbersplat="最后创建的地面纹理"
+GetLastCreatedUnit="最后创建的单位"
+GetLastCreatedWeatherEffect="最后创建的天气效果"
+GetLastHauntedGoldMine="最后建造的不死族金矿"
+GetLastPlayedMusic="最后播放的音乐"
+GetLastPlayedSound="最后播放的声音"
+GetLastRemovedItem="最后掉落的物品"
+GetLastReplacedUnitBJ="最后替换的单位"
+GetLastRestoredUnitBJ="最后恢复的单位"
+GetLastTransmissionDurationBJ="最后 播送的 单位消息 的时间长度"
+GetLearnedSkillBJ="学习英雄技能"
+GetLearnedSkillLevel="学习的技能的等级"
+GetLearningUnit="学习技能的英雄"
+GetLeavingUnit="正在离开的单位"
+GetLevelingUnit="英雄升级"
+GetLightningColorABJ="闪电的Alpha通道颜色"
+GetLightningColorBBJ="闪电的蓝色通道颜色"
+GetLightningColorGBJ="闪电的绿色通道颜色"
+GetLightningColorRBJ="闪电的红色通道颜色"
+GetLoadedUnitBJ="载入单位"
+GetLocationX="X 坐标"
+GetLocationY="Y 坐标"
+GetManipulatedItem="物品存在操作"
+GetManipulatingUnit="英雄操作物品"
+GetMinesOwned="拥有的金矿数"
+GetNextExpansion="下一个扩张基地"
+GetOrderedUnit="收到命令的单位"
+GetOrderPointLoc="目标的位置"
+GetOrderTargetDestructable="目标的可毁坏物"
+GetOrderTargetItem="目标的物品"
+GetOrderTargetUnit="目标的单位"
+GetOwningPlayer="单位的所有者"
+GetPlayableMapRect="可玩的地图区域"
+GetPlayerAlliance="玩家与玩家结盟"
+GetPlayerColor="玩家的颜色"
+GetPlayerController="玩家控制者"
+GetPlayerHandicapBJ="经验值上限"
+GetPlayerHandicapXPBJ="经验值比率"
+GetPlayerName="玩家名字"
+GetPlayerRace="玩家的种族"
+GetPlayers="玩家数量"
+GetPlayersAll="所有玩家"
+GetPlayersAllies="玩家联盟"
+GetPlayersByMapControl="所有某种控制的玩家"
+GetPlayerScore="获得玩家得分"
+GetPlayersEnemies="玩家的敌人"
+GetPlayerSlotState="玩家游戏属性"
+GetPlayersMatching="所有玩家匹配条件"
+GetPlayerStartLocationLoc="玩家的初始位置"
+GetPlayerState="获得玩家属性"
+GetPlayerStructureCount="获得建筑数量"
+GetPlayerTaxRateBJ="获得玩家税率"
+GetPlayerTeam="玩家在的队伍"
+GetPlayerTechCountSimple="科技等级"
+GetPlayerTechMaxAllowedSwap="最大科技等级"
+GetPlayerUnitCount="单位数量"
+GetRandomDirectionDeg="随机角度"
+GetRandomInt="随机数字"
+GetRandomLocInRect="区域内的随机地点"
+GetRandomPercentageBJ="随机百分数"
+GetRandomReal="随机数"
+GetRandomSubGroup="随机选 N 个单位在单位组中"
+GetRectCenter="区域中心"
+GetRectCenterX="区域中心的 X 坐标"
+GetRectCenterY="区域中心的 Y 坐标"
+GetRectHeightBJ="区域高度"
+GetRectMaxX="区域最大 X 坐标"
+GetRectMaxY="区域最大 Y 坐标"
+GetRectMinX="区域最小 X 坐标"
+GetRectMinY="区域最小 Y 坐标"
+GetRectWidthBJ="区域宽度"
+GetResearched="研究的 科技-类型"
+GetResearchingUnit="研究科技单位"
+GetResourceAmount="黄金资源数量"
+GetRevivableUnit="可复活的英雄"
+GetRevivingUnit="复活英雄"
+GetSaveBasicFilename="储存游戏文件名"
+GetSellingUnit="出售单位"
+GetSoldItem="卖出的物品"
+GetSoldUnit="被出售单位"
+GetSoundDurationBJ="声音长度"
+GetSoundFileDurationBJ="音乐长度"
+GetSpellAbilityId="使用的技能"
+GetSpellAbilityUnit="技能单位"
+GetSpellTargetDestructable="对其使用技能的目标可毁坏物"
+GetSpellTargetItem="对其使用技能的目标物品"
+GetSpellTargetLoc="对其使用技能的目标点"
+GetSpellTargetUnit="对其使用技能的目标单位"
+GetStoredBooleanBJ="读取布尔值"
+GetStoredIntegerBJ="读取整数数据"
+GetStoredRealBJ="读取实数值"
+GetStoredStringBJ="度曲字串符数据"
+GetSummonedUnit="已召唤单位"
+GetSummoningUnit="正在召唤的单位"
+GetTeams="队伍数量"
+GetTerrainCliffLevelBJ="悬崖的高度"
+GetTerrainTypeBJ="地形类型"
+GetTerrainVarianceBJ="地形形态"
+GetTimeOfDay="游戏当前的时间"
+GetTimeOfDayScalePercentBJ="游戏时间的速度"
+GetTownUnitCount="对应类型的单位数 - 按基地"
+GetTrainedUnit="训练单位"
+GetTrainedUnitType="训练的单位类型"
+GetTransportUnitBJ="传送单位"
+GetTriggerEvalCount="触发器赋值统计"
+GetTriggerExecCount="触发器运行次数统计"
+GetTriggeringTrigger="当前触发器"
+GetTriggerPlayer="触发玩家"
+GetTriggerUnit="触发单位"
+GetUnitAbilityLevelSwapped="单位的技能等级"
+GetUnitAcquireRange="单位射程 (当前)"
+GetUnitBuildTime="单位建造事件"
+GetUnitCount="对应类型的单位数"
+GetUnitCountDone="对应类型的单位数 - 仅完成的"
+GetUnitCurrentOrder="单位当前的命令"
+GetUnitDefaultAcquireRange="单位射程 (默认)"
+GetUnitDefaultFlyHeight="飞行高度 (默认)"
+GetUnitDefaultMoveSpeed="单位移动速度 (默认)"
+GetUnitDefaultPropWindowBJ="单位在头像窗口的角度 (默认)"
+GetUnitDefaultTurnSpeed="转向速度 (默认)"
+GetUnitFacing="单位面向角度"
+GetUnitFlyHeight="飞行高度 (当前)"
+GetUnitFoodMade="单位提供的人口"
+GetUnitGoldCost="单位金钱消耗"
+GetUnitLevel="单位等级"
+GetUnitLifePercent="生命值百分比"
+GetUnitLoc="单位的位置"
+GetUnitManaPercent="魔法值百分比"
+GetUnitMoveSpeed="单位移动速度 (当前)"
+GetUnitName="单位名字"
+GetUnitPointValue="单位的 附加值"
+GetUnitPointValueByType="单位-类型的 附加值"
+GetUnitPropWindowBJ="单位在头像窗口的角度 (当前)"
+GetUnitRace="单位的种族"
+GetUnitRallyDestructable="单位 聚集点"
+GetUnitRallyPoint="聚集点"
+GetUnitRallyUnit="拥有源聚集点单位"
+GetUnitsInRangeOfLocAll="圆周内的所有单位"
+GetUnitsInRangeOfLocMatching="单位在圆周内匹配条件的"
+GetUnitsInRectAll="区域中的所有单位"
+GetUnitsInRectMatching="单位在区域中并匹配条件"
+GetUnitsInRectOfPlayer="玩家在区域中的单位"
+GetUnitsOfPlayerAll="玩家拥有的单位"
+GetUnitsOfPlayerAndTypeId="玩家拥有的单位类型"
+GetUnitsOfPlayerMatching="玩家拥有的单位匹配条件"
+GetUnitsOfTypeIdAll="某类型的单位"
+GetUnitsSelectedAll="选定的单位"
+GetUnitStateSwap="单位属性"
+GetUnitTurnSpeed="转向速度 (当前)"
+GetUnitTypeId="单位的类型"
+GetUnitUserData="单位自定义值"
+GetUnitWoodCost="单位木材消耗"
+GetUpgradeGoldCost="升级金钱消耗"
+GetUpgradeLevel="当前升级的等级"
+GetUpgradeWoodCost="升级木材消耗"
+GetWood="当前木材数"
+gg_cam_="镜头"
+gg_rct_="区域"
+gg_snd_="声音"
+gg_trg_="触发器"
+gg_unit_="单位"
+GREATER_THAN="大于"
+GREATER_THAN_OR_EQUAL="大于或等于"
+GroupAddGroup="增加单位组到单位组"
+GroupAddUnitSimple="增加单位到单位组"
+GroupClear="清除"
+GroupImmediateOrder="发送单位组命令到 没有目标"
+GroupPickRandomUnit="单位组里的随机单位"
+GroupPointOrderLoc="发送单位组命令到 点"
+GroupRemoveGroup="清除单位组从单位组"
+GroupRemoveUnitSimple="清除单位从单位组"
+GroupTargetDestructableOrder="发送单位组命令到 可毁坏物"
+GroupTargetItemOrder="发送单位组命令到 物品"
+GroupTargetOrder="发送单位组命令到 单位"
+GroupTrainOrderByIdBJ="发送单位组命令到 训练兵种/升级建筑"
+HaveStoredValue="游戏缓存的数据"
+I2R="转换整数变量为实数"
+I2S="将整数转换为字符串"
+IAbsBJ="绝对值Abs"
+if="如果"
+IfThenElse="如果 / 然后 / 别的 ,唯一的条件和动作"
+IfThenElseMultiple="如果 / 然后 / 别的 ,多样的动作"
+IMaxBJ="取最大值"
+IMinBJ="取最小值"
+IncUnitAbilityLevelSwapped="提升单位技能等级"
+InitGameCacheBJ="创建游戏缓存"
+IsCustomCampaignButtonVisibile="自定义战役按钮是可见的"
+IsDestructableAliveBJ="可毁坏物是活者的"
+IsDestructableDeadBJ="可毁坏物是死的"
+IsDestructableInvulnerableBJ="可毁坏物是无敌的"
+IsFogEnabled="允许战争迷雾"
+IsFogMaskEnabled="允许黑色阴影"
+ISignBJ="标记"
+IsItemHiddenBJ="物品是隐藏的"
+IsItemInvulnerable="物品是无敌的"
+IsItemOwned="物品所有者"
+IsLocationFoggedToPlayer="点被迷雾遮挡"
+IsLocationMaskedToPlayer="点被黑色阴影遮挡"
+IsLocationVisibleToPlayer="点对于玩家可见"
+IsMapFlagSet="地图参数"
+IsMultiboardDisplayed="多列面板 是已显示的"
+IsMultiboardMinimized="多列面板 是最小化的"
+IsPlayerAlly="玩家是玩家的同盟"
+IsPlayerEnemy="玩家是玩家的敌人"
+IsPlayerFlagSetBJ="玩家旗是打开的"
+IsPlayerInForce="玩家在玩家组"
+IsPointBlightedBJ="点是不死族的地表"
+IsQuestCompleted="任务完成"
+IsQuestDiscovered="任务已发现"
+IsQuestEnabled="允许任务"
+IsQuestFailed="任务失败"
+IsQuestItemCompleted="任务条件完成"
+IsQuestRequired="任务是必须完成的"
+IssueBuildOrderByIdLocBJ="发送命令到 建造建筑"
+IssueImmediateOrder="给单位发送命令到 没有目标"
+IssuePointOrderLoc="给单位发送命令到 点"
+IssueTargetDestructableOrder="给单位发送命令到 可毁坏物"
+IssueTargetItemOrder="给单位发送命令到 物品"
+IssueTargetOrder="给单位发送命令到 单位"
+IssueTrainOrderByIdBJ="发送命令到 训练兵种/升级建筑"
+IssueUpgradeOrderByIdBJ="发送命令到 研究科技"
+IsSuspendedXP="英雄获得经验值"
+IsTerrainPathableBJ="地形是否为对应路径"
+IsTriggerEnabled="触发器打开"
+IsTriggerQueuedBJ="触发器在队列中"
+IsTriggerQueueEmptyBJ="触发器队列是空的"
+IsUnitAliveBJ="单位是活着的"
+IsUnitAlly="单位所属玩家的同盟玩家"
+IsUnitDeadBJ="单位是已死亡的"
+IsUnitEnemy="单位所属玩家的敌对玩家"
+IsUnitFogged="单位被战争迷雾遮挡"
+IsUnitGroupDeadBJ="单位组的单位是已死亡的"
+IsUnitGroupEmptyBJ="单位组是空的"
+IsUnitGroupInRectBJ="单位组的单位在区域"
+IsUnitHiddenBJ="单位被隐藏"
+IsUnitIdType="检查单位-类型 分类"
+IsUnitIllusionBJ="单位是隐形的"
+IsUnitInGroup="单位在 单位组"
+IsUnitInTransportBJ="单位已经装载"
+IsUnitInvisible="单位对于玩家不可见"
+IsUnitLoadedBJ="单位正在被送"
+IsUnitMasked="单位被黑色阴影遮挡"
+IsUnitPausedBJ="单位被暂停"
+IsUnitSelected="玩家已选定单位"
+IsUnitType="检查单位 分类"
+IsUnitVisible="单位对于玩家可见"
+ITEM_TYPE_ANY="物品类型-任何种类"
+ITEM_TYPE_ARTIFACT="物品类型-人造物品"
+ITEM_TYPE_CAMPAIGN="物品类型-战役"
+ITEM_TYPE_CHARGED="物品类型-可充"
+ITEM_TYPE_MISCELLANEOUS="物品类型-混杂"
+ITEM_TYPE_PERMANENT="物品类型-永久"
+ITEM_TYPE_POWERUP="物品类型-升级"
+ITEM_TYPE_PURCHASABLE="物品类型-可购买"
+ITEM_TYPE_TOME="物品类型-书"
+ITEM_TYPE_UNKNOWN="物品类型-未定义种类"
+ItemAddIndicatorBJ="闪动指示器为了物品"
+JASS_MAX_ARRAY_SIZE="数组最大域值"
+KillDestructable="杀死 可毁坏物"
+KillSoundWhenDoneBJ="破坏声音"
+KillUnit="杀死单位"
+LeaderboardAddItemBJ="在排行榜中增加玩家"
+LeaderboardDisplayBJ="显示/隐藏 排行榜"
+LeaderboardGetIndexedPlayerBJ="玩家在排行榜中第N位"
+LeaderboardGetPlayerIndexBJ="排行榜位置"
+LeaderboardHasPlayerItemBJ="排行榜包含玩家"
+LeaderboardRemovePlayerItemBJ="在排行榜中删除玩家"
+LeaderboardSetLabelBJ="改变排行榜标题"
+LeaderboardSetLabelColorBJ="改变排行榜 标签颜色"
+LeaderboardSetPlayerItemLabelBJ="改变排行榜中玩家 标签"
+LeaderboardSetPlayerItemLabelColorBJ="改变排行榜中玩家的 标签颜色"
+LeaderboardSetPlayerItemStyleBJ="改变排行榜中玩家的 风格"
+LeaderboardSetPlayerItemValueBJ="改变排行榜中玩家的 数值"
+LeaderboardSetPlayerItemValueColorBJ="改变排行榜中玩家的 数值颜色"
+LeaderboardSetStyleBJ="改变排行榜风格"
+LeaderboardSetValueColorBJ="改变排行榜 数值颜色"
+LeaderboardSortItemsBJ="排行榜分类"
+LESS_THAN="小于"
+LESS_THAN_OR_EQUAL="小于等于"
+LoadGameBJ="读取游戏进度"
+Location="转换坐标到点"
+LockGameSpeedBJ="锁定游戏速度"
+LockGuardPosition="锁定的防守职责"
+MakeUnitRescuableToForceBJ="安排营救单位"
+MakeUnitsPassiveForPlayer="设置玩家所有单位到中立受害者单位"
+MAP_ALLIANCE_CHANGES_HIDDEN="地图-隐藏改变联盟"
+MAP_CHEATS="地图-容许作弊码"
+MAP_CHEATS_HIDDEN="地图-隐藏作弊码"
+MAP_CONTROL_COMPUTER="地图控制者-电脑"
+MAP_CONTROL_CREEP="地图控制者-野生"
+MAP_CONTROL_NEUTRAL="地图控制者-中立"
+MAP_CONTROL_NONE="地图控制者-无"
+MAP_CONTROL_RESCUABLE="地图控制者-营救"
+MAP_CONTROL_USER="地图控制者-用户"
+MAP_DENSITY_HEAVY="地图-高密度"
+MAP_DENSITY_LIGHT="地图-小密度"
+MAP_DENSITY_MEDIUM="地图-中等密度"
+MAP_DENSITY_NONE="地图-无密度"
+MAP_DIFFICULTY_EASY="地图难度-容易"
+MAP_DIFFICULTY_HARD="地图难度-困难"
+MAP_DIFFICULTY_INSANE="地图难度-令人发疯的"
+MAP_DIFFICULTY_NORMAL="地图难度-正常"
+MAP_FIXED_COLORS="地图-固定颜色"
+MAP_FOG_ALWAYS_VISIBLE="地图迷雾-总是可见"
+MAP_FOG_HIDE_TERRAIN="地图迷雾-隐藏地形"
+MAP_FOG_MAP_EXPLORED="地图迷雾-地图已探索"
+MAP_LOC_PRIO_HIGH="起始位置分布优先权-高"
+MAP_LOC_PRIO_LOW="起始位置分布优先权-低"
+MAP_LOC_PRIO_NOT="起始位置分布优先权-无"
+MAP_LOCK_ALLIANCE_CHANGES="地图-锁定改变联盟"
+MAP_LOCK_RANDOM_SEED="地图-不容许随机游戏速度"
+MAP_LOCK_RESOURCE_TRADING="地图-锁定资源交易"
+MAP_LOCK_SPEED="地图-锁定游戏速度"
+MAP_OBSERVERS="地图-允许有观察者"
+MAP_OBSERVERS_ON_DEATH="地图-默认为观看者"
+MAP_PLACEMENT_FIXED="地图-玩家固定放置"
+MAP_PLACEMENT_RANDOM="地图-玩家随机放置"
+MAP_PLACEMENT_TEAMS_TOGETHER="地图-同一联盟玩家放置在一起"
+MAP_PLACEMENT_USE_MAP_SETTINGS="地图-使用地图设置的玩家放置"
+MAP_RANDOM_HERO="地图-随机英雄"
+MAP_RANDOM_RACES="地图-随机种族"
+MAP_RELOADED="地图-地图转换"
+MAP_RESOURCE_TRADING_ALLIES_ONLY="地图-容许联盟资源交易"
+MAP_SHARED_ADVANCED_CONTROL="地图-共享高级控制"
+MAP_SPEED_FASTEST="地图-最快游戏速度"
+MAP_SPEED_NORMAL="地图-正常游戏速度"
+MAP_SPEED_SLOW="地图-低游戏速度"
+MAP_SPEED_SLOWEST="地图-最低游戏速度"
+MAP_USE_HANDICAPS="地图-使用障碍"
+MapInitializationEvent="地图初始化"
+MeleeClearExcessUnits="删除多余单位"
+MeleeDifficulty="对战难度"
+MeleeGrantHeroItems="英雄初始物品"
+MeleeInitVictoryDefeat="胜利/失败条件"
+MeleeStartingAI="运行对战 AI"
+MeleeStartingHeroLimit="英雄数量限制"
+MeleeStartingResources="设置初始资源"
+MeleeStartingUnits="创建初始单位"
+MeleeStartingUnitsForPlayer="创建初始单位为了玩家"
+MeleeStartingVisibility="对用对战的时间设置"
+ModifyGateBJ="打开/关闭/破坏门"
+ModifyHeroSkillPoints="改变英雄技能点数"
+ModifyHeroStat="改变英雄属性"
+ModuloInteger="取余数"
+ModuloReal="取余数"
+MoveLightningLoc="移动闪电效果到指定点"
+MoveRectToLoc="移动区域"
+MultiboardAllowDisplayBJ="显示/隐藏 所有 多列面板"
+MultiboardClear="清除 多列面板"
+MultiboardDisplayBJ="显示/隐藏 多列面板"
+MultiboardGetColumnCount="获得多列面板 的列数"
+MultiboardGetRowCount="获得多列面板 的行数"
+MultiboardGetTitleText="多列面板 的标题"
+MultiboardMinimizeBJ="最大化/最小化 多列面板"
+MultiboardSetColumnCount="改变多列面板'列数'"
+MultiboardSetItemColorBJ="设置多列面板项目颜色"
+MultiboardSetItemIconBJ="设置项目图标"
+MultiboardSetItemStyleBJ="设置多列面板项目显示风格"
+MultiboardSetItemValueBJ="设置多列面板项目文本"
+MultiboardSetItemWidthBJ="设置多列面板项目宽度"
+MultiboardSetRowCount="改变多列面板'行数'"
+MultiboardSetTitleText="改变 多列面板 标题"
+MultiboardSetTitleTextColorBJ="改变 多列面板 标题颜色"
+NOT_EQUAL="不等于"
+null="空"
+OffsetLocation="点的坐标"
+OffsetRectBJ="区域位移"
+OperatorCompareAbilityId="技能          比较"
+OperatorCompareBoolean="布尔(真假)      比较"
+OperatorCompareBuffId="魔法/特效      比较"
+OperatorCompareButton="对话按钮        比较"
+OperatorCompareDestructableCode="可毁坏物-类型  比较"
+OperatorCompareDestructible="可毁坏物        比较"
+OperatorCompareGameDifficulty="游戏难度        比较"
+OperatorCompareGameSpeed="游戏速度        比较"
+OperatorCompareHeroSkill="英雄技能        比较"
+OperatorCompareInteger="整数            比较"
+OperatorCompareItem="物品            比较"
+OperatorCompareItemCode="物品-类型       比较"
+OperatorCompareItemType="物品-等级       比较"
+OperatorCompareMeleeDifficulty="对战 AI          比较"
+OperatorCompareOrderCode="命令            比较"
+OperatorComparePlayer="玩家            比较"
+OperatorComparePlayerColor="玩家颜色          比较"
+OperatorComparePlayerControl="玩家控制者       比较"
+OperatorComparePlayerSlotStatus="玩家状态          比较"
+OperatorComparePoint="点               比较"
+OperatorCompareRace="种族            比较"
+OperatorCompareReal="实数            比较"
+OperatorCompareRegion="区域            比较"
+OperatorCompareString="字串符          比较"
+OperatorCompareTechCode="研究-类型        比较"
+OperatorCompareTerrainType="地形-类型      比较"
+OperatorCompareTrigger="触发器         比较"
+OperatorCompareUnit="单位              比较"
+OperatorCompareUnitCode="单位-类型      比较"
+OperatorInt="运算表达式"
+OperatorReal="计算"
+OperatorString="连接字符串"
+OrderId2StringBJ="将命令转换为字符串"
+OrMultiple="或, 多样的条件   比较"
+PanCameraToTimedLocForPlayer="平移摄像机 (限时)"
+PanCameraToTimedLocWithZForPlayer="在指定高度平移摄像机 (限时)"
+PauseAllUnitsBJ="暂停/恢复 所有单位"
+PauseGameOff="恢复游戏"
+PauseGameOn="暂停游戏"
+PauseTimerBJ="暂停计时器r"
+PauseUnitBJ="设置单位 暂停/恢复"
+PingMinimapLocForForce="小地图闪光"
+PingMinimapLocForForceEx="小地图闪光有颜色"
+PLAYER_COLOR_AQUA="玩家颜色-浅绿"
+PLAYER_COLOR_BLUE="玩家颜色-蓝"
+PLAYER_COLOR_BROWN="玩家颜色-棕色"
+PLAYER_COLOR_CYAN="玩家颜色-青"
+PLAYER_COLOR_GREEN="玩家颜色-绿"
+PLAYER_COLOR_LIGHT_BLUE="玩家颜色-亮蓝"
+PLAYER_COLOR_LIGHT_GRAY="玩家颜色-亮灰"
+PLAYER_COLOR_ORANGE="玩家颜色-橙"
+PLAYER_COLOR_PINK="玩家颜色-粉红"
+PLAYER_COLOR_PURPLE="玩家颜色-紫"
+PLAYER_COLOR_RED="玩家颜色-红"
+PLAYER_COLOR_YELLOW="玩家颜色-黄"
+PLAYER_GAME_RESULT_DEFEAT="玩家结果-失败"
+PLAYER_GAME_RESULT_NEUTRAL="玩家结果-不确定"
+PLAYER_GAME_RESULT_TIE="玩家结果-平局"
+PLAYER_GAME_RESULT_VICTORY="玩家结果-胜利"
+PLAYER_NEUTRAL_AGGRESSIVE="中立敌对玩家"
+PLAYER_NEUTRAL_PASSIVE="中立被动玩家"
+PLAYER_SCORE_FOOD_MAXPROD="玩家积分-最大的人口数量"
+PLAYER_SCORE_FOOD_MAXUSED="玩家积分-最大所使用的人口数量"
+PLAYER_SCORE_GOLD_GIVEN="玩家积分-给予盟友的金子"
+PLAYER_SCORE_GOLD_LOST_TAX="玩家积分-由于税而损失的金子"
+PLAYER_SCORE_GOLD_LOST_UPKEEP="玩家积分-因为维修费而损失的金"
+PLAYER_SCORE_GOLD_MINED_TOTAL="玩家积分-所采集的金子 (总共)"
+PLAYER_SCORE_GOLD_MINED_UPKEEP="玩家积分-所采集的金子(带有维修"
+PLAYER_SCORE_GOLD_RECEIVED="玩家积分-从盟友那里收到的金子"
+PLAYER_SCORE_HERO_TOTAL="玩家积分-总的英雄得分"
+PLAYER_SCORE_HEROES_KILLED="玩家积分-杀死英雄"
+PLAYER_SCORE_ITEMS_GAINED="玩家积分-获得物品"
+PLAYER_SCORE_LUMBER_GIVEN="玩家积分-给予盟友的木材"
+PLAYER_SCORE_LUMBER_LOST_TAX="玩家积分-由于税而损失的木材"
+PLAYER_SCORE_LUMBER_LOST_UPKEEP="玩家积分-由于维修费而损失的木"
+PLAYER_SCORE_LUMBER_RECEIVED="玩家积分-从盟友那里收到的木材"
+PLAYER_SCORE_LUMBER_TOTAL="玩家积分-采集到的木材"
+PLAYER_SCORE_MERCS_HIRED="玩家积分-雇佣兵"
+PLAYER_SCORE_RESOURCE_TOTAL="玩家积分-总的资源得分"
+PLAYER_SCORE_STRUCT_BUILT="玩家积分-已建造建筑"
+PLAYER_SCORE_STRUCT_RAZED="玩家积分-被毁建筑"
+PLAYER_SCORE_TECH_PERCENT="玩家积分-科技百分比"
+PLAYER_SCORE_TOTAL="玩家积分-总的整体得分"
+PLAYER_SCORE_UNIT_TOTAL="玩家积分-总的单位得分"
+PLAYER_SCORE_UNITS_KILLED="玩家积分-消灭单位"
+PLAYER_SCORE_UNITS_TRAINED="玩家积分-已训练单位"
+PLAYER_SLOT_STATE_EMPTY="空的玩家槽"
+PLAYER_SLOT_STATE_LEFT="玩家离开的玩家槽"
+PLAYER_SLOT_STATE_PLAYING="正在使用的玩家槽"
+PLAYER_STATE_ALLIED_VICTORY="玩家状态-联盟胜利"
+PLAYER_STATE_FOOD_CAP_CEILING="玩家状态-食物最大容量"
+PLAYER_STATE_GAME_RESULT="玩家状态-游戏结果"
+PLAYER_STATE_GIVES_BOUNTY="玩家状态-给予奖励"
+PLAYER_STATE_GOLD_GATHERED="玩家状态-已收集金钱"
+PLAYER_STATE_GOLD_UPKEEP_RATE="玩家状态-金钱维护率"
+PLAYER_STATE_LUMBER_GATHERED="玩家状态-已收集木材"
+PLAYER_STATE_LUMBER_UPKEEP_RATE="玩家状态-木材维护率"
+PLAYER_STATE_NO_CREEP_SLEEP="玩家状态-野生生物不睡眠"
+PLAYER_STATE_OBSERVER="玩家状态-观看者"
+PLAYER_STATE_OBSERVER_ON_DEATH="玩家状态-默认为观看者"
+PLAYER_STATE_PLACED="玩家状态-放置"
+PLAYER_STATE_RESOURCE_FOOD_CAP="玩家状态-食物容量"
+PLAYER_STATE_RESOURCE_FOOD_USED="玩家状态-食物使用"
+PLAYER_STATE_RESOURCE_GOLD="玩家状态-金钱资源"
+PLAYER_STATE_RESOURCE_HERO_TOKENS="玩家状态-使用英雄"
+PLAYER_STATE_RESOURCE_LUMBER="玩家状态-木材资源"
+PLAYER_STATE_UNFOLLOWABLE="玩家状态-不可跟随"
+PlayerGetLeaderboardBJ="玩家排行榜"
+PlayMusicBJ="播放音乐"
+PlayMusicExBJ="播放音乐(跳跃)"
+PlaySoundAtPointBJ="播放声音在点"
+PlaySoundBJ="播放声音"
+PlaySoundFromOffsetBJ="播放声音 有等待时间"
+PlaySoundOnUnitBJ="播放声音单位"
+PlayThematicMusicBJ="播放主题音乐"
+PlayThematicMusicExBJ="播放主题音乐(跳跃)"
+PolarProjectionBJ="点向方向 位移 "
+PolledWait="等待 (游戏时间)"
+Pow="求幂"
+Preload="预读文件"
+PreloadEnd="开始预读"
+Preloader="预读一批文件"
+QuestItemSetCompletedBJ="设置任务完成条件为已完成"
+QuestItemSetDescriptionBJ="改变任务完成条件内容"
+QuestMessageBJ="任务消息"
+QuestSetCompletedBJ="设置任务为完成"
+QuestSetDescriptionBJ="改变任务文本内容"
+QuestSetDiscoveredBJ="设置任务被发现"
+QuestSetEnabledBJ="允许/禁止 任务"
+QuestSetFailedBJ="设置任务为失败"
+QuestSetTitleBJ="改变任务标题"
+QueueDestructableAnimationBJ="排列可毁坏物的动作"
+QueuedTriggerAddBJ="增加到触发器队列"
+QueuedTriggerClearBJ="清除触发器所有队列"
+QueuedTriggerClearInactiveBJ="清除触发器队列中未执行任务"
+QueuedTriggerCountBJ="触发器队列中触发器的数量"
+QueuedTriggerRemoveBJ="清除触发器队列"
+QueueUnitAnimationBJ="队列单位动作"
+R2I="转换实数为整数"
+R2S="将实数转换为字符串"
+R2SW="将实数转换为格式化字符串"
+RAbsBJ="绝对值Abs"
+RACE_DEMON="恶魔族"
+RACE_HUMAN="人族"
+RACE_NIGHTELF="暗夜精灵族"
+RACE_ORC="兽族"
+RACE_OTHER="其他族"
+RACE_UNDEAD="不死族"
+Rad2Deg="转换 弧度 到 度"
+RandomDestructableInRectBJ="区域的 随机可毁坏物 且匹配条件"
+RandomDestructableInRectSimpleBJ="区域的 随机可毁坏物"
+RandomItemInRectBJ="随机物品在区域并匹配条件"
+RandomItemInRectSimpleBJ="随机物品在区域"
+RARITY_FREQUENT="频率控制-普通频率"
+RARITY_RARE="频率控制-罕见的"
+Rect="将坐标转换为区域"
+RectContainsItem="物品在区域"
+RectContainsLoc="区域包含点"
+RectContainsUnit="单位在区域"
+RectFromCenterSizeBJ="将点,大小转换为区域"
+RectFromLoc="将点转换为区域"
+RecycleGuardPosition="恢复单位的防守职责"
+ReloadGameCachesFromDisk="读取所有缓存"
+RemoveAllGuardPositions="忽略所有单位的防守职责"
+RemoveDestructable="删除 可毁坏物"
+RemoveGuardPosition="忽略单位的防守职责"
+RemoveItem="删除物品"
+RemoveItemFromAllStock="删除 物品-类型 (从所有商店)"
+RemoveItemFromStockBJ="删除 物品-类型 (从商店)"
+RemoveSaveDirectoryBJ="删除游戏进度文件夹"
+RemoveUnit="删除单位"
+RemoveUnitFromAllStock="删除 单位-类型 (从所有商店)"
+RemoveUnitFromStockBJ="删除 单位-类型 (从商店)"
+RemoveWeatherEffectBJ="删除天气效果"
+RenameSaveDirectoryBJ="重命名游戏进度文件夹"
+ReplaceUnitBJ="替换单位"
+RescueUnitBJ="营救单位"
+ResetTerrainFogBJ="重置 迷雾"
+ResetToGameCameraForPlayer="重置游戏摄像机"
+ResetUbersplat="重置地面纹理"
+ResetUnitAnimation="重置单位动作"
+ResetUnitLookAt="重置单位面对方向"
+RestoreUnitLocFacingAngleBJ="读取单位 (有角度)"
+RestoreUnitLocFacingPointBJ="读取单位 (有位置方向)"
+ResumeMusicBJ="继续音乐"
+return="返回值为"
+ReturnAction="跳过这动作后面的所有动作"
+ReviveHeroLoc="复活英雄（立即）"
+RMaxBJ="最大值"
+RMinBJ="最小值"
+RotateCameraAroundLocBJ="旋转摄像机 (限时)"
+RSignBJ="标记"
+S2I="转换字串符为整数"
+S2R="转换字符串为实数"
+SaveAndChangeLevelBJ="保存进度同时设置下一张地图"
+SaveAndLoadGameBJ="保存进度同时读取进度"
+SaveGameCacheBJ="存储游戏缓存"
+SaveGameExists="游戏进度是存在的"
+SelectGroupBJ="选定单位组"
+SelectGroupForPlayerBJ="清除选定单位组对玩家"
+SelectHeroSkill="英雄学习技能"
+SelectUnitAddForPlayer="增加单位到玩家的选定中"
+SelectUnitForPlayerSingle="选定单位对玩家"
+SelectUnitRemove="清除单位选择"
+SelectUnitRemoveForPlayer="清除单位的选定为玩家"
+SelectUnitSingle="选定单位"
+set="设置"
+SetAllItemTypeSlots="限制物品的位置 (从所有商店)"
+SetAllUnitTypeSlots="限制单位的位置 (从所有商店)"
+SetAllyColorFilterState="设置结盟滤色镜"
+SetAltMinimapIcon="改变小地图的特殊图标"
+SetAmbientDaySound="使用白昼环境的音乐"
+SetAmbientNightSound="使用夜晚环境的音乐"
+SetBlightRadiusLocBJ="创造/删除 不死族地表在圆周"
+SetBlightRectBJ="创造/删除 不死族地表在区域"
+SetCameraBoundsToRectForPlayerBJ="设置镜头范围"
+SetCameraFieldForPlayer="设定摄像机属性 (限时)"
+SetCameraOrientControllerForPlayerBJ="锁定摄像机方向到单位"
+SetCameraQuickPositionLocForPlayer="设置空格点击 切换镜头目标"
+SetCameraTargetControllerNoZForPlayer="锁定摄像机目标到单位"
+SetCampaignAvailableBJ="允许/禁止 战役"
+SetCampaignMenuRaceBJ="设置读取地图画面"
+SetCinematicAvailableBJ="允许/禁止 过场电影"
+SetCinematicCameraForPlayer="播放动画摄像机"
+SetCineModeVolumeGroupsBJ="将所有音量设置为动画"
+SetCreepCampFilterState="显示/隐藏野生生物图标在小地图"
+SetDestAnimationSpeedPercent="改变可毁坏物动作速度"
+SetDestructableAnimationBJ="播放可毁坏物的动作"
+SetDestructableInvulnerableBJ="设置 无敌/可攻击"
+SetDestructableLife="设置 可毁坏物 生命 (值)"
+SetDestructableLifePercentBJ="设置 可毁坏物 生命 (百分比)"
+SetDestructableMaxLifeBJ="设置 可毁坏物 最大生命"
+SetDestructableOccluderHeight="设置闭塞高度"
+SetDoodadAnimationBJ="播放圆周内地形装饰物的动作"
+SetDoodadAnimationRectBJ="播放区域内地形装饰物的动作"
+SetForceAllianceStateBJ="设置玩家组联盟状态"
+SetGameSpeed="设定游戏速度"
+SetHeroLevel="设置英雄等级"
+SetHeroXP="设置英雄经验值"
+SetImageAboveWater="改变图像水上状态"
+SetImageColorBJ="改变图像颜色"
+SetImageConstantHeight="改变图像高度"
+SetImagePositionBJ="改变图像位置"
+SetImageRender="改变图像着色状态"
+SetImageRenderAlways="改变图像永久着色状态"
+SetImageType="改变图像类型"
+SetItemCharges="设置物品数量[使用次数]"
+SetItemDropOnDeathBJ="设置英雄死亡后能否物品掉落"
+SetItemDroppableBJ="设置物品能否丢弃"
+SetItemInvulnerableBJ="设置物品 无敌/可攻击"
+SetItemLifeBJ="设置生命(物品)"
+SetItemPawnable="设置物品能否变卖"
+SetItemPlayerBJ="改变物品的所有者"
+SetItemPositionLoc="移动物品 (立刻)"
+SetItemTypeSlots="限制物品的位置 (从商店)"
+SetItemUserData="设置物品自定义数据"
+SetItemVisibleBJ="显示/隐藏 物品"
+SetLightningColorBJ="设置闪电效果颜色"
+SetMapFlag="设置地图参数"
+SetMapMusicIndexedBJ="设置音乐列表 (使用指定的开始音乐)"
+SetMapMusicRandomBJ="设定音乐列表 (使用随机的开始音乐)"
+SetMissionAvailableBJ="允许/禁止 任务"
+SetMusicOffsetBJ="跳越音乐"
+SetMusicVolumeBJ="设置音乐音量"
+SetNextLevelBJ="设置下一张地图"
+SetPlayerAbilityAvailableBJ="允许/禁止 技能"
+SetPlayerAllianceBJ="设置联盟详细状态"
+SetPlayerAllianceStateBJ="设置联盟状态"
+SetPlayerColorBJ="改变玩家颜色"
+SetPlayerFlagBJ="打开/关闭 玩家参数"
+SetPlayerHandicapBJ="设置玩家生命百分比"
+SetPlayerHandicapXPBJ="设置玩家英雄经验值预先获得"
+SetPlayerMaxHeroesAllowed="设置英雄 的训练限制"
+SetPlayerName="设置玩家名字"
+SetPlayerOnScoreScreenBJ="显示/隐藏 得分屏幕"
+SetPlayerState="设置玩家属性"
+SetPlayerTaxRateBJ="截留玩家收入 (税率)"
+SetPlayerTechMaxAllowedSwap="设置最高科技级别"
+SetPlayerTechResearchedSwap="设置当前科技级别"
+SetPlayerUnitAvailableBJ="设置训练/建造单位可用性"
+SetPlayerUnitMaxAllowed="设置单位-类型 的训练限制"
+SetRescueUnitColorChangeBJ="安排营救单位行为"
+SetReservedLocalHeroButtons="保留英雄按钮"
+SetResourceAmount="设置金矿资源"
+SetSkyModel="设置天空"
+SetSoundDistanceCutoffBJ="设置声音距离"
+SetSoundDistances="设置3D声音距离"
+SetSoundOffsetBJ="跳跃播放声音"
+SetSoundPitchBJ="设置声音定调"
+SetSoundPositionLocBJ="设置3D声音位置"
+SetSoundVolumeBJ="设置声音音量"
+SetSpeechVolumeGroupsBJ="将所有音量设置为说话"
+SetStackedSoundBJ="添加/删除穿越区域的3维声音"
+SetTerrainFogExBJ="设置 迷雾 "
+SetTerrainPathableBJ="设置 地形路径 开/关"
+SetTerrainTypeBJ="改变地形类型"
+SetTextTagAgeBJ="改变漂浮文字已存在时间"
+SetTextTagColorBJ="改变漂浮文字颜色"
+SetTextTagFadepointBJ="改变漂浮文字淡化点"
+SetTextTagLifespanBJ="改变漂浮文字存在时限"
+SetTextTagPermanentBJ="永久存在/允许过期"
+SetTextTagPosBJ="改变漂浮文字位置到指定点"
+SetTextTagPosUnitBJ="改变漂浮文字位置到指定单位"
+SetTextTagSuspendedBJ="暂停/继续漂浮文字"
+SetTextTagTextBJ="改变漂浮文字内容"
+SetTextTagVelocityBJ="设置漂浮文字速度"
+SetThematicMusicOffsetBJ="跳越音乐主题曲"
+SetTimeOfDay="设置游戏的时间"
+SetTimeOfDayScalePercentBJ="设置时间流逝速度"
+SetUbersplatRender="改变地面纹理着色状态"
+SetUbersplatRenderAlways="改变地面纹理永久着色状态"
+SetUnitAbilityLevelSwapped="设置单位技能等级"
+SetUnitAcquireRangeBJ="设置感知敌人距离"
+SetUnitAnimation="播放单位动作"
+SetUnitAnimationWithRarity="播放单位动作 (指定概率)"
+SetUnitBlendTimeBJ="改变单位混合时间"
+SetUnitColor="改变单位颜色"
+SetUnitExplodedBJ="设置单位死亡方式"
+SetUnitFacingTimed="设置单位面对角度"
+SetUnitFacingToFaceLocTimed="设置单位面对点"
+SetUnitFacingToFaceUnitTimed="设置单位面对单位"
+SetUnitFlyHeightBJ="改变单位飞行高度"
+SetUnitInvulnerable="设置单位 无敌/可攻击"
+SetUnitLifeBJ="设置单位生命值 (数值)"
+SetUnitLifePercentBJ="设置单位生命值 (百分比)"
+SetUnitLookAt="锁定单位脸面对方向"
+SetUnitManaBJ="设置单位魔法值 (数值)"
+SetUnitManaPercentBJ="设置单位魔法值 (百分比)"
+SetUnitMoveSpeed="设置单位移动速度"
+SetUnitOwner="改变单位所有者"
+SetUnitPathing="设置碰撞 打开/关闭"
+SetUnitPositionLoc="移动单位 (立刻)"
+SetUnitPositionLocFacingBJ="移动单位并改变面对角度 (立刻)"
+SetUnitPositionLocFacingLocBJ="移动单位并改变面对点 (立刻)"
+SetUnitPropWindowBJ="改变单位头像视窗角度"
+SetUnitRallyDestructable="设置 聚集点 在可毁坏物"
+SetUnitRallyPoint="设置 聚集点 在点"
+SetUnitRallyUnit="设置 聚集点 在单位"
+SetUnitRescueRange="设置营救单位的营救距离"
+SetUnitScalePercent="改变单位尺寸"
+SetUnitTimeScalePercent="改变单位动作速度"
+SetUnitTurnSpeedBJ="改变单位转向速度"
+SetUnitTypeSlots="限制单位的位置 (从商店)"
+SetUnitUseFoodBJ="允许/禁止 使用人口"
+SetUnitUserData="设置单位自定义数据"
+SetUnitVertexColorBJ="改变单位着色"
+SetUserControlForceOff="禁止用户控制权"
+SetUserControlForceOn="授予用户控制权"
+SetVariable="设置变量"
+SetWaterBaseColorBJ="设置 水 颜色"
+SetWaterDeforms="设置 水变形 开/关"
+ShareEverythingWithTeam="同队共享视野与单位控制权"
+ShowCustomCampaignButton="显示/隐藏自定义战役按钮"
+ShowDestructableBJ="显示/隐藏 可毁坏物"
+ShowImageBJ="显示/隐藏图像"
+ShowInterfaceForceOff="信箱模式开"
+ShowInterfaceForceOn="信箱模式关"
+ShowTextTagForceBJ="显示/隐藏 漂浮文字"
+ShowUbersplatBJ="显示/隐藏地面纹理"
+ShowUnitHide="隐藏单位"
+ShowUnitShow="显示单位"
+SinBJ="正弦"
+SmartCameraPanBJ="必要时平移摄像机 (限时)"
+SOUND_VOLUMEGROUP_AMBIENTSOUNDS="场景配音"
+SOUND_VOLUMEGROUP_COMBAT="战斗声音"
+SOUND_VOLUMEGROUP_FIRE="火焰声音"
+SOUND_VOLUMEGROUP_MUSIC="音乐"
+SOUND_VOLUMEGROUP_SPELLS="动画和法术声音"
+SOUND_VOLUMEGROUP_UI="用户界面声音"
+SOUND_VOLUMEGROUP_UNITMOVEMENT="单位移动声音"
+SOUND_VOLUMEGROUP_UNITSOUNDS="单位回应声音"
+SquareRoot="平方根"
+StartCampaignAI="启动战役 AI "
+StartMeleeAI="启动对战 AI "
+StartTimerBJ="开启计时器"
+StopCameraForPlayerBJ="停止摄像机"
+StopMusicBJ="停止音乐"
+StopSoundBJ="停止声音"
+StoreBooleanBJ="贮藏 布尔变量"
+StoreIntegerBJ="贮藏 整数"
+StoreRealBJ="贮藏 实数"
+StoreStringBJ="贮藏 字串符"
+StoreUnitBJ="贮藏 单位"
+String2OrderIdBJ="将字符串转换为命令"
+String2UnitIdBJ="将单位类型转换为字符串"
+StringCase="将字串符转换为大小写字母"
+StringIdentity="格式化字串符"
+StringLength="字串符长度"
+SubStringBJ="切割字符串"
+SuspendHeroXPBJ="允许/禁止 英雄获得经验值"
+TanBJ="正切"
+TerrainDeformationCraterBJ="创造地域变形 :弹坑"
+TerrainDeformationRandomBJ="创造地域变形: 随机"
+TerrainDeformationRippleBJ="创造地域变形: 波纹"
+TerrainDeformationStopBJ="停止地域变形"
+TerrainDeformationWaveBJ="创造地域变形: 波"
+TerrainDeformStopAll="停止所有地域变形"
+TEXMAP_FLAG_NONE="地图涂层标志-无"
+TEXMAP_FLAG_WRAP_U="地图涂层标志-重叠(U)"
+TEXMAP_FLAG_WRAP_UV="地图涂层标志-重叠(UV)"
+TEXMAP_FLAG_WRAP_V="地图涂层标志-重叠(V)"
+then="然后"
+TimerDialogDisplayBJ="显示/隐藏计时器窗口"
+TimerDialogDisplayForPlayerBJ="显示/隐藏计时器窗口为玩家"
+TimerDialogSetSpeedBJ="改变计时器窗口速度"
+TimerDialogSetTimeColorBJ="改变计时器窗口时间颜色"
+TimerDialogSetTitleBJ="改变计时器窗口标题"
+TimerDialogSetTitleColorBJ="改变计时器标题颜色"
+TimerGetElapsed="计时器经过的时间"
+TimerGetRemaining="计时器剩余时间"
+TimerGetTimeout="计时器初始的时间"
+TotalFoodProduced="当前AI玩家的人口上限"
+TownHasHall="基地有主城镇"
+TownHasMine="基地有金矿"
+TownThreatened="基地被攻击"
+TownWithMine="有金矿的基地"
+TransmissionFromUnitTypeWithNameBJ="播送 单位[类型]消息"
+TransmissionFromUnitWithNameBJ="播送 单位消息"
+TriggerAddAction="添加触发器动作"
+TriggerAddCondition="添加触发器限制条件"
+TriggerEvaluate="触发器有条件"
+TriggerExecute="运行触发器 (忽略条件)"
+TriggerRegisterAnyUnitEventBJ="单位的事件"
+TriggerRegisterBuildSubmenuEventBJ="建造建筑物按钮被点击"
+TriggerRegisterDeathEvent="可毁坏物死亡"
+TriggerRegisterDestDeathInRegionEvent="可毁坏物在 区域 死亡"
+TriggerRegisterDialogEventBJ="对话框按钮点击"
+TriggerRegisterEnterRectSimple="单位进入区域"
+TriggerRegisterGameLoadedEventBJ="读取游戏"
+TriggerRegisterGameSavedEventBJ="储存游戏"
+TriggerRegisterGameStateEventTimeOfDay="游戏时间改变"
+TriggerRegisterLeaveRectSimple="单位离开区域"
+TriggerRegisterPlayerAllianceChange="联盟状态改变(特殊)"
+TriggerRegisterPlayerChatEvent="玩家输入聊天信息"
+TriggerRegisterPlayerEventAllianceChanged="联盟状态改变(任何状态)"
+TriggerRegisterPlayerEventDefeat="失败"
+TriggerRegisterPlayerEventEndCinematic="按ESC键(跳过动画)"
+TriggerRegisterPlayerEventLeave="玩家离开游戏"
+TriggerRegisterPlayerEventVictory="胜利"
+TriggerRegisterPlayerKeyEventBJ="键盘事件"
+TriggerRegisterPlayerSelectionEventBJ="选择单位事件"
+TriggerRegisterPlayerStateEvent="属性"
+TriggerRegisterPlayerUnitEventSimple="玩家单位的事件"
+TriggerRegisterShowSkillEventBJ="英雄学习技能按钮被点击"
+TriggerRegisterTimerEventPeriodic="循环逝去的时间"
+TriggerRegisterTimerEventSingle="游戏开始逝去的时间"
+TriggerRegisterTimerExpireEventBJ="计时器期满"
+TriggerRegisterUnitEvent="详细单位的事件"
+TriggerRegisterUnitInRangeSimple="进入单位的范围"
+TriggerRegisterUnitLifeEvent="单位生命值"
+TriggerRegisterUnitManaEvent="单位魔法值"
+TriggerRegisterVariableEvent="变量的值"
+TriggerSleepAction="等待"
+true="真"
+udg_="变量"
+UNIT_STATE_LIFE="单位状态-生命"
+UNIT_STATE_MANA="单位状态-法力"
+UNIT_STATE_MAX_LIFE="单位状态-最大生命"
+UNIT_STATE_MAX_MANA="单位状态-最大法力"
+UNIT_TYPE_ANCIENT="单位类型-古代的"
+UNIT_TYPE_ATTACKS_FLYING="单位类型-可以攻击飞行单位"
+UNIT_TYPE_ATTACKS_GROUND="单位类型-可以攻击地 单位"
+UNIT_TYPE_DEAD="单位类型-死亡单位"
+UNIT_TYPE_FLYING="单位类型-飞行单位"
+UNIT_TYPE_GIANT="单位类型-巨人"
+UNIT_TYPE_GROUND="单位类型-地面单位"
+UNIT_TYPE_HERO="单位类型-英雄"
+UNIT_TYPE_MECHANICAL="单位类型-机械的"
+UNIT_TYPE_MELEE_ATTACKER="单位类型-肉搏攻击者"
+UNIT_TYPE_PEON="单位类型-苦工"
+UNIT_TYPE_PLAGUED="单位类型-中了瘟疫的"
+UNIT_TYPE_RANGED_ATTACKER="单位类型-远程攻击者"
+UNIT_TYPE_SAPPER="单位类型-工兵"
+UNIT_TYPE_SNARED="单位类型-被诱捕的"
+UNIT_TYPE_STRUCTURE="单位类型-建筑单位"
+UNIT_TYPE_STUNNED="单位类型-被晕眩的"
+UNIT_TYPE_SUMMONED="单位类型-被召唤的"
+UNIT_TYPE_TOWNHALL="单位类型-城镇大厅类型单位"
+UNIT_TYPE_UNDEAD="单位类型-不死的"
+UnitAddAbilityBJ="增加单位技能"
+UnitAddIndicatorBJ="闪动指示器为了单位"
+UnitAddItemByIdSwapped="创建物品给英雄"
+UnitAddItemSwapped="移动物品给英雄"
+UnitAddSleepPerm="设置单位睡眠(无论何时)"
+UnitAddTypeBJ="添加类别"
+UnitApplyTimedLifeBJ="设置单位生命计时器"
+UnitCanSleepBJ="单位晚上睡觉"
+UnitCanSleepPerm="单位在睡觉"
+UnitCountBuffsExBJ="魔法效果/特殊效果 的数量"
+UnitDamagePointLoc="伤害区域"
+UnitDamageTargetBJ="伤害目标"
+UnitDropItemPointLoc="丢弃物品于指定点"
+UnitDropItemSlotBJ="放置物品于指定物品格"
+UnitDropItemTargetBJ="将物品给予其它单位"
+UnitGenerateAlarms="设置警报产生 打开/关闭"
+UnitHasBuffBJ="单位存在 魔法特效"
+UnitHasItem="英雄已有物品"
+UnitHasItemOfTypeBJ="英雄已有 物品 - 类型"
+UnitId2OrderIdBJ="将单位类型转换为命令"
+UnitId2StringBJ="将单位转换为字符串"
+UnitInventoryCount="单位物品的数量"
+UnitInventorySizeBJ="物品栏容量"
+UnitIsSleepingBJ="单位正在睡觉"
+UnitItemInSlotBJ="英雄携带的物品"
+UnitPauseTimedLifeBJ="暂停/恢复 单位生命计时器"
+UnitRemoveAbilityBJ="删除单位技能"
+UnitRemoveBuffBJ="删除 持续状态 (指定的)"
+UnitRemoveBuffsBJ="删除 持续状态"
+UnitRemoveBuffsExBJ="删除 持续状态 (按类型)"
+UnitRemoveItemFromSlotSwapped="从英雄的物品栏位置中掉落物品"
+UnitRemoveItemSwapped="掉落英雄的一个物品"
+UnitRemoveTypeBJ="移除类别"
+UnitResetCooldown="重设单位技能Cooldown"
+UnitSetCanSleepBJ="设置单位睡眠(之在晚上)"
+UnitSetConstructionProgress="设置建筑物 建筑升级比"
+UnitSetUpgradeProgress="设置建筑物 科技升级比"
+UnitSetUsesAltIconBJ="改变单位的小地图图标"
+UnitShareVisionBJ="共享单位视野"
+UnitSuspendDecayBJ="设置尸体腐烂方式"
+UnitUseItem="使用物品"
+UnitUseItemDestructable="对可毁坏物使用物品"
+UnitUseItemPointLoc="对 点 使用物品"
+UnitUseItemTarget="对单位使用物品"
+UnitWakeUpBJ="设置单位醒来"
+UnlockGameSpeedBJ="解锁游戏速度"
+UseTimeOfDayBJ="打开/关闭日夜循环"
+VERSION_FROZEN_THRONE="版本-冰封王座"
+VERSION_REIGN_OF_CHAOS="版本-混乱之治"
+VolumeGroupResetBJ="重置所有音量"
+VolumeGroupSetVolumeBJ="设置音量"
+WaitForCondition="等待条件"
+WaitForSoundBJ="等待声音结束"
+WaygateActivateBJ="打开/关闭 传送门"
+WaygateGetDestinationLocBJ="传送门的目的地"
+WaygateIsActiveBJ="传送门是允许的"
+WaygateSetDestinationLocBJ="设置传送门目的地"
+
+http://blog.csdn.net/llj1985/article/details/38510019
