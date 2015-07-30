@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <title>Money</title>
+  </head>
+  
+  
+  <body>
+    
+    <h1>------------</h1>
+    <select id='accselector'></select> -- <input type="number" id='outval'/> - <input type="text" placeholder="Comments:" id='comments'/>
+    <button onclick="addrecord()">Add Record</button>
+    <button onclick="undo()">Undo</button>
+    <br>
+    :Tracker
+    <br>
+    <textarea rows='20' cols='100' id='acclog'></textarea>
+    <button onclick="save()">Save(After Edit)</button>
+    <button onclick="caltt()">PrintTotal</button>
+    <br>
+    <div id="outputtb"></div>
+
+
+
+</br>
+<h1>-------------------------------------------</h1>
+    <div>
+      acclist:<input type='text' id='acclist' cols='40'/>
+      <button onclick='update_acclist()'>UpdateList</button>
+    </div>
+    </br>
+    <button onclick='reset()'>Reset&Reload</button>
+    
+    
+<script>
+  //----------------------------------------------------------------------------------------------------
+    function reset(){
+      r=confirm("ResetALL? Are you sure?");
+      if(r){
+      localStorage.clear();
+      location.reload();
+      }
+      
+    }
+    
+    //init
+    function run(){
+      
+      if(localStorage.acclist){
+        document.getElementById("acclist").value=localStorage.acclist  
+      }else{
+        localStorage.acclist="工资5170 农行7376 支付宝 余额宝 招商信用卡 其他 股票盈利"
+        document.getElementById("acclist").value=localStorage.acclist
+      }
+      var acclist = localStorage.acclist.split(" ")
+      
+      
+      for(var s in acclist){
+        accselector.add(new Option(acclist[s],acclist[s]))
+      }
+      if(localStorage.acclog){
+        acclog.value=localStorage.acclog
+      }else{
+        acclog.value="\n"
+      }
+      
+    }
+    
+    function update_acclist(){
+      localStorage.acclist = document.getElementById("acclist").value
+      acclist = localStorage.acclist.split(" ")
+    }
+    run()
+    
+    function addrecord(){
+      var a = accselector.value
+      var v = outval.value
+      var c = comments.value
+      d=new Date()
+      acclog.value+=d.getFullYear()+"/"+d.getMonth()+"/"+d.getDate()+","+a+","+v+","+c+"\n"
+      localStorage.acclog=acclog.value
+    }
+    function undo(){
+      acclog.value=acclog.value.replace(/\n[^\n]*\n/,"\n")
+      localStorage.acclog=acclog.value
+    }
+    function save(){
+      localStorage.acclog=acclog.value
+    }
+    function caltt(){
+      var rs=localStorage.acclog.split("\n")
+      var output=[]
+      for(var l in rs){
+        var d = rs[l].split(",")
+        if(!output[d[1]]){output[d[1]]=0}
+        if(d[1] == "股票盈利"){
+          output[d[1]]=d[2]
+          continue
+        }
+        
+        output[d[1]]+=parseFloat(d[2])
+      }
+      
+      console.log(output)
+      outputtb.innerHTML=""
+      for(var k in output){
+        if(k != "undefined" && k != "股票盈利"){
+          outputtb.innerHTML+=k+": "+output[k]+"<br>"
+        }
+        
+      }
+      outputtb.innerHTML+="股票盈利"+": "+output["股票盈利"]
+    }
+  </script>
+   </body>
+</html>
