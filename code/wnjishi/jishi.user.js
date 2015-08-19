@@ -287,7 +287,7 @@ if(!localStorage.exprolelist){
 addGlobalStyle('.controllbar{position:absolute;right:10%;top:30%;z-index:200;}');
 addGlobalStyle('#ngrolename{background:gray;}');
 addGlobalStyle('#okrolename{background:green;}');
-addGlobalStyle('#exprolename{background:yellow;}');
+addGlobalStyle('#exprolename{background:red;}');
 addGlobalStyle('a.pic img {opacity:0.4;width: 90px;height: 70px;border: 1px solid #fff;float: left;background: url("img/tipsImg.png") no-repeat 0 0;}');
 
 document.getElementById('btshow_all').addEventListener('click',function(){runview();},false);
