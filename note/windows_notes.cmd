@@ -9,3 +9,5 @@ sc delete SuperCMD
 
 
 icacls file /grant usrname_sid:F
+
+#ad:userinit.exe
