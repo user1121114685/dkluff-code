@@ -351,7 +351,7 @@ addGlobalStyle('#maintable{border: 1px solid black;left:10%;}');
 addGlobalStyle('tr,td {border: 1px solid black;}');
 
 var app = angular.module("apptb1", []);
-app.controller("ctr1", function($scope,$http) {
+app.controller("ctr1", function($scope,$http,$timeout) {
 
   $scope.cts = [];
   $scope.ctslocal = [];
@@ -367,7 +367,8 @@ app.controller("ctr1", function($scope,$http) {
       $scope.additemobj(data[0].pageData);
       for(var i = ttpage;i>1;i--){
         $http.get(url+i).success(function(data, status, headers, config){
-         $scope.additemobj(data[0].pageData);
+         //$scope.additemobj(data[0].pageData);
+         $timeout($scope.additemobj(data[0].pageData),5000)
         });
       }
     });
