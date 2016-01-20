@@ -1,0 +1,15 @@
+{
+   "content_scripts": [ {
+      "exclude_globs": [  ],
+      "exclude_matches": [  ],
+      "include_globs": [ "http://quotes.money.163.com/*", "http://192.168.93.128/*" ],
+      "js": [ "script.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   } ],
+   "converted_from_user_script": true,
+   "description": "",
+   "name": "wystock",
+   "version": "1.0",
+   "manifest_version": 2
+}
