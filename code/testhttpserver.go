@@ -14,6 +14,7 @@ func main() {
     fmt.Println("running on ip: ",*ipaddr)
     ipp := strings.Join([]string{*ipaddr, ":80"}, "")
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        fmt.Println(r)
         f,err := os.Open(*html)
         if err != nil {
             fmt.Println(err)
