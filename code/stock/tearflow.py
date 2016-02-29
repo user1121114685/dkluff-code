@@ -16,5 +16,7 @@ def getTrend(oldp,newp,cyc):
         return tdlist[cyc][1]
     return tdlist[cyc][0]
 
-
-
+#parr=[yestclose,open,price,high,low,byestclose]
+def calclose(parr):
+    maxclose = parr[0]*1.1
+    minclose = parr[0]*0.9
