@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>柱状图</title>
-    <!-- 引入 G2 文件 -->
-    <script src="src/g2.js"></script>
-    <script src="src/angular.min.js"></script>
-   
-    <link href="src/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- 创建图表容器 -->
-    <div id="c1"></div>
-    <script>
-      var data = [
+     var data = [
         {genre: 'Sports', sold: 275},
         {genre: 'Strategy', sold: 115},
         {genre: 'Action', sold: 120},
@@ -39,17 +24,3 @@
       chart.interval().position('genre*sold').color('genre')
       // Step 4: 渲染图表
       chart.render();
-    </script>
-
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="src/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="src/js/bootstrap.min.js"></script>
-    <script src="src/g2.js"></script>
-    <script src="src/angular.min.js"></script>
-    <script src="lib/app.js"></script>
-  </body>
-  
-</html>
