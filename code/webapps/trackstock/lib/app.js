@@ -1,26 +1,45 @@
-     var data = [
-        {genre: 'Sports', sold: 275},
-        {genre: 'Strategy', sold: 115},
-        {genre: 'Action', sold: 120},
-        {genre: 'Shooter', sold: 350},
-        {genre: 'Other', sold: 150},
-      ]; // G2 对数据源格式的要求，仅仅是 JSON 数组，数组的每个元素是一个标准 JSON 对象。
-      // Step 1: 创建 Chart 对象
-      var chart = new G2.Chart({
-        id: 'c1', // 指定图表容器 ID
-        width : 800, // 指定图表宽度
-        height : 400 // 指定图表高度
-      });
-      // Step 2: 载入数据源
-      chart.source(data, {
-        genre: {
-          alias: '游戏种类' // 列定义，定义该属性显示的别名
-        },
-        sold: {
-          alias: '销售量'
+var app = angular.module("trackstockapp", []);
+
+app.controller("tsctrlmain", function($scope,$http) {
+//adata = ["stockname amount price date", ]
+    $scope.adata = [];
+
+    $scope.logger = function (data,opt) {
+        
+    }
+
+    $scope.addData = function () {
+        for(i=0;i<tmpdata.length;i++){
+            var d = parseData(tmpdata[i]);
+            $scope.adata = $scope.adata.concat(d);
+            $scope.logger(d,"+");
         }
-      });
-      // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-      chart.interval().position('genre*sold').color('genre')
-      // Step 4: 渲染图表
-      chart.render();
+        
+    }
+
+    $scope.removeItem = function (x) {
+        $scope.adata.splice(x, 1);
+        $scope.logger(x,"-")
+    }
+
+    $scope.addItem = function () {
+        if (!$scope.addMe) {return;}
+        if ($scope.adata.indexOf($scope.addMe) == -1) {
+            $scope.adata.push($scope.addMe);
+            $scope.logger(addMe,"+");
+            $scope.addMe = "";
+        }
+    }
+
+    $scope.saveFile = function () {
+        var d = $scope.adata.join();
+        var blob = new Blob(d, {type: 'text/plain; charset=gbk'});
+        var url = URL.createObjectURL(blob);
+        node = document.createElement('a');
+        node.href = url;
+        node.download = outputfilename;
+        node.click();
+    }
+       
+    
+});

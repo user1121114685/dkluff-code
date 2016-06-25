@@ -2,27 +2,72 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>柱状图</title>
-    <!-- 引入 G2 文件 -->
-    <script src="src/g2.js"></script>
-    <script src="src/angular.min.js"></script>
-   
     <link href="src/css/bootstrap.min.css" rel="stylesheet">
+    <title>Track Stock</title>
   </head>
-  <body>
-    <!-- 创建图表容器 -->
-    <div id="c1"></div>
-  
+  <body onbeforeunload="return chksave()">
+    <div class="container" ng-app="trackstockapp" ng-controller="tsctrlmain">
+
+      <button type="button" class="btn btn-primary" ng-click="paint()">Paint</button>
+      <button type="button" class="btn btn-danger" ng-click="saveFile()">SaveToFile</button>
+      <!-- 当前持股 -->
+      <p>当前持股:</p>
+      <div id="c1"></div>
+      <!-- 当前现金+当前收益（RMB + %) -->
+      <p>收益:</p>
+      <div id="c2"></div>
+
+
+
+      <br/>
+      <h1>Import Data...</h1>
+
+      <div class="jumbotron" id="dropbox">
+ 	      
+        Drop File Here...<br/>
+        Or Click
+    
+      <input class="btn btn-primary btn-lg" type="file" multiple onchange="readData(this.files)">
+      //这个重新选择的方式就是，选文件的时候点取消
+      </div>
+      <p>Data in Queue(from files)</p>
+      <pre id="datainqueue"></pre>
+
+      <button ng-click="addData()" class="btn btn-primary btn-lg"> Append Data </button>
+
+      <div>
+        <p>Data Editor</p>
+        <ul>
+          <li ng-repeat="x in adata">
+            {{ x }} 
+            <span ng-click="removeItem($index)">&times;</span>
+          </li>
+        </ul>
+        <input ng-model="addMe">
+        <button ng-click="addItem()">Add</button>
+        <button>UNDO</button>
+        <p>LOG:</p>
+        <ul>
+          <li></li>
+        </ul>
+      </div>
+    </div>
+    
+
+
 
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="src/jquery.min.js"></script>
+    <!-- script src="src/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="src/js/bootstrap.min.js"></script>
+    <!-- script src="src/js/bootstrap.min.js"></script -->
     <script src="src/g2.js"></script>
     <script src="src/angular.min.js"></script>
+    <script src="lib/dataproc.js"></script>
+    <script src="lib/entry.js"></script>
     <script src="lib/app.js"></script>
+    
   </body>
   
 </html>

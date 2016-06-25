@@ -1,0 +1,6 @@
+1.识别文件编码
+2.转换所有结果至UTF-8
+3.UNDO remove/add
+4.log
+5.自动抓取当前价格
+6.localstorage
