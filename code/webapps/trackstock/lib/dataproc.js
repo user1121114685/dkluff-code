@@ -1,10 +1,11 @@
-function zsDatafmt(d) {
+//massive org files -->tmpdata-->split to adata 
+function zsDatafmt(line) {
   
 }
 
-function parseData(tdata) {
+function parseData(tmpdata) {
   //tmpdata to $scope.adata,return ["stockname amount price date", ]
 }
-function datatoJSON(d) {
+function datatoJSON(adata) {
   
 }

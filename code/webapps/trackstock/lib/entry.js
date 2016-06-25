@@ -34,6 +34,7 @@ function readData(files){
     oFReader.onload = function (oFREvent) {
       console.log("Loaded successfully")
       tmpdata.push(oFREvent.target.result);
+      //append data to datainqueue
  
     };
   

@@ -26,7 +26,7 @@ app.controller("tsctrlmain", function($scope,$http) {
         if (!$scope.addMe) {return;}
         if ($scope.adata.indexOf($scope.addMe) == -1) {
             $scope.adata.push($scope.addMe);
-            $scope.logger(addMe,"+");
+            $scope.logger($scope.addMe,"+");
             $scope.addMe = "";
         }
     }
