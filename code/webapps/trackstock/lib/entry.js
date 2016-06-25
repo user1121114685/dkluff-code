@@ -35,7 +35,7 @@ function readData(files){
       console.log("Loaded successfully")
       tmpdata.push(oFREvent.target.result);
       //append data to datainqueue
- 
+      
     };
   
     

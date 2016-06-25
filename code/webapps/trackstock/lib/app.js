@@ -1,11 +1,11 @@
 var app = angular.module("trackstockapp", []);
 
 app.controller("tsctrlmain", function($scope,$http) {
-//adata = ["stockname amount price date", ]
+//adata = ["stockname *** price amount date", ]
     $scope.adata = [];
 
     $scope.logger = function (data,opt) {
-        
+        //console.log(data);
     }
 
     $scope.addData = function () {
@@ -14,17 +14,23 @@ app.controller("tsctrlmain", function($scope,$http) {
             $scope.adata = $scope.adata.concat(d);
             $scope.logger(d,"+");
         }
+        tmpdata = [];
         
     }
 
     $scope.removeItem = function (x) {
+        $scope.logger($scope.adata[x],"-");
         $scope.adata.splice(x, 1);
-        $scope.logger(x,"-")
+        
     }
 
     $scope.addItem = function () {
+        //org addMe "stockname price amount" 
         if (!$scope.addMe) {return;}
         if ($scope.adata.indexOf($scope.addMe) == -1) {
+            //format addMe to "stockname *** price amount date"
+
+            
             $scope.adata.push($scope.addMe);
             $scope.logger($scope.addMe,"+");
             $scope.addMe = "";
