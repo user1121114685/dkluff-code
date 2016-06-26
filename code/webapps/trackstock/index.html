@@ -6,46 +6,51 @@
     <title>Track Stock</title>
   </head>
   <body onbeforeunload="return chksave()">
-    <div class="container" ng-app="trackstockapp" ng-controller="tsctrlmain">
+    <div id="top" class="container" ng-app="trackstockapp" ng-controller="tsctrlmain">
 
       <button type="button" class="btn btn-primary" ng-click="paint()">Paint</button>
       <button type="button" class="btn btn-danger" ng-click="saveFile()">SaveToFile</button>
       <!-- 当前持股 -->
-      <p>当前持股:</p>
+      <p>当前现金:</p>
       <div id="c1"></div>
       <!-- 当前现金+当前收益（RMB + %) -->
       <p>收益:</p>
       <div id="c2"></div>
 
-
-
       <br/>
-      <h1>Import Data...</h1>
+      <h1>Import Data...<a href="#addme">ADD Single</a></h1>
+      
 
       <div class="jumbotron" id="dropbox">
  	      
         Drop File Here...<br/>
-        Or Click
+        Or Click<br/>
     
       <input class="btn btn-primary btn-lg" type="file" multiple onchange="readData(this.files)">
+      utf-8:<input class="btn btn-primary btn-lg" type="file" multiple onchange="readData(this.files,'UTF-8')">
+
       //这个重新选择的方式就是，选文件的时候点取消
       </div>
-      <p>Data in Queue(from files)</p>
-      <pre id="datainqueue"></pre>
 
-      <button ng-click="addData()" class="btn btn-primary btn-lg"> Append Data </button>
+
+      <button ng-click="clearQueue()" class="btn btn-warning btn-lg"> Discard Data </button>
+      <button ng-click="addData()" class="btn btn-primary btn-lg"> Add Data </button>
+      <p>Data in Queue(from files)</p>      
+      <pre id="datainqueue"></pre>
 
       <div>
         <p>Data Editor</p>
+       
         <ul>
-          <li ng-repeat="x in adata track by $index" >
+          <li ng-repeat="x in adata track by $index " >
             {{ x }} 
             <span ng-click="removeItem($index)">&times;</span>
           </li>
         </ul>
-        <input ng-model="addMe">
+        <input id="addme" ng-model="addMe">
         <button ng-click="addItem()">Add</button>
         <button>UNDO</button>
+        <a href="#top">To Top</a>
         <p>LOG:</p>
         <ul>
           <li></li>
@@ -54,10 +59,6 @@
     </div>
     
 
-
-
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- script src="src/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -65,6 +66,7 @@
     <script src="src/g2.js"></script>
     <script src="src/angular.min.js"></script>
     <script src="lib/dataproc.js"></script>
+    <script src="lib/datapaint.js"></script>
     <script src="lib/entry.js"></script>
     <script src="lib/app.js"></script>
     

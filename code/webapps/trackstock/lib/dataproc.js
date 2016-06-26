@@ -62,5 +62,54 @@ function parseData(tmpdatablock) {
 
 }
 function datatoJSON(adata) {
+  var r = [];
+  for(i=0;i<adata.length;i++){
+    if(adata[i].startsWith("#")){continue;}
+    d = adata[i].split(" ");
+    var fee=Math.abs(parseFloat(d[3])*parseInt(d[4])/1000)+5;
   
+    r.push({
+      "cid":i,
+      "stockname":d[1],
+      "price":parseFloat(d[3]),
+      "amount":parseInt(d[4]),
+      "date":d[5],
+      "money":parseFloat(d[3])*parseInt(d[4])+fee,
+    });
+  }
+  //console.log(r);
+  return r;
+}
+
+
+
+
+
+
+function dataByStock(jarr){
+  var r = [];
+  r[0]={};
+
+  for(i=0;i<jarr.length;i++){
+    if(jarr[i].stockname == "现金"){
+      r[i+1] = cpdic(r[i]);
+      continue;
+    }
+    r[i+1] = cpdic(r[i]);
+    r[i+1]["cid"] = i;
+    if(!r[i+1].hasOwnProperty(jarr[i].stockname)) {
+      r[i+1][jarr[i].stockname] = jarr[i].amount;
+    }
+    r[i+1][jarr[i].stockname] += jarr[i].amount;
+    
+  }
+  return r.slice(1);
+
+}
+function cpdic(d){
+  var a = {};
+  for(k in d){
+    a[k] = d[k];
+  }
+  return a;
 }

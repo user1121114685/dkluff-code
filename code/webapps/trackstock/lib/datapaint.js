@@ -1,23 +1,111 @@
-function g2paint_c1(d) {
-    var data = datatoJSON(d)
+function requrl(url,chkfunc){
+  xp=new XMLHttpRequest();
+  xp.onreadystatechange = chkfunc;
+  xp.open("GET",url,true);
+  xp.send();
+}//if (this.readyState==4 && this.status==200)
+
+function fmtframe(frame){
+    //add curcash
+    var m = 0;
+    var arrm=[];
+    frame.colArray('money').forEach(function(e) {
+      m+=e;
+      arrm.push(-1*m);
+    }, this);
+    frame.addCol('curcash',arrm);
+
+    //add stockchk
+    m = 0;
+    arrm=[];
+    frame.colArray('amount').forEach(function(e) {
+      m+=e;
+      if(m==0){arrm.push(1);}
+      arrm.push(0);
+    }, this);
+    frame.addCol('stockchk',arrm);
+    
+    
+
+    return frame;
+
+}
+
+
+function g2paint_c1(d,totalhold) {
+    bid = 'c1'
+    var e = document.getElementById(bid);
+    e.innerHTML = "";
+    
+    var data = datatoJSON(d);
+    
+    var Stat = G2.Stat;
+    var Frame = G2.Frame;
+    var frame = new Frame(data);
     var chart = new G2.Chart({ // 声明一个图表
-        id: 'c1',
+        id: bid,
         width: 800,
         height: 400,
-        plotCfg: {
-          margin: 80, // 设置 margin
-          border: {
-            stroke: '#ddd',
-            'stroke-width': 3, // 设置线的宽度
-            radius: 10 // 设置圆角
-          }, // 设置边框
-          background : {
-            fill: '#3F3F4F'
-          } // 设置背景色
-        }
+        forceFit:true,
+        
     });
-    chart.source(data);
-    chart.col('count',{type: 'linear',min:0})
-    chart.interval().position('gender*count').color('gender').size(60);
+    
+
+
+    //test
+    //console.log(frame.cell(frame.rowCount()-1,'curcash'));
+    //end-test
+    frame = fmtframe(frame);
+    chart.source(frame);
+    totalhold += frame.cell(frame.rowCount()-1,'curcash');
+    //chart.interval().position(Stat.summary.sum('stockname*money'));
+    chart.line().position('cid*curcash');
+    chart.interval().position('cid*stockchk').size(1).color('red');
+    chart.guide().line([0,totalhold],[totalhold,totalhold]);
     chart.render();
+}
+
+
+
+
+
+function g2paint_c2(d,stockprices) {
+    bid = 'c2'
+    var e = document.getElementById(bid);
+    e.innerHTML = "";
+    
+    var data = datatoJSON(d);
+    
+    
+    var Stat = G2.Stat;
+    var Frame = G2.Frame;
+    var frame = new Frame(data);
+    var chart = new G2.Chart({ // 声明一个图表
+        id: bid,
+        width: 800,
+        height: 400,
+        forceFit:true,
+        
+    });
+
+    
+    var defs = {
+      money:{
+        min:-2000,
+        max:2000,
+      },
+      
+    };
+    chart.source(frame,defs);
+  
+    chart.interval().position(Stat.summary.sum('stockname*money')).size(25).color('stockname');
+    
+    chart.intervalSymmetric().position(Stat.summary.sum('stockname*amount')).shape('hollowRect').style({
+        'stroke-width': 2,
+        stroke: '#FF7F00'
+      }).size(35);
+
+     chart.render();
+
+    
 }

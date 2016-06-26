@@ -28,18 +28,20 @@ function chksave(){
   //return "save to file?";
 }
 
-function readData(files){
+function readData(files,charset='gbk'){
   for(i=0;i<files.length;i++){
     oFReader = new FileReader();
     oFReader.onload = function (oFREvent) {
       console.log("Loaded successfully")
       tmpdata.push(oFREvent.target.result);
       //append data to datainqueue
-      
+      var e = document.getElementById("datainqueue");
+      e.innerHTML = e.innerHTML+oFREvent.target.result;
+            
     };
   
     
-    oFReader.readAsText(files[i],'gbk');
+    oFReader.readAsText(files[i],charset);
     //oFReader.readAsArrayBuffer(files[0]);
   }  
 }
