@@ -1,13 +1,19 @@
 //massive org files -->tmpdata-->split to adata 
-function zsDatafmt(line) {
-
+function removebadline(line){
   line = line.trim();
-
-  //remove bad line
+    //remove bad line
   if(line.length <3 ){return "";}
   if(line.includes("证券名称")){return "";}
   if(line.startsWith("---")){return "";}
   if(line.startsWith("#")){return "";}
+  return line;
+}
+function zsDatafmt(line,isDbfile) {
+  
+  line = removebadline(line);
+  if(isDbfile){
+    return line;
+  }
   //fmt data
   var r = line.replace(/ +|\t/g," ").split(" ");
   var d = new Date();
@@ -44,16 +50,19 @@ function zsDatafmt(line) {
   return "";
 }
 
+
 function parseData(tmpdatablock) {
+  
   //tmpdata to $scope.adata,return ["stockname *** price amount date", ]
   var a = tmpdatablock.split("\n");
   var r = [];
-
+  
+  var isDbfile = false;
   if(a[0].startsWith("#new-db-stock.txt")){
-    return a;
+    isDbfile = true;
   }
   for(i=0;i<a.length;i++){
-    var s = zsDatafmt(a[i]);
+    var s = zsDatafmt(a[i],isDbfile);
     if(s.length <3){continue;}
     r.push(s);
   }
@@ -80,7 +89,6 @@ function datatoJSON(adata) {
   //console.log(r);
   return r;
 }
-
 
 
 

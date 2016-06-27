@@ -76,7 +76,6 @@ function g2paint_c2(d,stockprices) {
     
     var data = datatoJSON(d);
     
-    
     var Stat = G2.Stat;
     var Frame = G2.Frame;
     var frame = new Frame(data);
@@ -100,12 +99,9 @@ function g2paint_c2(d,stockprices) {
   
     chart.interval().position(Stat.summary.sum('stockname*money')).size(25).color('stockname');
     
-    chart.intervalSymmetric().position(Stat.summary.sum('stockname*amount')).shape('hollowRect').style({
-        'stroke-width': 2,
-        stroke: '#FF7F00'
-      }).size(35);
+    chart.interval().position(Stat.summary.sum('stockname*amount')).shape('hollowRect').size(35);
 
-     chart.render();
+    chart.render();
 
     
 }

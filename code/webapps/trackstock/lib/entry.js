@@ -31,17 +31,37 @@ function chksave(){
 function readData(files,charset='gbk'){
   for(i=0;i<files.length;i++){
     oFReader = new FileReader();
-    oFReader.onload = function (oFREvent) {
-      console.log("Loaded successfully")
-      tmpdata.push(oFREvent.target.result);
+    oFReader.readAsArrayBuffer(files[i]);
+
+
+    oFReader.onload = function (e) {
+      er = e.target.result;
+      var g = new TextDecoder('gbk');
+      var u = new TextDecoder();
+      var gd = g.decode(er);
+      var ud = u.decode(er);
+      var r = "输入文件有误！";
+      var c = ["现金","人民币","买","卖"];
+      for(i=0;i<c.length;i++){
+        if(gd.search(c[i])>-1){
+          r=gd;
+          break;
+        }
+        if(ud.search(c[i])>-1){
+          r=ud;
+          break
+        }
+      }
+      tmpdata.push(r);
       //append data to datainqueue
       var e = document.getElementById("datainqueue");
-      e.innerHTML = e.innerHTML+oFREvent.target.result;
-            
-    };
+      e.innerHTML = e.innerHTML+r;
+      
+    }
   
     
-    oFReader.readAsText(files[i],charset);
-    //oFReader.readAsArrayBuffer(files[0]);
+    //oFReader.readAsText(files[i],charset);
+    
+   //oFReader.readAsBinaryString(files[i]);
   }  
 }

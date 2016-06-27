@@ -3,17 +3,26 @@ var app = angular.module("trackstockapp", []);
 app.controller("tsctrlmain", function($scope,$http) {
 //adata = ["RMB stockname *** price amount date", ]
     $scope.adata = [];
+    
 
     $scope.logger = function (data,opt) {
-        //console.log(data);
+        //console.log(data.length);
     }
 
+
     $scope.addData = function () {
-        for(i=0;i<tmpdata.length;i++){
-            var d = parseData(tmpdata[i]);
+        var d = [];
+        var i = tmpdata.length-1;
+        //for(i=0;i<tmpdata.length;i++){ //--bug
+        while(i>=0){
+          
+            d = parseData(tmpdata[i]);
             $scope.adata = $scope.adata.concat(d);
-            $scope.logger(d,"+");
+            //$scope.logger(tmpdata);
+            i--;
+
         }
+        
         $scope.clearQueue();
         $scope.paint();
         
@@ -50,11 +59,13 @@ app.controller("tsctrlmain", function($scope,$http) {
     }
 
     $scope.saveFile = function () {
-        var d = [];
+        localStorage.adata = $scope.adata;
+        var d = ["#new-db-stock.txt\r\n"];
         $scope.adata.forEach(function(e) {
             d.push(e+"\r\n")
         }, this);
         var blob = new Blob(d, {type: "text/plain"});
+        //var blob = new File(d,{type: "text/plain;charset=gbk"});
        
         var url = URL.createObjectURL(blob);
         node = document.createElement('a');
@@ -62,6 +73,16 @@ app.controller("tsctrlmain", function($scope,$http) {
         node.download = outputfilename;
         node.click();
     }
+    $scope.clear = function () {
+        r=confirm("Clear&Save?");
+        if(r){
+            $scope.saveFile();
+            localStorage.clear();
+        }
+        
+    }
+
+
     $scope.paint = function () {
         g2paint_c1($scope.adata,16250);
         g2paint_c2($scope.adata,[{"中国动力":32}]);
@@ -74,5 +95,9 @@ app.controller("tsctrlmain", function($scope,$http) {
         
     }
        
-    
+    if(localStorage.adata){
+        $scope.adata = localStorage.adata.split(",");
+        $scope.addData();
+    }
+
 });
