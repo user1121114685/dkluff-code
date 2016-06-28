@@ -10,7 +10,9 @@
 
       <button type="button" class="btn btn-primary" ng-click="updateCode()">UpdateCode</button>
       <button type="button" class="btn btn-danger" ng-click="saveFile()">SaveToFile</button>
-      <button type="button" class="btn btn-danger" ng-click="clear()">ClearLocal</button>
+      <button type="button" class="btn btn-danger" ng-click="clearAll()">ClearAll</button>
+      <button type="button" class="btn btn-danger" ng-click="clearData()">ClearData</button>
+
 
       <!-- 当前持股 -->
       <p>当前现金:</p>
@@ -72,7 +74,7 @@
             <span class="badge" ng-click="removeItem($index)">&times;</span>
           </li>
         </ul>
-        <div class="input-group">        
+        <div class="input-group" ng-hide="!chkeditor">        
            <input id="addme" ng-model="addMe" class="form-control" placeholder="name price amount...">
           <span class="input-group-btn">
             <button class="btn btn-default" ng-click="addItem()">Add</button>
@@ -82,7 +84,7 @@
         <a href="#top">To Top</a>
         <p>LOG:</p>
         <ul>
-          <li></li>
+          <li ng-repeat="g in datalog">{{g}}</li>
         </ul>
         ----------------</br>
 

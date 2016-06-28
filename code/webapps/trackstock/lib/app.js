@@ -5,10 +5,11 @@ app.controller("tsctrlmain", function($scope,$http) {
     $scope.adata = [];
     $scope.stock = [];
     $scope.stockcodes = [];
+    $scope.datalog = [];
 
 
     $scope.logger = function (data,opt) {
-        //console.log(data.length);
+        $scope.datalog.push(data+" opt :"+opt);
     }
 
 
@@ -19,7 +20,7 @@ app.controller("tsctrlmain", function($scope,$http) {
         while(i>=0){         
             d = parseData(tmpdata[i]);
             $scope.adata = $scope.adata.concat(d);
-            //$scope.logger(tmpdata);
+            $scope.logger(tmpdata,"+");
             i--;
         }
         $scope.stock = bStock(datatoJSON($scope.adata));
@@ -75,11 +76,19 @@ app.controller("tsctrlmain", function($scope,$http) {
         node.download = outputfilename;
         node.click();
     }
-    $scope.clear = function () {
+    $scope.clearAll = function () {
         r=confirm("Clear&Save?");
         if(r){
             $scope.saveFile();
             localStorage.clear();
+        }
+        
+    }
+    $scope.clearData = function () {
+        r=confirm("Clear&Save?");
+        if(r){
+            $scope.saveFile();
+            localStorage.adata="";
         }
         
     }
