@@ -65,3 +65,18 @@ function readData(files,charset='gbk'){
    //oFReader.readAsBinaryString(files[i]);
   }  
 }
+function sinaApi() {
+  var url = "http://hq.sinajs.cn/list=";
+  if(localStorage.stockcodes){
+    var s=localStorage.stockcodes.split(",");
+    for(i=0;i<s.length;i++){
+      var u = url + s[i].split(" ")[1];
+      var e=document.getElementsByTagName("body");				
+      var node = document.createElement('script');
+      node.type = "text/javascript";
+      node.src = u;
+      e[0].appendChild(node);
+    }
+  }
+}
+sinaApi();

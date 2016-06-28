@@ -74,7 +74,7 @@ function datatoJSON(adata) {
   var r = [];
   for(i=0;i<adata.length;i++){
     if(adata[i].startsWith("#")){continue;}
-    d = adata[i].split(" ");
+    var d = adata[i].split(" ");
     var fee=Math.abs(parseFloat(d[3])*parseInt(d[4])/1000)+5;
   
     r.push({
@@ -94,26 +94,50 @@ function datatoJSON(adata) {
 
 
 
-function dataByStock(jarr){
-  var r = [];
-  r[0]={};
+function getStock(jarr){
+  var r = {};
 
   for(i=0;i<jarr.length;i++){
-    if(jarr[i].stockname == "现金"){
-      r[i+1] = cpdic(r[i]);
-      continue;
-    }
-    r[i+1] = cpdic(r[i]);
-    r[i+1]["cid"] = i;
-    if(!r[i+1].hasOwnProperty(jarr[i].stockname)) {
-      r[i+1][jarr[i].stockname] = jarr[i].amount;
-    }
-    r[i+1][jarr[i].stockname] += jarr[i].amount;
-    
+    r[jarr[i].stockname] = 0;
   }
-  return r.slice(1);
+  return r;
 
 }
+
+function dataByStock(jarr){
+  var r =[];
+  var s = getStock(jarr);
+  for(i=0;i<jarr.length;i++){
+    s[jarr[i].stockname] += jarr[i].amount;  
+    r.push(cpdic(s));  
+  }
+  return r;
+}
+
+function bStock(jarr){
+  var r = [];
+  var s = getStock(jarr);
+  var sp = getStock(jarr);
+  for(i=0;i<jarr.length;i++){
+    s[jarr[i].stockname] += jarr[i].amount;
+    sp[jarr[i].stockname] += jarr[i].money;  
+          
+  }
+  for(k in s){
+    var t = {};
+    if(s[k] <100){ continue;}
+    t.stockname = k;
+    t.amount = s[k];
+    t.price = 0;
+    t.code= "";
+    t.money=sp[k];
+    t.cost=sp[k]/s[k];
+    r.push(t);
+  }
+
+  return r;
+}
+
 function cpdic(d){
   var a = {};
   for(k in d){

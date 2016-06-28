@@ -8,7 +8,7 @@
   <body onbeforeunload="return chksave()">
     <div id="top" class="container" ng-app="trackstockapp" ng-controller="tsctrlmain">
 
-      <button type="button" class="btn btn-primary" ng-click="paint()">Paint</button>
+      <button type="button" class="btn btn-primary" ng-click="updateCode()">UpdateCode</button>
       <button type="button" class="btn btn-danger" ng-click="saveFile()">SaveToFile</button>
       <button type="button" class="btn btn-danger" ng-click="clear()">ClearLocal</button>
 
@@ -16,10 +16,28 @@
       <p>当前现金:</p>
       <div id="c1"></div>
       <!-- 当前现金+当前收益（RMB + %) -->
-      <p>收益:</p>
+      <p>投入/收益(负为收益):</p>
       <div id="c2"></div>
 
       <br/>
+      <ul class="list-group">
+          <li class="list-group-item">
+            stockname cur_price amount cost/share totalmoney # codeOnsina #
+            </li>
+          <li class="list-group-item" ng-repeat="x in stock">
+            {{x.stockname}} {{ x.price | number:2 }}  {{ x.amount }} {{x.cost | number:2}} {{x.money | number:2 }} # {{ x.code }} #
+             <span class="label {{getlabelcolor((x.price-x.cost)*100/x.cost)}}">
+              {{(x.price-x.cost)*x.amount | number:2}} ( {{ (x.price-x.cost)*100/x.cost | number:2 }}% )
+              </span>  
+          </li>
+        </ul>
+        <div class="input-group">        
+           <input  ng-model="tmpstcode" class="form-control" placeholder="update: name code">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="updateCode()">Update</button>
+          </span>
+        </div>
+
       <h1>Import Data...<a href="#addme">ADD Single</a></h1>
       
 
@@ -41,21 +59,39 @@
 
       <div>
         <p>Data Editor</p>
+        <div class="checkbox">
+          <label>
+          <input type="checkbox" ng-model="chkeditor">
+            Enable Editor...
+          </label>
+        </div>
        
-        <ul>
-          <li ng-repeat="x in adata track by $index " >
-            {{ x }} 
-            <span ng-click="removeItem($index)">&times;</span>
+        <ul class="list-group" ng-hide="!chkeditor">
+          <li class="list-group-item" ng-repeat="x in adata track by $index " >
+           {{$index}} -  {{ x }} 
+            <span class="badge" ng-click="removeItem($index)">&times;</span>
           </li>
         </ul>
-        <input id="addme" ng-model="addMe">
-        <button ng-click="addItem()">Add</button>
-        <button>UNDO</button>
+        <div class="input-group">        
+           <input id="addme" ng-model="addMe" class="form-control" placeholder="name price amount...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="addItem()">Add</button>
+            <button class="btn btn-default">UNDO</button>
+          </span>
+        </div>
         <a href="#top">To Top</a>
         <p>LOG:</p>
         <ul>
           <li></li>
         </ul>
+        ----------------</br>
+
+        
+
+        
+        </br>
+        </br>
+        </br>
       </div>
     </div>
     

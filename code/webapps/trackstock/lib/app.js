@@ -3,7 +3,9 @@ var app = angular.module("trackstockapp", []);
 app.controller("tsctrlmain", function($scope,$http) {
 //adata = ["RMB stockname *** price amount date", ]
     $scope.adata = [];
-    
+    $scope.stock = [];
+    $scope.stockcodes = [];
+
 
     $scope.logger = function (data,opt) {
         //console.log(data.length);
@@ -14,15 +16,14 @@ app.controller("tsctrlmain", function($scope,$http) {
         var d = [];
         var i = tmpdata.length-1;
         //for(i=0;i<tmpdata.length;i++){ //--bug
-        while(i>=0){
-          
+        while(i>=0){         
             d = parseData(tmpdata[i]);
             $scope.adata = $scope.adata.concat(d);
             //$scope.logger(tmpdata);
             i--;
-
         }
-        
+        $scope.stock = bStock(datatoJSON($scope.adata));
+
         $scope.clearQueue();
         $scope.paint();
         
@@ -40,22 +41,23 @@ app.controller("tsctrlmain", function($scope,$http) {
         $scope.paint();
         
     }
+    
 
     $scope.addItem = function () {
         var d = new Date();
         //org addMe "stockname price amount" 
         if (!$scope.addMe) {return;}
-        if ($scope.adata.indexOf($scope.addMe) == -1) {
-            //format addMe to "*** stockname *** price amount date"
-            var r=$scope.addMe.replace(/ +|\t/g," ").split(" ");
-            
-            $scope.addMe = ["人民币",r[0],"***",r[1],r[2],d.toLocaleDateString()].join(" ");
 
-            $scope.adata.push($scope.addMe);
-            $scope.logger($scope.addMe,"+");
-            $scope.addMe = "";
-            $scope.paint();
-        }
+         //format addMe to "*** stockname *** price amount date"
+         var r=$scope.addMe.replace(/ +|\t/g," ").split(" ");
+         
+         $scope.addMe = ["人民币",r[0],"***",r[1],r[2],d.toLocaleDateString()].join(" ");
+
+         $scope.adata.push($scope.addMe);
+         $scope.logger($scope.addMe,"+");
+         $scope.addMe = "";
+         $scope.paint();
+        
     }
 
     $scope.saveFile = function () {
@@ -82,9 +84,27 @@ app.controller("tsctrlmain", function($scope,$http) {
         
     }
 
+    $scope.getPrice = function () {
+        for(k=0;k<$scope.stock.length;k++){
+            try {
+                
+                var v = eval("hq_str_"+$scope.stock[k].code);      
+                $scope.stock[k].price=parseFloat(v.split(",")[3]);
+            } catch (error) {
+                console.log(error);
+                continue;
+            }
+        }
+       
+    }
+
 
     $scope.paint = function () {
-        g2paint_c1($scope.adata,16250);
+        var tt = 0;
+        for(k=0;k<$scope.stock.length;k++){
+            tt+=$scope.stock[k].price*$scope.stock[k].amount;
+        }
+        g2paint_c1($scope.adata,tt);
         g2paint_c2($scope.adata,[{"中国动力":32}]);
         //TODO
         /*
@@ -94,10 +114,55 @@ app.controller("tsctrlmain", function($scope,$http) {
         */
         
     }
+    $scope.updateCode = function () {
+        
+        if ($scope.tmpstcode) {
+            if ($scope.stockcodes.indexOf($scope.tmpstcode) == -1) {
+                
+                var c= $scope.tmpstcode.replace(/ +|\t+/g," ").split(" ");
+                var k = {};
+                for(s=0;s<$scope.stockcodes.length;s++){
+                    var a = $scope.stockcodes[s].split(" ");
+                    
+                    if(a.length>1){k[a[0]] = a[1];}
+                }
+                k[c[0]] = c[1];
+                
+                $scope.stockcodes=[];
+                for(key in k){
+                    $scope.stockcodes.push(key+" "+k[key]);
+                }
+                
+            }
+        }
+        for(i=0;i<$scope.stockcodes.length;i++){
+            var n = $scope.stockcodes[i].split(" ");
+            for(k=0;k<$scope.stock.length;k++){
+                if($scope.stock[k].stockname==n[0]){
+                    $scope.stock[k].code=n[1];
+                }
+            }
+            
+        }
+        $scope.getPrice();        
+        $scope.paint();
+        localStorage.stockcodes = $scope.stockcodes;
+    }
+
+    //---for ui
+    $scope.getlabelcolor= function (i){
+        if(i>0){ return "label-success"}
+        return "label-danger";
+    }
+    //end -- for ui
        
     if(localStorage.adata){
         $scope.adata = localStorage.adata.split(",");
         $scope.addData();
+    }
+    
+    if(localStorage.stockcodes){
+        $scope.stockcodes = localStorage.stockcodes.split(",");
     }
 
 });
