@@ -8,6 +8,7 @@ app.controller("tsctrlmain", function($scope,$http) {
     $scope.datalog = [];
     $scope.totalhold = 0;
     $scope.totalcash = 0;
+    $scope.startcash = 0;
 
 
     $scope.logger = function (data,opt) {
@@ -31,6 +32,7 @@ app.controller("tsctrlmain", function($scope,$http) {
         $scope.clearQueue();
         $scope.paint();
         $scope.totalcash = -1*datasum(j);
+        $scope.startcash = -1*datasum(j,col='money',filter='stockname/现金');
         
     }
     $scope.clearQueue = function () {

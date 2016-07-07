@@ -75,6 +75,7 @@ function sinaApi() {
       var node = document.createElement('script');
       node.type = "text/javascript";
       node.src = u;
+      node.className = "sinaapi";
       e[0].appendChild(node);
     }
   }

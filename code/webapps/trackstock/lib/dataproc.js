@@ -168,10 +168,21 @@ function cpdic(d){
 function datasum(jarr,col='money',filter='') {
   //filter = "stockname/string"
   var r = 0;
-  jarr.forEach(function(element) {
-    
-    if(!filter){ r+=element[col]; }
+  if(!filter){
+    jarr.forEach(function(element) {
+      r+=element[col];
+    }, this);
+    return r;
 
-  }, this);
+  }else{
+    var sn = filter.split("/")[0];
+    var st = filter.split("/")[1];
+    jarr.forEach(function(element) {
+      if(element[sn] == st ){
+        r+=element[col];
+      }
+    }, this);
+  }
+
   return r;
 }
