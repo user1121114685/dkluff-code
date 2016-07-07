@@ -5,12 +5,12 @@ function removebadline(line){
   if(line.length <3 ){return "";}
   if(line.includes("证券名称")){return "";}
   if(line.startsWith("---")){return "";}
-  if(line.startsWith("#")){return "";}
   return line;
 }
 function zsDatafmt(line,isDbfile) {
   
   line = removebadline(line);
+  if(line.startsWith("#")){return line;}
   if(isDbfile){
     return line;
   }
@@ -73,7 +73,9 @@ function parseData(tmpdatablock) {
 function datatoJSON(adata) {
   var r = [];
   for(i=0;i<adata.length;i++){
-    if(adata[i].startsWith("#")){continue;}
+    if(adata[i].startsWith("#") ){
+      continue;
+    }
     var d = adata[i].split(" ");
     var fee=Math.abs(parseFloat(d[3])*parseInt(d[4])/1000)+5;
   
@@ -88,6 +90,22 @@ function datatoJSON(adata) {
   }
   //console.log(r);
   return r;
+}
+
+function getHistoryData(adata,flag){
+  var r = [];
+  for(i=0;i<adata.length;i++){
+    if(adata[i].startsWith('#p1') && flag == '#p1'){
+      var d = adata[i].split("|");
+      r.push({
+        "cid":i,       
+        "property":parseFloat(d[1]),
+        "sh000001":parseFloat(d[2]),
+      });
+    }
+  }
+  return r;
+
 }
 
 
@@ -144,4 +162,16 @@ function cpdic(d){
     a[k] = d[k];
   }
   return a;
+}
+
+
+function datasum(jarr,col='money',filter='') {
+  //filter = "stockname/string"
+  var r = 0;
+  jarr.forEach(function(element) {
+    
+    if(!filter){ r+=element[col]; }
+
+  }, this);
+  return r;
 }

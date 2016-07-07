@@ -6,6 +6,7 @@ app.controller("tsctrlmain", function($scope,$http) {
     $scope.stock = [];
     $scope.stockcodes = [];
     $scope.datalog = [];
+    $scope.totalhold = 0;
 
 
     $scope.logger = function (data,opt) {
@@ -63,7 +64,7 @@ app.controller("tsctrlmain", function($scope,$http) {
 
     $scope.saveFile = function () {
         localStorage.adata = $scope.adata;
-        var d = ["#new-db-stock.txt\r\n"];
+        var d = [];
         $scope.adata.forEach(function(e) {
             d.push(e+"\r\n")
         }, this);
@@ -87,8 +88,9 @@ app.controller("tsctrlmain", function($scope,$http) {
     $scope.clearData = function () {
         r=confirm("Clear&Save?");
         if(r){
-            $scope.saveFile();
             localStorage.adata="";
+            $scope.saveFile();
+            
         }
         
     }
@@ -104,23 +106,21 @@ app.controller("tsctrlmain", function($scope,$http) {
                 continue;
             }
         }
+
+        $scope.totalhold = 0;
+        
+        for(k=0;k<$scope.stock.length;k++){
+            $scope.totalhold+=$scope.stock[k].price*$scope.stock[k].amount;
+        }
        
     }
 
 
     $scope.paint = function () {
-        var tt = 0;
-        for(k=0;k<$scope.stock.length;k++){
-            tt+=$scope.stock[k].price*$scope.stock[k].amount;
-        }
-        g2paint_c1($scope.adata,tt);
-        g2paint_c2($scope.adata,[{"中国动力":32}]);
-        //TODO
-        /*
-        $http.get(url).success(function(response){
-            g2paint_c1($scope.adata,);
-        });
-        */
+        
+        g2paint_c0($scope.adata);
+        g2paint_c1($scope.adata,$scope.totalhold);
+        g2paint_c2($scope.adata);
         
     }
     $scope.updateCode = function () {
@@ -153,9 +153,26 @@ app.controller("tsctrlmain", function($scope,$http) {
             }
             
         }
-        $scope.getPrice();        
-        $scope.paint();
+
+        $scope.getPrice(); 
+
+        //archive index
+        try{
+            
+            var s = "#p1"
+                +"|"+(-1*datasum(datatoJSON($scope.adata))+$scope.totalhold)
+                +"|"+parseFloat(hq_str_sh000001.split(",")[3]);
+            $scope.adata.push(s);
+            localStorage.adata=$scope.adata;
+        
+        }catch (error) {
+            console.log(error);
+        }
+
+
+        
         localStorage.stockcodes = $scope.stockcodes;
+        $scope.paint();
     }
 
     //---for ui
@@ -173,5 +190,6 @@ app.controller("tsctrlmain", function($scope,$http) {
     if(localStorage.stockcodes){
         $scope.stockcodes = localStorage.stockcodes.split(",");
     }
+
 
 });
