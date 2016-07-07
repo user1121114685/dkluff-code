@@ -7,6 +7,7 @@ app.controller("tsctrlmain", function($scope,$http) {
     $scope.stockcodes = [];
     $scope.datalog = [];
     $scope.totalhold = 0;
+    $scope.totalcash = 0;
 
 
     $scope.logger = function (data,opt) {
@@ -24,10 +25,12 @@ app.controller("tsctrlmain", function($scope,$http) {
             $scope.logger(tmpdata,"+");
             i--;
         }
-        $scope.stock = bStock(datatoJSON($scope.adata));
+        var j = datatoJSON($scope.adata)
+        $scope.stock = bStock(j);
 
         $scope.clearQueue();
         $scope.paint();
+        $scope.totalcash = -1*datasum(j);
         
     }
     $scope.clearQueue = function () {
@@ -160,7 +163,7 @@ app.controller("tsctrlmain", function($scope,$http) {
         try{
             
             var s = "#p1"
-                +"|"+(-1*datasum(datatoJSON($scope.adata))+$scope.totalhold)
+                +"|"+($scope.totalcash +$scope.totalhold)
                 +"|"+parseFloat(hq_str_sh000001.split(",")[3]);
             $scope.adata.push(s);
             localStorage.adata=$scope.adata;
