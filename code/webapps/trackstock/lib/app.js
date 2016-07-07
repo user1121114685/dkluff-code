@@ -89,11 +89,11 @@ app.controller("tsctrlmain", function($scope,$http) {
         
     }
     $scope.clearData = function () {
-        r=confirm("Clear&Save?");
+        r=confirm("Clear? - Pleas Save Before clear");
         if(r){
-            localStorage.adata="";
             $scope.saveFile();
-            
+            localStorage.adata="";
+                       
         }
         
     }
