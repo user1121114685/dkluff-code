@@ -129,7 +129,8 @@ app.controller("tsctrlmain", function($scope,$http) {
         
     }
     $scope.updateCode = function () {
-        
+        sinaApi();
+                
         if ($scope.tmpstcode) {
             if ($scope.stockcodes.indexOf($scope.tmpstcode) == -1) {
                 
