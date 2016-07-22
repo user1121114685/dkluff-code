@@ -1,0 +1,4 @@
+http://api.money.126.net/data/feed/1000766
+http://quotes.money.163.com/stocksearch/json.do?type=&count=1&word=st%E6%98%A5%E5%A4%A9
+http://img1.money.126.net/data/hs/kline/day/history/2016/1000766.json
+http://img1.money.126.net/data/hs/time/today/1000766.json
