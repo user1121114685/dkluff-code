@@ -453,3 +453,5 @@ sedmod以及GNU sed v3.02.80。
 方便地在命令行中使用这些紧凑的脚本才是其意义所在。
 
 
+in Mac:
+sed 's/regexp/\'$'\n/g'
