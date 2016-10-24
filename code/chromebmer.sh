@@ -1,5 +1,7 @@
 #!/bin/sh
-grep -v "chrome://bookmarks"|sed 's/^[ ]*//g' | grep  "<DT><A" | awk -F\< '{ print $3 }' | awk -F\" '
+grep -iv "ibm.com\|microstrategy.com"|grep -v "></A>" \
+| grep -v "chrome://bookmarks"|sed 's/^[ ]*//g' | grep  "<DT><A" \
+| awk -F\< '{ print $3 }' | awk -F\" '
  BEGIN{
  print "<DL><p>"
  }
