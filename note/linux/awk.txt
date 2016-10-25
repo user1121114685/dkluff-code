@@ -448,3 +448,9 @@ grep '"[^"]*"'
 
 #grep only matching
 grep -o reg
+
+#调用外部命令
+awk 'BEGIN{ while( system("ls -l") | getline line ){ print line } }'
+
+#func
+awk 'function a(){print 1} {a()}'

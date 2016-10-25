@@ -1,7 +1,15 @@
 #!/bin/sh
-filename=$1
-codelist=$1".codelist"
-showsold=$2
+filename="/Users/dkluffy/Documents/db-stock.txt"
+showsold=""
+dosave=""
+
+if [ $1 ];then
+  filename=$1
+  showsold=$2
+  dosave=$3
+fi
+codelist=$filename
+
 api="http://hq.sinajs.cn/list="
 
 getcurprice(){
@@ -48,7 +56,7 @@ prtsum(){
     fmtdata
   else
     fmtdata | awk '{if($2>=100) print $0;}'
-    echo "...sold stocks are truked..."
+    echo "...sold stocks are trunked..."
   fi
   echo
   echo
@@ -62,11 +70,23 @@ prtsum(){
       if($2>=100) totalgain+=$6;
       else totalgain+=$3
   }
-  END { print "TotalCash: ",totalcash," / ", "TotalGain: ",totalgain}
+  END { printf "#TotalCash=%.2f; TotalGain=%.2f; TotalValue=%.2f\n",totalcash,totalgain,totalcash+totalgain}
   '
 }
 
 
-#$(tput setaf 2; tput bold)'color show\n\n'$(tput sgr0)
 
-prtsum
+
+result=$(prtsum)
+echo "$result"
+
+if [ $dosave ];then
+  r=$(echo "$result" | sed '/^#Total/!d;s/#//g')
+  eval $r
+  sh000001=$(curl -s "$api""sh000001" | awk -F, '{print $4}')
+  echo "#p1|$TotalValue|$sh000001|$TotalGain" | tee -a $filename
+fi
+
+
+
+
