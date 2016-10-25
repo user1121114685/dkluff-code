@@ -135,12 +135,34 @@ app.controller("tsctrlmain", function($scope,$http) {
         
     }
     $scope.updateCode = function () {
-        for(i=0;i<$scope.adata.length;i++){
-            if(!$scope.adata[i].startswith("#codes")){
-               continue;
+        sinaApi();
+                
+        if ($scope.tmpstcode) {
+            if ($scope.stockcodes.indexOf($scope.tmpstcode) == -1) {
+                
+                var c= $scope.tmpstcode.replace(/ +|\t+/g," ").split(" ");
+                var k = {};
+                for(s=0;s<$scope.stockcodes.length;s++){
+                    var a = $scope.stockcodes[s].split(" ");
+                    
+                    if(a.length>1){k[a[0]] = a[1];}
+                }
+                k[c[0]] = c[1];
+                
+                $scope.stockcodes=[];
+                for(key in k){
+                    $scope.stockcodes.push(key+" "+k[key]);
+                }
+                
             }
-            var n = $scope.adata[i].split(" ");
-            sinaApi(n);
+        }
+        for(i=0;i<$scope.stockcodes.length;i++){
+            var n = $scope.stockcodes[i].split(" ");
+            for(k=0;k<$scope.stock.length;k++){
+                if($scope.stock[k].stockname==n[0]){
+                    $scope.stock[k].code=n[1];
+                }
+            }
             
         }
 
@@ -160,6 +182,8 @@ app.controller("tsctrlmain", function($scope,$http) {
         }
 
 
+        
+        localStorage.stockcodes = $scope.stockcodes;
         $scope.paint();
     }
 
@@ -175,7 +199,9 @@ app.controller("tsctrlmain", function($scope,$http) {
         $scope.addData();
     }
     
-
+    if(localStorage.stockcodes){
+        $scope.stockcodes = localStorage.stockcodes.split(",");
+    }
 
 
 });
