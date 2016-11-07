@@ -22,7 +22,8 @@ getcurprice(){
     if [ $code ];then
       price=$(curl -s "$api$code" | awk -F, '{print $4}')
     fi
-    echo $line | awk -v p=$price '{print $0,p,(p-$4)*$2}'
+    echo $line | awk -v p=$price '{print $0,p,(p-$4)*$2,100*(p-$4)/$4"%";}'
+    #echo $line | awk -v p=$price '{printf "s% .2f% .2f% .2f%\n",$0,p,(p-$4)*$2,100*(p-$4)/$4;}'
   done
 }
 
@@ -60,7 +61,7 @@ prtsum(){
   fi
   echo
   echo
-  echo "******"
+  echo "***Sum***"
 
   fmtdata | awk '
   BEGIN { totalcash=0;totalgain=0}
@@ -70,7 +71,9 @@ prtsum(){
       if($2>=100) totalgain+=$6;
       else totalgain+=$3
   }
-  END { printf "#TotalCash=%.2f; TotalGain=%.2f; TotalValue=%.2f\n",totalcash,totalgain,totalcash+totalgain}
+  END { printf "#TotalCash=%.2f; TotalGain=%.2f; TotalValue=%.2f\n",totalcash,totalgain,totalcash+totalgain;
+        printf "#*****(%.2f)%%",totalgain*100/totalcash;
+      }
   '
 }
 
@@ -84,7 +87,7 @@ if [ $dosave ];then
   r=$(echo "$result" | sed '/^#Total/!d;s/#//g')
   eval $r
   sh000001=$(curl -s "$api""sh000001" | awk -F, '{print $4}')
-  echo "#p1|$TotalValue|$sh000001|$TotalGain" | tee -a $filename
+  echo "#p1|$TotalValue|$sh000001|$TotalGain$(date "+|%Y/%m/%d")" | tee -a $filename
 fi
 
 
