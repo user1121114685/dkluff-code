@@ -91,5 +91,8 @@ if [ $dosave ];then
 fi
 
 
+#-----#
+echo "-#Usage: ./clistocktool.sh filename showold dosave "
+
 
 

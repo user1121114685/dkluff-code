@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
+
+"""
+TO format(on Mac):
+    sed -i "" 's/Answer/\'$'\n&/g'
+    sed -i "" 's/[A-Z]\./\'$'\n&/g'
+    sed -i "" '/^$/d'
+"""
 import re
 import json
 import sys
