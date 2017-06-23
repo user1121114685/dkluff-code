@@ -8,9 +8,16 @@ function dkrobot(){
   var a=$("#pointDiv[style$='block;']");
   if(a.length >0 ){
     a=$("#questionAnswer").attr("value")
-    s=":radio[value='"+a+"']"
-    $(s).click()
-    savePointAnswer()
+    if(a.length == 1){
+      var s=":radio[value='"+a+"']";
+      $(s).click();
+    }else{
+      for(var i in a){
+        $(":checkbox[value='"+a[i]+"']")[0].checked=true;
+      }
+    }
+
+    savePointAnswer();
     console.log("window showed:"+s);
 
   }else{
