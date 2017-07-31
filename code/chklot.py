@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
     print("Loading...")
     r=""
-    r=ocr_space_file(filename=image,api_key='9f5c7724dd88957')
+    r=ocr_space_file(filename=image,api_key='key')
     r=json.loads(r)
 
     txt=r["ParsedResults"][0]["ParsedText"]
