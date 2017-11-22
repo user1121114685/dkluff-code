@@ -1,9 +1,10 @@
 #!/bin/sh
-dst=/dev/sdd1
+dst=/dev/sdc1
+dstd=/dev/sdc
 dst_mount=/mnt/usb
-newiso=.
+newiso=/mnt/livefs
 sudo syslinux -i $dst
-sudo dd if=/usr/lib/syslinux/mbr/mbr.bin of=/dev/sdf conv=notrunc bs=440 count=1
+sudo dd if=/usr/lib/syslinux/mbr/mbr.bin of=$dstd conv=notrunc bs=440 count=1
 sudo mount $dst $dst_mount
 #sudo cp /usr/lib/syslinux/menu.c32 $dst_mount/▫
 #sudo cp /boot/memtest86+.bin $dst_mount/memtest▫

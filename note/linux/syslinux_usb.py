@@ -6,10 +6,10 @@ sudo dd if=/usr/lib/syslinux/mbr.bin of=/dev/sdf conv=notrunc bs=440 count=1
 sudo mount /dev/sdf1 /mnt/usb
 #sudo cp /usr/lib/syslinux/menu.c32 /mnt/usb/ 
 #sudo cp /boot/memtest86+.bin /mnt/usb/memtest 
-sudo cp newiso/isolinux/isolinux.cfg /mnt/usb/syslinux.cfg 
+sudo cp newiso/isolinux/isolinux.cfg /mnt/usb/syslinux.cfg
 sudo cp newiso/isolinux/*.cfg /mnt/usb/.
 sudo cp newiso/isolinux/*.c32 /mnt/usb/.
-#sudo cp /usr/share/misc/pci.ids /mnt/usb/ 
+#sudo cp /usr/share/misc/pci.ids /mnt/usb/
 sudo rsync -rv image/live /mnt/usb/
 
 #------modify way 1-------------
