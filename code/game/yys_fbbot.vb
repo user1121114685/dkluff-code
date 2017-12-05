@@ -1,31 +1,105 @@
 'init
-
+MoveTo 0,0
 '1731,878,"B172D"
 pc1=GetPixelColor(1731,878)
 pc2=GetPixelColor(1738,680)
 pc3=GetPixelColor(1723,481)
 
+mobcol="A29AE9"
+papmancol="C4CCDC"
 
+Function ifwin()
+ifwin=-1
+FindColor 756,627,1058,854,"14182D",intX,intY
+If intX > 0 And intY > 0 Then 
+FindColor 756,627,1058,854,"141836",intX,intY
+If intX > 0 And intY > 0 Then 
+FindColor 756,627,1058,854,"8255E",intX,intY
+If intX > 0 And intY > 0 Then 
 
-Function mybot(col)
-	mybot = -1
+ifwin=1
+TracePrint "I-----win"
 
-	FindColor 0,0,1657,812,col,intX,intY
+End If
+End If
+End If
+End Function
+
+Function selectmob(col)
+TracePrint "start Mob..."
+	selectmob = -1
 	'boss
 	'FindColor 0,0,1657,812,"B7AFED",intX,intY
+	FindColor 0,0,1657,812,col,intX,intY
 	If intX > 0 And intY > 0 Then 
 
 	MoveTo intX, intY
 	Delay 500
 	LeftClick 2
+	Delay 500
+	'a=ifwin()
+	'While a<0
+	'TracePrint "checking win"
+	'  a=ifwin()
+	'  MoveTo 1381, 371
+  '  Delay 500
+  '  LeftClick 1
+  '  Delay 1000
+	'Wend
+	selectmob = 1
 
-	mybot = 1
+	End If
+	
+	'MessageBox "delay..@selectmob"
+	Delay 2000
+
+
+End Function
+
+
+Function selectpm(col)
+TracePrint "start selectpm"
+	selectpm = 0
+	'boss
+	'FindColor 0,0,1657,812,"B7AFED",intX,intY
+	FindColor 0,0,1657,812,col,intX,intY
+	If intX > 0 And intY > 0 Then 
+	yn=intY-50
+
+	MoveTo intX, yn
+	Delay 500
+	LeftClick 2
+
+	selectpm = 1
 
 	End If
 	
 	
 	Delay 2000
+
 End Function
+
+Function testbot()
+TracePrint "start testbot"
+	testbot = -1
+	'boss
+	'FindColor 0,0,1657,812,"B7AFED",intX,intY
+	FindColor 0,0,1657,812,mobcol,intX,intY
+	If intX > 0 And intY > 0 Then 
+		testbot = 1
+
+	Else
+		
+		FindColor 0,0,1657,812,papmancol,x,y
+		If x > 0 And y > 0 Then 
+		testbot = 1
+		End If
+
+	End If
+	
+End Function
+
+
 
 
 Function chkover()
@@ -69,56 +143,73 @@ Delay 3000
 
 End Sub
 
-redge=0
 Sub walk()
-  If redge < 5 Then
-	If mybot("A29AE9")>0 Then
-		Exit Sub
-	End If
-	MoveTo 1332, 700
-	LeftClick 1
-	Delay 1000
-	redge=redge+1
-  ElseIf redge < 15 And redge >=5 Then
-  	If mybot("A29AE9")>0 Then
-		Exit Sub
-	End If
-	
-	MoveTo 332, 700
-	LeftClick 1
-	Delay 1000
-	redge=redge+1
-  ElseIf redge >=15
-    redge = 0
-  End If
- 
+TracePrint "start walk"
+'MoveTo 1379, 793
+i=7
+While i>0
+MoveTo 1379, 793
+LeftClick 1
+Delay 1000
+i=i-1
+If testbot()>0 Then
+Exit Sub
+End If
+Wend
 
-  
+i=7
+While i>0
+MoveTo 487, 772
+LeftClick 1
+Delay 1000
+i=i-1
+If testbot()>0 Then
+Exit Sub
+End If
+Wend
+
 End Sub
 
 call startgui()
 
 'start to farm
+LogStart "c:\a.log"
 a=1
 While a >0
-  If mybot("A29AE9")<0 Then
+ 
+  b=0
+  If selectmob(mobcol)<0 Then
     'check paper man
-    mybot("CDDDE9")
-    call startgui()
-	If mybot("A29AE9")<0 Then
-		call walk()
-	End If
+
+    b=b+selectpm(papmancol)
+	b=b+selectpm(papmancol)
+	b=b+selectpm(papmancol)
+
+	call startgui()
+
   End If
   
-  MoveTo 1381, 371
-  Delay 500
-  LeftClick 1
-  Delay 2000
-  
+
+  If b>0 Then
+   TracePrint "find papman"
+    MoveTo 1381, 371
+    Delay 500
+    LeftClick 1
+    Delay 3000
+  call startgui()
+  End If
   a=a+1
 
-Wend
+  'MessageBox "call walk"
+  call walk()
 
+    MoveTo 1381, 371
+    Delay 500
+    LeftClick 1
+    Delay 1000
+
+Wend
+LogStop
 
 
 
