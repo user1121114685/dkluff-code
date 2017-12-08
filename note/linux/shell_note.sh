@@ -193,3 +193,96 @@ Bang (!) 命令
 ^blah：删除上一条命令中的 blah
 ^blah^foo：将上一条命令中的 blah 替换为 foo
 ^blah^foo^：将上一条命令中所有的 blah 都替换为 foo
+
+
+
+1.合并行
+
+zj@zj:~/Script/blog_script$ cat test1
+1
+2
+3
+4
+合并上下两行
+zj@zj:~/Script/blog_script$ sed '$!N;s/\n/\t/' test1
+1    2
+3    4
+合并匹配模式及其下一行
+zj@zj:~/Script/blog_script$ sed '/2/{N;s/\n/\t/}' test1
+1
+2    3
+4
+合并所有行
+zj@zj:~/Script/blog_script$ sed ':a;N;s/\n/\t/;ba;' test1
+1    2    3    4
+
+2.交换行
+2.1已知行号时交换两行
+zj@zj:~/Script/blog_script$ cat test
+baidu music so terrible so bad
+microsoft haha haha
+yahoo byebye
+google princess so good 
+这里是交换1,4行.当然你可以根据自己需要修改
+zj@zj:~/Script/blog_script$ for(( i=1;i<=4;i++ )); do  case $i in 1) sed -n 4p test;; 4) sed -n 1p test;; *) sed -n ${i}p test;; esac; done
+google princess so good 
+microsoft haha haha
+yahoo byebye
+baidu music so terrible so bad
+连续时好说:
+zj@zj:~/Script/blog_script$ sed '1{h;d};2{G}' test
+microsoft haha haha
+baidu music so terrible so bad
+yahoo byebye
+google princess so good 
+
+2.2不知道行号
+要交换的两行是连续行的情况下:
+zj@zj:~/Script/blog_script$ sed '/baidu/{h;d};/microsoft/{G}' test
+microsoft haha haha
+baidu music so terrible so bad
+yahoo byebye
+google princess so good
+ps:交换包含bai与microsoft的行
+两行不连续的情况:
+
+zj@zj:~/Script/blog_script$ sed '/baidu/{:a;N;/google/!ba;s/\([^\n]*\)\n\(.*\)\n\(.*\)/\3\n\2\n\1/}' test
+google princess so good 
+microsoft haha haha
+yahoo byebye
+baidu music so terrible so bad
+ps:交换含有baidu与google的行
+
+研究了下写了个不论连续不连续的都可以的:
+zj@zj:~/Script/blog_script$ sed '/baidu/{:a;N;/microsoft/!ba;/[^\n]*baidu[^\n]*\n[^\n]*microsoft[^\n]*$/{s/\([^\n]*baidu[^\n]*\)\n\(.*\)/\2\n\1/};s/\([^\n]*\)\n\(.*\)\n\(.*\)/\3\n\2\n\1/}' test
+microsoft haha haha
+baidu music so terrible so bad
+yahoo byebye
+google princess so good 
+
+zj@zj:~/Script/blog_script$ sed '/baidu/{:a;N;/google/!ba;/[^\n]*baidu[^\n]*\n[^\n]*google[^\n]*$/{s/\([^\n]*baidu[^\n]*\)\n\(.*\)/\2\n\1/;};s/\([^\n]*\)\n\(.*\)\n\(.*\)/\3\n\2\n\1/}' test
+google princess so good 
+microsoft haha haha
+yahoo byebye
+baidu music so terrible so bad
+
+ps:上面代码
+/baidu/{....}  遇到含有baidu的行，开始做{}中的命令序列
+:a;N;/google/!ba  循环读信息，直到读取google.
+/[^\n]*baidu[^\n]*\n[^\n]*google[^\n]*$/这个就是说如果哦baidu与google之间只有一个\n,即这两个是连续行就：{s/\([^\n]*baidu[^\n]*\)\n\(.*\)/\2\n\1/;}交换这两行
+
+如果不匹配上面的模式就是说不是连续行了.
+s/\([^\n]*\)\n\(.*\)\n\(.*\)/\3\n\2\n\1/}
+而在匹配连续行的情况下是不可能匹配上面表达式的.ok~~~~
+
+3.忘了还有交互奇偶行
+zj@zj:~/Script/blog_script$ sed '$!N;s/\([^\n]*\)\n\([^\n]*\)/\2\n\1/' test
+microsoft haha haha
+baidu music so terrible so bad
+google princess so good 
+yahoo byebye
+
+
+#在A.开头加```\n ,然后在D/E/F/G 开头的行和下一行合并，并在他们中间加```
+
+sed -i 's/^[A]\./\`\`\`\n&/;/^[DEFG]\./{N;s/\n/&\`\`\`/}'
