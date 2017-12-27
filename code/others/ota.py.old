@@ -30,13 +30,74 @@ HEAD_MTAB = "母件编码,母件名称,母件规格,母件计量单位,母件损
 
 MC_STR = "母件编码"
 
-XLSFILES='./xlsfiles/'
-RESULTS='./results/'
+SRCDIR='./src/'
+BUILDDIR='./build/'
+
+def Excel2CSV(ExcelFile,CSVFile):
+     workbook = xlrd.open_workbook(ExcelFile)
+     worksheet = workbook.sheets()[0]
+     csvfile = open(CSVFile, 'wb')
+     wr = csv.writer(csvfile)
+     #wr = csv.writer(csvfile, quoting=csv.QUOTE_NONNUMERIC)
+
+     for rownum in xrange(worksheet.nrows):
+         wr.writerow( list(x.encode('utf-8') if type(x) == type(u'') else x
+             for x in worksheet.row_values(rownum)))
+
+     csvfile.close()
+
+
+def tab2csv(tab,outfile,fields=[]):
+    csvfile = open(outfile, 'wb')
+    wr = csv.writer(csvfile)
+
+    if len(fields)>0:
+        wr.writerow(list(x for x in fields))
+    for l in tab:
+        #wr.writerow(list(x.encode('gb2312') if isinstance(x,unicode) else x for x in l))
+        wr.writerow(list(x for x in l ))
+
+    csvfile.close()
+
+
+def fmtcsv(csvfile):
+    f = open(csvfile)
+    mtable = []
+
+    subtable = []
+
+    mc = ""
+    for l in f:
+        sl = l.split(",")[:-1]
+        if mc != "" and ("+" in sl[0]):
+            subtable.append([mc]+sl)
+
+        if mc_str in sl[0]:
+            m_i = f.next()
+            mtable.append(m_i.split(",")[:-1])
+            mc = m_i.split(",")[0]
+
+    return mtable,subtable
+
+def ReadFile(filePath,encoding="utf-8"):
+    with codecs.open(filePath,"r",encoding) as f:
+        return f.read()
+
+def WriteFile(filePath,u,encoding="gbk"):
+    with codecs.open(filePath,"w",encoding) as f:
+        f.write(u)
+
+def convtfile(src,dst,codec="gb18030"):
+    content = ReadFile(src,encoding="utf-8")
+    WriteFile(dst,content,encoding=codec)
 
 
 def main():
     for f in glob.glob(SRCDIR+'*.xls*'):
         print f
+
+#-------------------------------
+""" part 2 for calculate """
 
 
 def todf(atab,tabhead):
@@ -128,6 +189,13 @@ def save_df_xls(df,xls,sheetname="pysheet01",wb=""):
 
 def test():
     t=3
+    if t == 1:
+        Excel2CSV("a.xlsx","tg.csv")
+        m,s = fmtcsv("tg.csv")
+        #print s[0][6],[x.decode("utf-8").encode("gb2312") for x in s[0] ]
+        tab2csv(s,"sub1.csv",list(HEAD_SUBTAB.split(",")) )
+        convtfile("sub1.csv","gb.csv")
+        return
 
     if t == 2:
         m,s = reader_pyxls("a.xlsx")
