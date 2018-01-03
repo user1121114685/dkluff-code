@@ -94,55 +94,99 @@ def save_df_xls(dflist, xls):
 
     wb.save(xls)
 
+def table_class(dt,kw=[]):
 
-def proc_mtable(dt,keyword="",keyword2=""):
-  
-    indexs = []
-    for i in range(len(dt)):
-        for row in dt[i]:
-            if len(row)>0:
-                #pdb.set_trace()
-                try:
-                    if keyword in row[0]:
-                        indexs.append(i)
-                        break
-                except:
-                    pass
+    dt_dic={}
+    for w in kw:
+        dt_dic[w]=[]
 
     
+
+    for t in dt:
+        rowshift = 0
+        for row in t:   
+            try:
+                k = row[0]
+                if k in kw:
+                    dt_dic[k].append(t[rowshift:])
+                    break
+            except:
+                continue
+            rowshift+=1
+    
+    return dt_dic
+
+def proc_tablehead(tb,keyword):
+    for row in tb:
+        try:
+            if keyword == row[0]:
+                return row
+        except:
+            pass
+    return
+
+    
+
+def proc_mtable(dtdic,keyword="",keyword2=""):
+    """
+        mtable - stack table:
+        keyword h2 h3 h4
+        1        1 1  s
+
+        keyword2 hh2 hh3 hh4
+        1        2  3     5
+    """
+    
+    if not dtdic.has_key(keyword):
+        print "No such table - keyword error!"
+        return
+    
+
     subtable = []
     subheadcols = []
     mitable = []
-    for s in indexs:
-        mc = ""
-        for i in range(len(dt[s])):
-            if mc != "" and ("+" in dt[s][i][0]):
-                subtable.append([mc]+dt[s][i])
 
-            if keyword in dt[s][i][0]:
-                m_i = dt[s][i+1]
-                mitable.append(m_i)
-                mc = m_i[0]
+    for tb in dtdic[keyword]:
+        mc = ""
+        for i in range(len(tb)):
+            #row - tb[i]
+            if len(tb[i]) <= 0: continue
+            try:
+                if mc != "" and ("+" in tb[i][0]):
+                    subtable.append([mc]+tb[i])
+
+                if keyword in tb[i][0]:
+                    m_i = tb[i+1]
+                    mitable.append(m_i)
+                    mc = m_i[0]
+            except:
+                continue
 
     if len(subtable)>0:
-        for row in dt[indexs[0]]:
-            if len(row)>0:
-                if keyword2 in row[0]:
-                    subheadcols = row
-                    break
-    
+        subheadcols = proc_tablehead(dtdic[keyword][0],keyword2)
 
     return mitable,subtable,[keyword]+subheadcols
 
-def proc_pricetable(dt,keyword=""):
+def proc_pricetable(dtdic,keyword=""):
+
+    if not dtdic.has_key(keyword):
+        print "No such table - keyword error!"
+        return
 
     pricetable = []
     headcols = []
     #pdb.set_trace()
-    for i in range(len(dt)):
-        if keyword in dt[i][0][0]:
-            pricetable+=dt[i][1:]
-            headcols = dt[i][0]
+
+    for tb in dtdic[keyword]:
+        for r in tb[1:]:
+            try:
+                if len(r)>0 and (r[0] != None):
+                    pricetable.append(r)
+            except:
+                continue
+
+    if len(pricetable)>0:
+        headcols = proc_tablehead(dtdic[keyword][0],keyword)
 
     return pricetable,headcols
 
@@ -174,7 +218,7 @@ def printwin(s):
         print s
 
 
-def main():
+def task_a():
     if not os.path.exists(RESULTS):
         os.makedirs(RESULTS)
     
@@ -201,21 +245,19 @@ def main():
     printwin("开始读取文件，可能需要几分钟...")
 
     
-    ONTEST = 0
-
-    if ONTEST == 0:
-        for f in glob.glob(XLSFILES+'*.xls*'):
-            printwin("正在读取： ")
-            printwin(f)
-            datatables.append(reader_pyxls(f))
-    else:
-        datatables = pk.load(open("dt.pk"))[0]
+    for f in glob.glob(XLSFILES+'*.xls*'):
+        printwin("正在读取： ")
+        printwin(f)
+        datatables.append(reader_pyxls(f))
+    
 
     #pk.dump([datatables],open("dt.pk","wb"))
 
     printwin( "加工中。。。")
-    pt,hcols = proc_pricetable(datatables,keyword=PRICIE_KEYWORD)
-    mit,subt,subthcols = proc_mtable(datatables,keyword=MTABLE_KEYWORD,keyword2=SUBTABLE_KEYWORD)
+    tabdic = table_class(datatables,[PRICIE_KEYWORD,MTABLE_KEYWORD])
+    pt,hcols = proc_pricetable(tabdic,keyword=PRICIE_KEYWORD)
+    
+    mit,subt,subthcols = proc_mtable(tabdic,keyword=MTABLE_KEYWORD,keyword2=SUBTABLE_KEYWORD)
 
     ptf=todf(pt,hcols)
     ptf_indexed = ptf.set_index('存货编码')
@@ -258,16 +300,8 @@ def testdump():
     PRICIE_KEYWORD = config.get('base','PRICIE_KEYWORD')
 
     dt=datatables
-    pt,hcols = proc_pricetable(datatables,keyword=PRICIE_KEYWORD)
-    mit,subt,subthcols = proc_mtable(datatables,keyword=MTABLE_KEYWORD,keyword2=SUBTABLE_KEYWORD)
-    ptf=todf(pt,hcols)
-    ptf_indexed = ptf.set_index('存货编码')
-
-    subtf=todf(subt,subthcols)
-
-    result = subtf.join(ptf_indexed,on='子件编码')
-    #t1=result[result['母件编码'] == "CPEA20001"]
-    r1 = proc_rdrop(result,FINAL_COLS)
+    dtdic = table_class(dt)
+    
     pdb.set_trace()
 
 
@@ -310,6 +344,14 @@ def test():
         print hm.decode("UTF-8").encode("GB18030")
 """
 
+def main():
+    task = "a"
+    if len(sys.argv)>1:
+        task = sys.argv[1]
+    
+    print "run task: ",task
+    if task == "a":
+        task_a()
     
 
 if __name__ == "__main__":
