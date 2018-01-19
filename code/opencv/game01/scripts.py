@@ -1,99 +1,67 @@
 from exlib.botv import *
-from pymouse import PyMouse
-from time import sleep
+
+import time
 import random
+import os
 
-def delay(s=1):
-    t=random.random()*s+0.8
-    sleep(t)
+from pymouse import PyMouse
 
 
-def faildeamon(t):
-    m = PyMouse()
-    bwin1="bwin1.png"
-    bfail1="bfail1.png"
-    bwin2 = 'bwin2.png'
+BIMGDIR = '1080p'
 
-    ftxt=["Win--!","Fail--!"]
+BLIST = ["btz","bts","bwin1","bwin2","bxz","bfail1","bzb"]
 
-    while 1:
-        ft=-1
-        f,w,h,pts = findimg(bwin1)
-        if f:
-            p=getpoint(w,h,pts)
-            m.click(p[0],p[1],1,1)
-            ft=0
-        delay(10)
-        f,w,h,pts = findimg(bfail1)
-        if f:
-            p=getpoint(w,h,pts)
-            m.click(p[0],p[1],1,1)
-            ft=1
-
-        f,w,h,pts = findimg(bwin2)
-        if f:
-            p=getpoint(w,h,pts)
-            m.click(p[0],p[1],1,1)
-            ft=1
-        
-        if ft>=0:
-            print ftxt[ft]
-        delay(10)
-
+BIMAGE_DICT = [os.path.join(BIMGDIR,b+".png") for b in BLIST ]
 
 
 def yhsolo(t):
     m = PyMouse()
-    btz = 'btz.PNG'
-    bwin2 = 'bwin2.png'
-    bfail1="bfail1.png"
+    blist = ["btz","bwin1","bwin2","bxz","bfail1"]
+    bimgarr = [os.path.join(BIMGDIR,b+".png") for b in blist ]
+
+    print "Start YuHun Solo...",t
+
+    startsec=time.time()
+
+    MAXT=1000
+    if t>0: MAXT=t
+
+    monitor={}
+    monitor["btz"]=0
+
+    count=0
+    while count<MAXT:
+        count+=1
+        print "-->Total Run Count# ",count
+        print "--> #","btz",monitor["btz"]
+        looptime=time.time()
+        bcall("btz",monitor,chkk_loop,bimgarr,m)
+        delay(3)
+        print "---->Total time:",time.time()-startsec
+
+def yhpt(t):
+    m = PyMouse()
+    blist = ["bwin1","bwin2","bxz","bfail1"]
+    bimgarr = [os.path.join(BIMGDIR,b+".png") for b in blist ]
 
     print "Start YuHun Solo...",t
 
     MAXT=1000
     if t>0: MAXT=t
 
+    startsec=time.time()
+
     count=0
     while count<MAXT:
         count+=1
-        print "GO #",count
+        print "-->GO #",count
+        looptime=time.time()
+        chkk_loop(bimgarr,m)
+        delay(3)
+        print "---->Time:",time.time()-looptime
+        print "---->Total time:",time.time()-startsec
 
-        f,w,h,pts = findimg(bwin2)
-        if f:
-            p=getpoint(w,h,pts)
-            m.click(p[0],p[1],1,1)
-            print "--->Win #",count
-        
-        f,w,h,pts = findimg(bfail1)
-        if f:
-            p=getpoint(w,h,pts)
-            m.click(p[0],p[1],1,1)
-            print "--->Fail #",count
 
-        while 1:
-            f,w,h,pts = findimg(btz)
-            if f:
-               p=getpoint(w,h,pts)
-               m.click(p[0],p[1],1,1)
-               print "Start #",count
-               break
-            delay()
-
-        
-        delay(20)
-
-        while 1:
-            f,w,h,pts = findimg(bwin2)
-            if f:
-                delay(3)
-                f,w,h,pts = findimg(bwin2)
-                p=getpoint(w,h,pts)
-                m.click(p[0],p[1],1,1)
-                print "--->Win #",count
-                break
-            delay()
-        
-        delay(5)
 
         
 
