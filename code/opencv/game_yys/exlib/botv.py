@@ -114,7 +114,4 @@ def bcall(bname,tmonitor,func,*argv):
             print "---->",bname," Avg. Time: ",func.func_name,tmonitor[bname+"_time"]/tmonitor[bname]
     except:
         tmonitor[bname+"_time"]=time.time()-st
-    
-    
-    
-    
+
