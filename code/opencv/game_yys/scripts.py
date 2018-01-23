@@ -46,6 +46,137 @@ def yhsolo(t,blist=[],bmstring="bwin2"):
 
 
 
+
+def tssolo(t,blist=[],bmstring="bwin2"):
+    m = PyMouse()
+    blist=[os.path.join(BIMGDIR,i+".png") for i in blist ]
+
+    btsstandby = blist[0]
+    btscomm = blist[1]
+
+    dt=1
+    dtmax=20
+    dtcount=0
+    while 1:
+        delay(5)
+        bflag,w,h,pts = findimg(btsstandby)
+        if bflag:         
+            x0=0
+            y0=0
+            try:
+                x0,y0=pts[0]
+                ib,iw,ih,ipts = findimg(btscomm)
+                if dt>0 and not ib:
+                    mx=int(x0-w*random.random())
+                    my=int(y0+h*random.random())
+                    m.click(mx,my,1,1)
+                    print "-----> walking!"
+                    dtcount+=1
+                    if dtcount>dtmax:
+                        dtcount=0
+                        dt=-1*dt
+
+                if dt<0 and not ib:
+                    mx=int(x0-w*random.random()-1.5*w)
+                    my=int(y0+h*random.random())
+                    m.click(mx,my,1,1)
+                    print "walking!<-----"
+                    dtcount+=1
+                    if dtcount>dtmax:
+                        dtcount=0
+                        dt=-1*dt
+            except Exception as e:
+                print e
+
+
+
+def jward(t,blist=[],bmstring="bwin2"):
+    while 1:
+        try:
+            jward_proc(t,blist,bmstring)
+            delay(5)
+        except:
+            pass
+
+def jward_proc(t,blist=[],bmstring="bwin2"):
+
+    """
+    jtype : PL, PUB
+    """
+
+    X=3
+    Y=3
+    jtypes = ["PL","PUB"]
+    jtype = jtypes[t]
+
+    if jtype == "PUB":
+        X=2
+
+    m = PyMouse()
+
+    blist = ["jjk","bjjs","bjjf","bsx","bjg","bqd"]
+    blist = [os.path.join(BIMGDIR,i+".png") for i in blist ]
+
+    badgelist = [str(5-i)+"x" for i in range(6)]
+    badgelist = [os.path.join(BIMGDIR,i+".png") for i in badgelist ]
+    
+    
+    imjj=blist[0]
+    bjjs=blist[1]
+    bjjf=blist[2]
+    bsx =blist[3]
+    bjg =blist[4]
+    bqd =blist[5]
+
+    w,h,pts = find2grid(imjj,3,3)
+    imgs = cropscreen(w,h,pts)
+
+    imgsindex =[]
+    for bg in badgelist:
+        for i in range(len(imgs)):
+            ib,iw,ih,ipts = findimg(bg,0.8,False,imgs[i])
+            if ib:
+                imgsindex.append(i)
+                continue
+
+    winpt = []
+    failpt = []
+    for i in imgsindex:
+        ib,iw,ih,ipts = findimg(bjjs,0.8,False,imgs[i])
+        if ib:
+            winpt.append(i)
+            if len(winpt)>=3 and jtype == "PL":
+                chkk(bsx,m)
+                delay(2)
+                chkk(bqd,m)
+                winpt=[]
+            continue
+
+        ib,iw,ih,ipts = findimg(bjjf,0.8,False,imgs[i])
+        if ib:
+            failpt.append(i)
+            if len(failpt)>=5 and jtype == "PL":
+                chkk(bsx,m)
+                delay(2)
+                chkk(bqd,m)
+                failpt=[]
+            continue
+
+        mx,my = Getpoint(w,h,[pts[i]])
+        m.click(mx,my,1,1)
+        delay(2)
+        chkk(bjg,m)
+
+        
+
+    
+
+        
+        
+
+
+
+
         
 
 

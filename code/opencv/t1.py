@@ -31,29 +31,36 @@ methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
 
 #res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)
 
-threshold = 0.8
+threshold = 0.5
 
 res = cv.matchTemplate(img_gray,template,eval(methods[1]))	
 loc = np.where( res >= threshold)
 
 
-#pdb.set_trace()
+
 zpoints = zip(*loc[::-1])
-m2p=zpoints[0]
-mx=int(m2p[0]+w/2)
-my=int(m2p[1]+h/2)
-#nmx,nmy = p2m(mx,my)
+
+zpoints.sort()
+x0,y1=zpoints[0]
+zpoints.sort(key=lambda x:x[1])
+x1,y0=zpoints[0]
 
 
-m.click(mx,my,1,2)
-cv.circle(img_rgb,(mx,my),w/4,(0,0,255), 2)
+print x0,y1
+print x1,y0
 
 
-#pdb.set_trace()
-for pt in zpoints:
-	cv.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 2)
+#for pt in zpoints:
+	#cv.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 1)
 	#cv.circle(img_rgb,(pt[0]+w/2,pt[1]+h/2),w/4,(0,0,255),-1)
+	
 #cv.imwrite(methods[1]+'.png',img_rgb)
+
+cv.rectangle(img_rgb, (x0,y1), (x0 + w, y1 + h), (0,0,255), 1)
+cv.rectangle(img_rgb, (x1,y0), (x1 + w, y0 + h), (0,0,255), 1)
+cv.circle(img_rgb,(x0,y1),w/8,(0,0,255),1)
+cv.circle(img_rgb,(x1,y0),w/8,(0,0,255),1)
+cv.circle(img_rgb,(x0,y0),w/8,(0,0,255),1)
 plt.imshow(img_rgb)
 plt.show()
 

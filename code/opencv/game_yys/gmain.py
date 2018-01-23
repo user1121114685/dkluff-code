@@ -4,21 +4,15 @@ import sys
 from multiprocessing import Process
 
 def parseArg():
-	optblist = ["btz","bts","bzb"]
-	
-	print optblist
-	print "yhsolo 0 btz"
+	print "yhsolo 0"
 
 	task=sys.argv[1]
 	count=int(sys.argv[2])
 	t=eval(task)
 
-	try:
-		optblist=sys.argv[3:]
-	except:
-		pass
+	
 
-	return t,count,optblist
+	return t,count
 
 
 if __name__ == "__main__":
@@ -29,15 +23,25 @@ if __name__ == "__main__":
 	"""
 	print "Must run as admin!!!!"
 	
-	task,count,blist= parseArg()
+	task,count = parseArg()
+	blist = ["btz"]
 
-	commlist = ["bwin2","bfail1","bxz","bwin1"]
-	
+	commlist = ["bwin2","bfail1","bxz"]
 
-	p0 = Process(target=yhsolo, args=(count,commlist,))
+	if task.__name__ == "jward":
+		commlist+=["bzb"]
+
+	if task.__name__ == "tssolo":
+		pt = Process(target=yhsolo, args=(count,commlist,))
+		pt.start()
+
+		commlist=["bts","btsboss","btsbox","btscomm","bts_c8"]
+		blist=["btsstandby","btscomm"]
+		
+	p0 = Process(target=yhsolo, args=(0,commlist,))
 	p0.start()
-
-	p1 = Process(target=yhsolo, args=(count,blist,))
+ 
+	p1 = Process(target=task, args=(count,blist,))
 	p1.start()
 	
 	

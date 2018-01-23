@@ -7,7 +7,10 @@ import glob
 import os
 from time import sleep
 import time
+import pdb
 from PIL import ImageGrab as ig
+from matplotlib import pyplot as plt
+
 
 __version__="1.0"
 
@@ -35,12 +38,13 @@ def loadcfg(cfgfile,sec,cfgnames):
     return result
 
 
-def findimg(timg,threshold=0.8):
+def findimg(timg,threshold=0.8,rflag=False,img_rgb=None):
     """
     timg: template image dir
     """
-    img_rgb = ig.grab()
-    img_rgb = np.array(img_rgb)
+    if type(img_rgb) == type(None):
+        img_rgb = ig.grab()
+        img_rgb = np.array(img_rgb)
     img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
     template = cv.imread(timg,0)
     w, h = template.shape[::-1]
@@ -51,6 +55,7 @@ def findimg(timg,threshold=0.8):
     bflag = False
     pts=zip(*loc[::-1])
     if len(pts)>0: bflag=True
+    if rflag: return bflag,w,h,pts,img_rgb
     return bflag,w,h,pts
 
 def Getpoint(w,h,pts):
@@ -114,4 +119,55 @@ def bcall(bname,tmonitor,func,*argv):
             print "---->",bname," Avg. Time: ",func.func_name,tmonitor[bname+"_time"]/tmonitor[bname]
     except:
         tmonitor[bname+"_time"]=time.time()-st
+
+def find2count(img,threshold=0.5):
+    bflag,w,h,pts=findimg(img,threshold)
+
+
+def find2grid(img,X,Y,threshold=0.5):
+    bflag,w,h,pts,img_rgb=findimg(img,threshold,True)
+    gridpts = []
+    
+    if bflag:
+        try:
+            pts.sort()
+            x0,y1 = pts[0]
+
+            pts.sort(key=lambda x:x[1])
+            x1,y0 = pts[0]
+
+            xs=[x0+i*w for i in range(X) ]
+            ys=[y0+i*h for i in range(Y) ]
+            
+            for x in xs:
+                for y in ys:
+                    gridpts.append((x,y))
+
+        except Exception as e:
+            print e            
+            print "No Grid found...!"
+    
+    return w,h,gridpts
+
+def cropscreen(w,h,pts=[],Rs=1.2,Ls=0.3):
+    if len(pts)<1:
+        print "No points in args"
+        return
+
+    img_rgb = ig.grab()
+    img_rgb = np.array(img_rgb)
+
+    imgs = []
+
+    for x,y in pts:
+        imgs.append(img_rgb[y:y+h,int(x+w*Ls):int(x+w*Rs)])
+
+    return imgs
+       
+
+
+            
+            
+
+
 
