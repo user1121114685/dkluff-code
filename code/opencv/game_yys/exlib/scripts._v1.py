@@ -1,4 +1,4 @@
-from botv import *
+from botv2 import *
 
 import time
 import random
@@ -99,16 +99,13 @@ def tssolo(t,blist=[],bmstring="bwin2"):
 
 
 def jward(t,blist=[],bmstring="bwin2"):
-    jjt=os.path.join(BIMGDIR,"jjt.png")
-    
     while 1:
         try:
-            waitchkk(jjt,None,20)
             jward_proc(t,blist,bmstring)
             delay(5)
         except Exception as e:
-            print e
-            #pass
+            #print e
+            pass
 
 def story(*args,**kwargs):
     yhsolo(*args,**kwargs)
@@ -132,68 +129,62 @@ def jward_proc(t,blist=[],bmstring="bwin2"):
 
     m = PyMouse()
 
-    blist = ["jjk","bjjs","bjjf","bsx","bjg","bqd","jjt"]
+    blist = ["jjk","bjjs","bjjf","bsx","bjg","bqd"]
     blist = [os.path.join(BIMGDIR,i+".png") for i in blist ]
 
-    #badgelist = [str(3-i)+"x" for i in range(3)]
-    #badgelist = [os.path.join(BIMGDIR,i+".png") for i in badgelist ]
+    badgelist = [str(2-i)+"x" for i in range(3)]
+    badgelist = [os.path.join(BIMGDIR,i+".png") for i in badgelist ]
     
     
-    jjk=blist[0]
+    imjj=blist[0]
     bjjs=blist[1]
     bjjf=blist[2]
     bsx =blist[3]
     bjg =blist[4]
     bqd =blist[5]
-    jjt =blist[6]
 
-    f,w,h,pts = findimg(jjk,0.5)
-    pcount = len(pts)
-    
+    w,h,pts = find2grid(imjj,3,3)
+    imgs = cropscreen(w,h,pts)
 
-    def refresh(s=""):
-        chkk(bsx,m)
-        waitchkk(bqd,m)
-        print "---->Refresh as:",s,jtype
+    imgsindex =[]
+    for bg in badgelist:
+        for i in range(len(imgs)):
+            ib,iw,ih,ipts = findimg(bg,0.8,False,imgs[i])
+            if ib:
+                imgsindex.append(i)
+                continue
 
-    def checkwf():
-        wincount=0
-        failcount=0
-        try:
-            wf,ww,wh,wpts = findimg(bjjs)
-            wincount =len(wpts)
+    print "---->sorted by badge: ",imgsindex,len(imgs)
 
-            ff,fw,fh,fpts = findimg(bjjf,0.9)
-            failcount =len(fpts)
-        except:
-            pass
+    winpt = []
+    failpt = []
+    for i in imgsindex:
+        ib,iw,ih,ipts = findimg(bjjs,0.8,False,imgs[i])
+        if ib:
+            winpt.append(i)
+            if len(winpt)>=3 and jtype == "PL":
+                chkk(bsx,m)
+                delay(2)
+                chkk(bqd,m)
+                winpt=[]
+            continue
 
-        return wincount,failcount      
+        ib,iw,ih,ipts = findimg(bjjf,0.8,False,imgs[i])
+        if ib:
+            failpt.append(i)
+            if len(failpt)>=5 and jtype == "PL":
+                chkk(bsx,m)
+                delay(2)
+                chkk(bqd,m)
+                failpt=[]
+            continue
 
-    if not f:
-        refresh("no jjk found")
-        return
+        mx,my = Getpoint(w,h,[pts[i]])
+        m.click(mx,my,1,1)
+        delay(2)
+        chkk(bjg,m)
 
-    
-    if pcount<=6 and jtype == "PL":
-        refresh("pcount<=6")
-        return
-
-    wc,fc = checkwf()
-    if (wc>=3 or fc>3) and jtype == "PL":
-        refresh("wc>=3 or fc>3")
-        return
-
-
-    p=pts[random.randint(0,pcount-1)]
-    print "---->Jward:pcount,wc,fc: ",pcount,wc,fc    
-    mx,my = Getpoint(w,h,[p],0.5)
-    m.click(mx,my,1,1)
-    waitchkk(bjg,m)
-    waitchkk(jjt)
-    
-    
-
+        
 
     
 

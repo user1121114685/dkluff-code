@@ -4,18 +4,17 @@ from matplotlib import pyplot as plt
 import pdb
 import sys
 import os
-
+from pykeyboard import PyKeyboard
 from pymouse import PyMouse
 m = PyMouse()
 
 from PIL import ImageGrab as ig
-#ig.grabclipboard()
-#img_rgb = ig.grabclipboard()
-img_rgb = ig.grab()
+kb=PyKeyboard()
+kb.press_key(kb.print_screen_key)
+img_rgb = ig.grabclipboard()
+#img_rgb = ig.grab()
 print "image size:",img_rgb.width,img_rgb.height
 print m.screen_size()
-
-
 
 img_rgb = np.array(img_rgb)
 #img_rgb = cv.imread('1.png')
