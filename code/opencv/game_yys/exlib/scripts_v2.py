@@ -18,12 +18,12 @@ def slowpc(mx=0,my=0):
         print "---->slowpc!"
 
 
-def yhsolo(t,bdict={},bmstring="bwin2"):
-    if len(bdict)==0:
+def yhsolo(t,blist=[],bmstring="bwin2"):
+    if len(blist)==0:
         return
     m = PyMouse()
-    #bdict = ["btz","bwin2","bfail1","bxz","bwin1"]
-    #bimgarr = [os.path.join(BIMGDIR,b+".png") for b in bdict ]
+    #blist = ["btz","bwin2","bfail1","bxz","bwin1"]
+    #bimgarr = [os.path.join(BIMGDIR,b+".png") for b in blist ]
 
     print "Start YuHun Solo...",t
 
@@ -37,19 +37,23 @@ def yhsolo(t,bdict={},bmstring="bwin2"):
 
     count=0
     while count<MAXT:
-        count+=1 
-        print "---->",bmstring,monitor[bmstring]
-        chkk_loop(bdict,m,monitor)
+        count+=1
+        print "-->Total Run Count# ",count
+        print "--> #",bmstring,monitor[bmstring]
+        looptime=time.time()
+        bcall(bmstring,monitor,chkk_loop,bimgarr,m)
         delay(1)
         print "---->Total time:",time.time()-startsec
-        print "---->Total Run Count: ",count
 
 
-def tssolo(t,bdict={},bmstring="bwin2"):
+
+
+def tssolo(t,blist=[],bmstring="bwin2"):
     m = PyMouse()
+    blist=[os.path.join(BIMGDIR,i+".png") for i in blist ]
 
-    btsstandby = bdict["btsstandby"]
-    btscomm = bdict["btscomm"]
+    btsstandby = blist[0]
+    btscomm = blist[1]
 
     dt=1
     dtmax=20
@@ -87,12 +91,13 @@ def tssolo(t,bdict={},bmstring="bwin2"):
 
 
 
-def jward(t,bdict={},bmstring="bwin2"):
+def jward(t,blist=[],bmstring="bwin2"):
+    jjt=os.path.join(BIMGDIR,"jjt.png")
     
     while 1:
         try:
-            waitchkk("jjt",bdict,None,20)
-            jward_proc(t,bdict,bmstring)
+            waitchkk(jjt,None,20)
+            jward_proc(t,blist,bmstring)
             delay(5)
         except Exception as e:
             print e
@@ -104,7 +109,7 @@ def story(*args,**kwargs):
 
 
 
-def jward_proc(t,bdict,bmstring="bwin2"):
+def jward_proc(t,blist=[],bmstring="bwin2"):
 
     """
     jtype : PL, PUB
@@ -120,23 +125,28 @@ def jward_proc(t,bdict,bmstring="bwin2"):
 
     m = PyMouse()
 
+    blist = ["jjk","bjjs","bjjf","bsx","bjg","bqd","jjt"]
+    blist = [os.path.join(BIMGDIR,i+".png") for i in blist ]
 
+    #badgelist = [str(3-i)+"x" for i in range(3)]
+    #badgelist = [os.path.join(BIMGDIR,i+".png") for i in badgelist ]
     
-    jjk  =bdict["jjk"]
-    bjjs =bdict["bjjs"]
-    bjjf =bdict["bjjf"]
-    bsx  =bdict["bsx"]
-    bjg  =bdict["bjg"]
-    bqd  =bdict["bqd"]
-    jjt  =bdict["jjt"]
+    
+    jjk=blist[0]
+    bjjs=blist[1]
+    bjjf=blist[2]
+    bsx =blist[3]
+    bjg =blist[4]
+    bqd =blist[5]
+    jjt =blist[6]
 
     f,w,h,pts = findimg(jjk,0.5)
     pcount = len(pts)
     
 
     def refresh(s=""):
-        chkk("bsx",bdict,m)
-        waitchkk("bqd",bdict,m)
+        chkk(bsx,m)
+        waitchkk(bqd,m)
         print "---->Refresh as:",s,jtype
 
     def checkwf():
@@ -172,8 +182,8 @@ def jward_proc(t,bdict,bmstring="bwin2"):
     print "---->Jward:pcount,wc,fc: ",pcount,wc,fc    
     mx,my = Getpoint(w,h,[p],0.5)
     m.click(mx,my,1,1)
-    waitchkk("bjg",bdict,m)
-    waitchkk("jjt",bdict)
+    waitchkk(bjg,m)
+    waitchkk(jjt)
     
     
 
