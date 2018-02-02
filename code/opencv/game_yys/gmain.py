@@ -1,4 +1,5 @@
 from scripts import *
+from sp01 import *
 import sys
 
 from multiprocessing import Process
@@ -36,8 +37,10 @@ if __name__ == "__main__":
 	print "Must run as admin!!!!"
 
 	task,count = parseArg()
-	blist = ["btz"]	
+	
 	commlist = ["bwin2","bfail1","bxz"]	
+	blist = ["btz"]
+
 	if task.__name__ == "jward":
 		commlist+=["bzb"]
 	
@@ -45,7 +48,7 @@ if __name__ == "__main__":
 		blist=["st1","st2","st3","st4","st5","bzb","btscomm"]
 
 	if task.__name__ == "tssolo":
-		commlist=["bts","btsboss","btsbox","btscomm","bts_c8"]
+		commlist+=["bts","btsboss","btsbox","btscomm","bts_c8"]
 		blist=["btsstandby","btscomm"]
 
 	if task.__name__ == "jward":
@@ -68,9 +71,10 @@ if __name__ == "__main__":
 	p_list.append(p1)
 
 	if onSLOWPC:
-		ptslow=Process(target=slowpc, args=(584,190,))
+		ptslow=Process(target=yhslow, args=(0,dict(bdict.items()+commdict.items()),))
 		ptslow.start()
 		p_list.append(ptslow)
+		p_list[0].terminate()
 	
 	#not a good way, pyhook is better
 	with keyboard.Listener(on_press=press_f12) as listener:
