@@ -1,11 +1,12 @@
-from botv import *
-
-import time
-import random
 import os
+import random
+import time
 
 from pymouse import PyMouse
+
 from botcfg import *
+from botv import *
+
 
 class Robot:
 
@@ -20,11 +21,14 @@ class Robot:
         self.m = PyMouse()
 
     def beforefunc(self):
-        print "before"
+        f=waitchkk(self.bwin,self.commdict,self.m,15,5)
+        if not f and onSLOWPC:
+            slowpc()
+        print "before-done!"
     
     def afterfunc(self):
-        waitchkk(self.bwin,self.bdict,self.m,20,5)
-        print "after"
+        #put statics and others here
+        print "after-done!"
 
     def mainbot(self,t):
         if t == 0:
@@ -39,7 +43,7 @@ class Robot:
 
             print "\n!-----------Looping ",t," -----------!\n"
             delay(5)
-            s,w,h,pts=gstatus(self.st_all)
+            s,w,h,pts=gstatus(self.commdict)
 
             #for slowpc and exceptions
             if s is None:
@@ -56,8 +60,4 @@ class Robot:
             if s == self.bstart:
                 self.beforefunc()
                 t-=1
-                self.afterfunc()
-
-            
-
-
+            self.afterfunc()

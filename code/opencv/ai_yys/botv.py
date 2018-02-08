@@ -1,23 +1,23 @@
 # -*- coding: UTF-8 -*-
-from basev import *
-import re
-import cv2 as cv
-import numpy as np
-import random
 import glob
 import os
-from time import sleep
-import time
 import pdb
-from PIL import ImageGrab as ig
-from matplotlib import pyplot as plt
-from pykeyboard import PyKeyboard
+import random
+import re
+import time
 from ctypes import windll
-from botcfg import *
+from time import sleep
+
+import cv2 as cv
+import numpy as np
+from matplotlib import pyplot as plt
+from PIL import ImageGrab as ig
+from pykeyboard import PyKeyboard
 
 #import win32clipboard
 import win32gui as w32
-
+from basev import *
+from botcfg import *
 
 __version__="3.0"
 
@@ -68,7 +68,7 @@ def chkk(k,imgdict,mouse):
         print "*Found ---->",k
     return f
 
-def chkk_loop(bimgdic,mouse,monitor={}):
+def _chkk_loop(bimgdic,mouse,monitor={}):
     f = False
     while not f:
         for k in bimgdic:
@@ -149,10 +149,9 @@ def gstatus(imgdict):
             f,w,h,pts = findimg(imgdict[k])
             if f:
                 s=k
+                print "*Found status: ",k
                 break
         except Exception as e:
             print "---->Get Game stuatus Error:\n",e
             continue
     return s,w,h,pts
-
-
