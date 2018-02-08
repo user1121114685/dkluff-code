@@ -21,10 +21,15 @@ def press_f12(key):
 
 def parseArg():
 	print "yhsolo 0"
-	task=sys.argv[1]
+	t=eval(sys.argv[1])
 	count=int(sys.argv[2])
-	t=eval(task)
-	return t,count
+	test=False
+	try:
+		test = bool(sys.argv[3])
+	except:
+		pass
+
+	return t,count,test
 
 
 if __name__ == "__main__":
@@ -35,13 +40,14 @@ if __name__ == "__main__":
 	"""
 	print "Must run as admin!!!!"
 
-	task,count = parseArg()
+	task,count,test = parseArg()
 	
 
-	#if task.__name__ == "jward":
 
-	blist = ["btz","bwin2","bfail1"]
-	comlist= ["ftb"]
+	#####TEST#####
+	if test:
+		task(count)
+	#####TEST#####
 
 	p0 = Process(target=task, args=(count,))
 	p0.start()

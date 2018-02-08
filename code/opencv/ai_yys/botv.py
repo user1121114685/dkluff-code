@@ -21,6 +21,16 @@ import win32gui as w32
 
 __version__="3.0"
 
+class init_script:
+    
+    bdict={}
+    commdict={}
+
+    def __init__(self,blist,commlist):
+        self.bdict=readimgs(blist)
+        self.commdict=readimgs(commlist)
+
+
 
 def Getpoint(w,h,pts,shift=0):
     mx=0
@@ -38,22 +48,24 @@ def delay(s=1):
     t=random.random()*s+0.8
     sleep(t)
 
+def bclick(mouse,w,h,pts):
+    #paint(w,h,pts)
+    p=Getpoint(w,h,pts)
+    mouse.click(p[0],p[1],1,1)
+    print "*click: ",p
+    #move mouse random
+    rx,ry=mouse.screen_size()
+    rx=int(random.random()*rx)
+    ry=int(random.random()*ry)
+    mouse.move(rx,ry)
 
 def chkk(k,imgdict,mouse):
     #mouse.move(0,0)
     print "*Checking: ",k
     f,w,h,pts = findimg(imgdict[k],DefaultTH)
     if f:
-        #paint(w,h,pts)
-        p=Getpoint(w,h,pts)
-        mouse.click(p[0],p[1],1,1)
-        print "*Found -->",k
-
-        #move mouse random
-        rx,ry=mouse.screen_size()
-        rx=int(random.random()*rx)
-        ry=int(random.random()*ry)
-        mouse.move(rx,ry)
+        bclick(mouse,w,h,pts)
+        print "*Found ---->",k
     return f
 
 def chkk_loop(bimgdic,mouse,monitor={}):
@@ -72,19 +84,20 @@ def chkk_loop(bimgdic,mouse,monitor={}):
 
 
 def waitchkk(k,imgdict,mouse=None,maxcount=5,t=5):
-    f=False
-    if mouse is None:
-        while maxcount>0 and not f:
-            f,w,h,pts = findimg(imgdict[k])
-            print "---->Wait",k,maxcount
-            maxcount-=1
-            delay(t)
-            return
+    f=False      
     while maxcount>0 and not f:
-        f=chkk(k,imgdict,mouse)
+        if mouse is None:
+            f,w,h,pts=findimg(imgdict[k])
+        else:
+            f=chkk(k,imgdict,mouse)
         maxcount-=1
         print "---->Wait",k,maxcount
         delay(t)
+    return f
+
+def flowchkk(blist,imgdict,mouse,maxcount=5,t=5):
+    for im in blist:
+        waitchkk(im,imgdict,mouse=None,maxcount=5,t=5)
 
 def uwaitchkk(k,imgdict,mouse,maxcount=0):
     f=False
@@ -92,7 +105,7 @@ def uwaitchkk(k,imgdict,mouse,maxcount=0):
     while not f:
         f=chkk(k,imgdict,mouse)
         print "---->Wait until:",k,maxcount
-  
+
 
 def showimgs(imgs=[]):
     for i in imgs:
@@ -129,7 +142,7 @@ def readimgs(blist=[]):
 
 def gstatus(imgdict):
     s=None
-
+    f,w,h,pts = (False,0,0,[])
     for k in imgdict:
         try:
             print "*Checking status: ",k
@@ -140,12 +153,6 @@ def gstatus(imgdict):
         except Exception as e:
             print "---->Get Game stuatus Error:\n",e
             continue
-    return s
+    return s,w,h,pts
 
-def gifstatus(k,imgdict,execfuc=None,*argv):
-    f=False
-    f,w,h,pts = findimg(imgdict[k])
-    if f and execfuc:
-        execfuc(k,imgdict,*argv)   
-    return f
 
