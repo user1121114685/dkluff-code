@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*-
-from basev import *
 import re
 import cv2 as cv
 import numpy as np
@@ -97,12 +96,46 @@ def calCenter(w,h,pts):
     return upts
 
 
+def matchImgray(template,img_gray=None,threshold=DefaultTH,cc=True):
+    bflag,w,h,pts = False,0,0,[]
+    if img_gray is None:
+        return bflag,w,h,pts
+    res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)	
+    loc = np.where( res >= threshold)
 
+    bflag = False
+    pts=zip(*loc[::-1])
+
+    if len(pts)>0:
+        if cc:
+            pts=calCenter(w,h,pts)
+        pts=verifypts(pts)
+        if len(pts)>0:
+            bflag = True
+    return bflag,w,h,pts
+
+def dyMatchIm(template,img_gray=None,maxth=0.9,minth=0.5,step=0.1,cc=True):
+    bflag,w,h,pts = False,0,0,[]
+    while maxth>=minth:
+        bflag,w,h,pts = matchImgray(template,img_gray,maxth,cc)
+        if bflag:
+            break
+        maxth-=step
+    return bflag,w,h,pts
+
+
+def verifypts(pts):
+    w,h,lt,rb = GetGameWindow()
+    l,t = lt
+    r,b = rb
+    goodpts = []
+    for x,y in pts:
+        if (x>l and x<r) and (y>t and y<b):
+            goodpts.append((x,y))
+    return goodpts
 
 def findimg(template,threshold=DefaultTH,rflag=False,img_rgb=None):
-    """
-    timg: template image dir
-    """
+    
     if type(img_rgb) == type(None):
         img_rgb=GrabGameImage()
 

@@ -143,13 +143,15 @@ def readimgs(blist=[]):
 def gstatus(imgdict):
     s=None
     f,w,h,pts = (False,0,0,[])
+    img_rgb = GrabGameImage()
+    img_gray = cv.cvtColor(img_rgb,cv.COLOR_BGR2GRAY)
     for k in imgdict:
         try:
             print "*Checking status: ",k
-            f,w,h,pts = findimg(imgdict[k])
+            f,w,h,pts = matchImgray(imgdict[k],img_gray)
             if f:
                 s=k
-                print "*Found status: ",k
+                print "*Found status: ",s
                 break
         except Exception as e:
             print "---->Get Game stuatus Error:\n",e

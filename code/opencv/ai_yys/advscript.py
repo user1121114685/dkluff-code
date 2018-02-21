@@ -21,7 +21,8 @@ def preventstuck():
         for k in bdict:
             chkk(k,bdict,m)
             delay(15)
-        
+
+
 ###########################################################################
 def yhsolo(t):
     blist = []
