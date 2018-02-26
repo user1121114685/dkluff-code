@@ -10,20 +10,19 @@ from botv import *
 
 class Robot:
 
-    def __init__(self,blist,commlist):
-        self.bdict=readimgs(blist)
+    def __init__(self,brachlist,commlist):
+        self.bdict=readimgs(brachlist)
         self.commdict=readimgs(commlist)
         self.bwin="bwin2"
         self.wcount = 20
         self.wtimeout = 5
         self.bstart="btz"
+        self.botdelay=5
+        self.starttime=time.time()
         #self.st_all = dict(self.bdict.items()+self.commdict.items())
         self.m = PyMouse()
 
     def beforefunc(self):
-        f=waitchkk(self.bwin,self.commdict,self.m,15,5)
-        if not f and onSLOWPC:
-            slowpc()
         print "before-done!"
     
     def afterfunc(self):
@@ -34,8 +33,6 @@ class Robot:
         if t == 0:
             t = 1000
 
-        unkowns=0
-        unkownsTH=10
         while 1:
             if t <0:
                 print "---->Quite script as MAX hit!"
@@ -44,20 +41,19 @@ class Robot:
             print "\n!-----------Looping ",t," -----------!\n"
             delay(5)
             s,w,h,pts=gstatus(self.commdict)
-
-            #for slowpc and exceptions
             if s is None:
-                unkowns+=1
-                if unkowns>unkownsTH:
-                    slowpc(self.m)
                 continue
-            else:
-                unkowns=0
 
             if s.startswith("b"):
                 bclick(self.m,w,h,pts)
-
-            if s == self.bstart:
-                self.beforefunc()
+            
+            try:
+                if s == self.bstart:
+                    self.beforefunc()
+                    t-=1
+                    self.afterfunc()
+            except Exception as e:
+                print e
                 t-=1
-            self.afterfunc()
+            
+            delay(self.botdelay)

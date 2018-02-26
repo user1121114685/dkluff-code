@@ -11,16 +11,11 @@ from commscript import *
 
 ###########################################################################
 def preventstuck():
-    m = PyMouse()
-
-    blist=["bxz","bfail1"]
-
-    bdict=readimgs(blist)
-
-    while 1:
-        for k in bdict:
-            chkk(k,bdict,m)
-            delay(15)
+    blist = []
+    comlist= ["bxz","bfail1"]
+    rb = Robot(blist,comlist)
+    rb.botdelay=15
+    rb.mainbot(0)
 
 
 ###########################################################################
@@ -49,15 +44,10 @@ def tssolo(t):
             f=chkk("btsboss",self.commdict,self.m)
             if not f:
                 f=chkk("btscomm",self.commdict,self.m)
-            if f:
-                f=waitchkk(self.bwin,self.commdict,self.m,15,5)
-                if not f and onSLOWPC:
-                    slowpc()
-                return
+            
             #box
             f=chkk("btsbox",self.bdict,self.m)
             while f:
-                slowpc()
                 f=chkk("btsbox",self.bdict,self.m)
             
             #walking
@@ -104,11 +94,18 @@ def jwarda(t,pljj = True):
 
     
     class Jwd(Robot):
-        def refresh(self):
+        def refresh(self,pt=None,wc=0,fc=0,pcount=0):
             if pljj:
-                chkk("bsx",self.bdict,self.m)
-                waitchkk("bqd",self.bdict,self.m)
-                print "---->Refresh as:"
+                if wc>=3 or fc>5 or pcount<3:
+                    chkk("bsx",self.bdict,self.m)
+                    waitchkk("bqd",self.bdict,self.m)
+            else:
+                if pcount < 1:
+                    x = int(pt[0])
+                    y = int(pt[1])
+                    self.m.move(x,y)
+                    self.m.scroll(-10,None,None)
+            print "---->Refresh wc,fc,pcount:",wc,fc,pcount
 
         def checkwf(self):
             wincount=0
@@ -125,30 +122,34 @@ def jwarda(t,pljj = True):
             return wincount,failcount
 
         def beforefunc(self):
+            
             wc,fc = self.checkwf()
-            if wc>=3 or fc>5:
-                self.refresh()
-                print "---->wc,fc ",wc,fc
-                return
-
             f,w,h,pts = findimg(self.bdict["jjk"],0.5)
             pcount = len(pts)
+            pt=pts[0]
+            
+            self.refresh(pt,wc,fc)
 
-            if pcount<3:
-                self.refresh()
-                print "---->pcount",pcount
-                return
-
-            p=pts[random.randint(0,pcount-1)]
+            pt=pts[random.randint(0,pcount-1)]
             print "---->Jward:pcount,wc,fc: ",pcount,wc,fc    
-            mx,my = Getpoint(w,h,[p],0.5)
+            mx,my = Getpoint(w,h,[pt],0.5)
             self.m.click(mx,my,1,1)
             
             waitchkk("bjg",self.bdict,self.m,5,5)
-            f=waitchkk(self.bwin,self.commdict,self.m,20,5)
-            if not f and onSLOWPC:
-                slowpc()
+            #f=waitchkk(self.bwin,self.commdict,self.m,20,5)
+            
             print "before-done!"
+
+        def afterfunc(self):
+            interval=150
+            nowtime=time.time()
+            elstime=nowtime - self.starttime
+            if elstime<interval:
+                print "Sleeping....................",interval-elstime
+                time.sleep(interval-elstime)
+                self.starttime=time.time()
+            print "after-done!"
+
             
     rb=Jwd(blist,comlist)
     rb.bstart="jjt"
