@@ -136,7 +136,7 @@ def jwarda(t,pljj = True):
             self.m.click(mx,my,1,1)
             
             waitchkk("bjg",self.bdict,self.m,5,5)
-            #f=waitchkk(self.bwin,self.commdict,self.m,20,5)
+            ##f=waitchkk(self.bwin,self.commdict,self.m,20,5)
             
             print "before-done!"
 
