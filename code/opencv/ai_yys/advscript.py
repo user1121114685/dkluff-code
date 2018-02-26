@@ -140,7 +140,7 @@ def jwarda(t,pljj = True):
             
             print "before-done!"
 
-        def afterfunc(self):
+        def afterfunc_no(self):
             interval=150
             nowtime=time.time()
             elstime=nowtime - self.starttime
