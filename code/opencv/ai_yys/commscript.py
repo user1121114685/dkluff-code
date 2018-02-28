@@ -11,8 +11,11 @@ from botv import *
 class Robot:
 
     def __init__(self,brachlist,commlist):
-        self.bdict=readimgs(brachlist)
+        stucklist=["bxz","bfail1","cancelm"]
+
+        self.bdict=readimgs(brachlist+stucklist)
         self.commdict=readimgs(commlist)
+        
         self.bwin="bwin2"
         self.wcount = 20
         self.wtimeout = 5
@@ -42,7 +45,15 @@ class Robot:
             delay(5)
             s,w,h,pts=gstatus(self.commdict)
             if s is None:
-                continue
+                print "---->No status Found!"
+                print "---->Checking branch and stuck!"
+                s,w,h,pts=gstatus(self.bdict)
+                if s is None:
+                    print "---->No status Found! Loop Continue!---->"
+                    if onSLOWPC and random.random()>0.5:
+                        slowpc(self.m)
+                        delay(self.botdelay)
+                    continue
 
             if s.startswith("b"):
                 bclick(self.m,w,h,pts)

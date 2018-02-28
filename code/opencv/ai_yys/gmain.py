@@ -53,11 +53,7 @@ if __name__ == "__main__":
 	p0.start()
 	p_list.append(p0)
 
-	p1 = Process(target=preventstuck)
-	p1.start()
-	p_list.append(p1)
-
-	
+		
 	#not a good way, pyhook is better
 	with keyboard.Listener(on_press=press_f12) as listener:
 		listener.run()

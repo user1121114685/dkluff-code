@@ -126,8 +126,8 @@ def slowpc(mouse=None):
     w=r-l
     h=b-t
 
-    mx = int(l+w*random.random()+w/3.0)
-    my = int(t+h*random.random()+h/3.0)
+    mx = int(l+100*random.random()+w/2.0)
+    my = int(t+50*random.random()+h/2.0)
 
     mouse.click(mx,my,1,1)
     print "---->Slow PC!!!"

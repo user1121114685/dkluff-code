@@ -10,15 +10,7 @@ from commscript import *
 
 
 ###########################################################################
-def preventstuck():
-    blist = []
-    comlist= ["bxz","bfail1"]
-    rb = Robot(blist,comlist)
-    rb.botdelay=15
-    rb.mainbot(0)
 
-
-###########################################################################
 def yhsolo(t):
     blist = []
     comlist= ["btz","bwin2"]
@@ -34,7 +26,7 @@ def story(t):
 ###########################################################################
 def tssolo(t):
     blist=["btsbox"]
-    comlist=["btscomm","bts","btsboss","bwin2","bts_c8","tsstandby"]
+    comlist=["btscomm","bts","btsboss","bwin2","bts_c8","tsstandby",]
     
     class TsRobot(Robot):
         dt=1
@@ -90,7 +82,7 @@ def jwardb(t,pljj=False):
 
 def jwarda(t,pljj = True):
     blist =  ["bsx","bqd","jjk","jjs","jjf","bjg"]
-    comlist= ["jjt","bwin2"]
+    comlist= ["jjt","bwin2","bzb"]
 
     
     class Jwd(Robot):
