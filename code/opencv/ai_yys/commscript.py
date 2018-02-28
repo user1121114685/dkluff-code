@@ -13,9 +13,10 @@ class Robot:
     def __init__(self,brachlist,commlist):
         stucklist=["bxz","bfail1","cancelm"]
 
-        self.bdict=readimgs(brachlist+stucklist)
+        self.bdict=readimgs(brachlist)
         self.commdict=readimgs(commlist)
-        
+        self.bstuckdict=readimgs(stucklist)
+
         self.bwin="bwin2"
         self.wcount = 20
         self.wtimeout = 5
@@ -46,8 +47,8 @@ class Robot:
             s,w,h,pts=gstatus(self.commdict)
             if s is None:
                 print "---->No status Found!"
-                print "---->Checking branch and stuck!"
-                s,w,h,pts=gstatus(self.bdict)
+                print "---->Checking stuck!"
+                s,w,h,pts=gstatus(self.bstuckdict)
                 if s is None:
                     print "---->No status Found! Loop Continue!---->"
                     if onSLOWPC and random.random()>0.5:
