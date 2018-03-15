@@ -8,19 +8,19 @@ from botcfg import *
 from botv import *
 from commscript import *
 
-
+STUCKLIST=["bxz", "bfail1","cancelm"]
 ###########################################################################
 
 def yhsolo(t):
     blist = []
     comlist= ["btz","bwin2"]
-    rb = Robot(blist,comlist)
+    rb = Robot(blist,comlist,STUCKLIST)
     rb.mainbot(t)
 
 def story(t):
     blist=[]
     comlist=["bst1","bst2","bst3","bst4","bst5","bzb","btscomm","bwin2"]
-    rb = Robot(blist,comlist)
+    rb = Robot(blist,comlist,STUCKLIST)
     rb.mainbot(t)
 
 ###########################################################################
@@ -33,17 +33,18 @@ def tssolo(t):
         dtmax=10
         dtcount=0
         def beforefunc(self):
-            f=chkk("btsboss",self.commdict,self.m)
+            f=chkk("btsboss",self.commdict,self.m,self.screen)
             if not f:
-                f=chkk("btscomm",self.commdict,self.m)
+                f=chkk("btscomm",self.commdict,self.m,self.screen)
             
             #box
-            f=chkk("btsbox",self.bdict,self.m)
+            f=chkk("btsbox",self.bdict,self.m,self.screen)
             while f:
-                f=chkk("btsbox",self.bdict,self.m)
+                f=chkk("btsbox",self.bdict,self.m,self.screen)
             
             #walking
-            bflag,w,h,pts = findimg(self.commdict["tsstandby"])
+            img_rgb = self.screen.GrabGameImage()
+            bflag,w,h,pts = findimg(self.commdict["tsstandby"],img_rgb)
             if bflag:         
                 x0=0
                 y0=0
@@ -72,7 +73,7 @@ def tssolo(t):
                     print e
 
 
-    rb = TsRobot(blist,comlist)
+    rb = TsRobot(blist,comlist,STUCKLIST)
     rb.bstart = "tsstandby"
     rb.mainbot(t)
 
@@ -89,8 +90,8 @@ def jwarda(t,pljj = True):
         def refresh(self,pt=None,wc=0,fc=0,pcount=0):
             if pljj:
                 if wc>=3 or fc>5 or pcount<3:
-                    chkk("bsx",self.bdict,self.m)
-                    waitchkk("bqd",self.bdict,self.m)
+                    chkk("bsx",self.bdict,self.m,self.screen)
+                    waitchkk("bqd",self.bdict,self.m,self.screen)
             else:
                 if pcount < 1:
                     x = int(pt[0])
@@ -103,10 +104,11 @@ def jwarda(t,pljj = True):
             wincount=0
             failcount=0
             try:
-                wf,ww,wh,wpts = findimg(self.bdict["jjs"])
+                img_rgb = self.screen.GrabGameImage()
+                wf,ww,wh,wpts = findimg(self.bdict["jjs"],img_rgb)
                 wincount =len(wpts)
 
-                ff,fw,fh,fpts = findimg(self.bdict["jjf"],0.9)
+                ff,fw,fh,fpts = findimg(self.bdict["jjf"],img_rgb,0.9)
                 failcount =len(fpts)
             except:
                 pass
@@ -116,7 +118,9 @@ def jwarda(t,pljj = True):
         def beforefunc(self):
             
             wc,fc = self.checkwf()
-            f,w,h,pts = findimg(self.bdict["jjk"],0.5)
+            
+            img_rgb = self.screen.GrabGameImage()
+            f,w,h,pts = findimg(self.bdict["jjk"],img_rgb,0.5)
             pcount = len(pts)
             pt=pts[0]
             
@@ -127,10 +131,10 @@ def jwarda(t,pljj = True):
             mx,my = Getpoint(w,h,[pt],0.5)
             self.m.click(mx,my,1,1)
             
-            waitchkk("bjg",self.bdict,self.m,5,5)
-            ##f=waitchkk(self.bwin,self.commdict,self.m,20,5)
+            waitchkk("bjg",self.bdict,self.m,self.screen,0.8,5,5)
             
-            print "before-done!"
+            
+            
 
         def afterfunc_no(self):
             interval=150
@@ -140,10 +144,9 @@ def jwarda(t,pljj = True):
                 print "Sleeping....................",interval-elstime
                 time.sleep(interval-elstime)
                 self.starttime=time.time()
-            print "after-done!"
-
             
-    rb=Jwd(blist,comlist)
+          
+    rb=Jwd(blist,comlist,STUCKLIST)
     rb.bstart="jjt"
     #pdb.set_trace()
     rb.mainbot(t)

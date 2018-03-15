@@ -20,7 +20,7 @@ def press_f12(key):
 		return False
 
 def parseArg():
-	print "yhsolo 0"
+	
 	t=eval(sys.argv[1])
 	count=int(sys.argv[2])
 	test=False
