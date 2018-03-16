@@ -11,6 +11,7 @@ class Robot:
 
     def __init__(self,brachlist,commlist,stucklist):
         print "Reading Config of botsetting..."
+        cleancfg(CFG_FILENAME)
         config = ConfigParser.RawConfigParser()
         config.read([CFG_FILENAME])
         self.BIMGDIR=config.get('botsetting','BIMGDIR')

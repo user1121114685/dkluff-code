@@ -4,7 +4,6 @@ import time
 
 from pymouse import PyMouse
 
-from botcfg import *
 from botv import *
 from commscript import *
 

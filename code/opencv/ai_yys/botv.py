@@ -37,10 +37,11 @@ def cleancfg(fname):
 class GameScreen:
     def __init__(self):
         print "Reading config of Screen..."
+        cleancfg(_CFG_FILENAME)
         config = ConfigParser.RawConfigParser()
         config.read([_CFG_FILENAME])
 
-        self.BIGSCREEN=bool(config.get('screen','BIGSCREEN'))
+        self.BIGSCREEN=bool(int(config.get('screen','BIGSCREEN'))>=1)
 
         self.MainScreenX=int(config.get('screen','MainScreenX'))
         self.MainScreenY=int(config.get('screen','MainScreenY'))
@@ -51,10 +52,12 @@ class GameScreen:
         self.MouseScreenX=int(config.get('screen','MouseScreenX'))
         self.MouseScreenY=int(config.get('screen','MouseScreenY'))
 
-        self.onSLOWPC=bool(config.get('screen','onSLOWPC'))
+        self.onSLOWPC=bool(int(config.get('screen','onSLOWPC'))>=1)
         self.GAMENAME=u"阴阳师-网易游戏" 
         
         print "Screen Initial Done!!!!"
+        print "BIGSCREEN:",self.BIGSCREEN
+        print "onSlowPC:",self.onSLOWPC
         print "GameName(Hardcode):",self.GAMENAME.encode("GB18030")     
         
 
@@ -194,6 +197,7 @@ def gstatus(imgdict,screen,threshold=DefaultTH,cc=True):
     f,w,h,pts = (False,0,0,[])
     ww,wh,wlt,wrb =  screen.GetGameWindow()
     img_rgb = screen.GrabGameImage()
+    #showimgs(img_rgb)
     img_gray = cv.cvtColor(img_rgb,cv.COLOR_BGR2GRAY)
     for k in imgdict:
         try:

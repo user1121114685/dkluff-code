@@ -3,7 +3,7 @@ import sys
 
 from multiprocessing import Process
 from pynput import keyboard
-from botcfg import *
+
 from botv import readimgs
 
 import pdb
