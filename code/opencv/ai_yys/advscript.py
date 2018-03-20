@@ -9,6 +9,11 @@ from commscript import *
 
 STUCKLIST=["bxz", "bfail1","cancelm"]
 ###########################################################################
+def yhpt(t):
+    blist = []
+    comlist= ["bwin2","bpartygo","bwin1"]
+    rb = Robot(blist,comlist,STUCKLIST)
+    rb.mainbot(t)
 
 def yhsolo(t):
     blist = []
