@@ -6,13 +6,22 @@ from pymouse import PyMouse
 
 from botv import *
 from commscript import *
+import ConfigParser
 
 STUCKLIST=["bxz", "bfail1","cancelm"]
+_CFG_FILENAME="bot.conf"
 ###########################################################################
-def yhpt(t):
+def yhcomm(t):
+    print "Reading config of yhconf..."
+    cleancfg(_CFG_FILENAME)
+    config = ConfigParser.RawConfigParser()
+    config.read([_CFG_FILENAME])
     blist = []
-    comlist= ["bwin2","bpartygo","bwin1"]
-    rb = Robot(blist,comlist,STUCKLIST)
+    comlist=config.get('yhconf','comlist').split()
+    _STUCKLIST=config.get('yhconf','STUCKLIST').split()
+    print "comlist,stucklist: ",comlist,_STUCKLIST
+    rb = Robot(blist,comlist,_STUCKLIST)
+    rb.cc = False
     rb.mainbot(t)
 
 def yhsolo(t):
@@ -30,7 +39,7 @@ def story(t):
 ###########################################################################
 def tssolo(t):
     blist=["btsbox"]
-    comlist=["btscomm","bts","btsboss","bwin2","bts_c8","tsstandby",]
+    comlist=["btsboss","btscomm","bts","bwin2","bts_c8","tsstandby",]
     
     class TsRobot(Robot):
         dt=1

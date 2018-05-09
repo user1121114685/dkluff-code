@@ -16,10 +16,6 @@ from ctypes import windll
 #import win32clipboard
 import win32gui as w32
 
-__version__="""
-Vsersion=4.0
-该库只包含处理图片的功能等游戏无关的功能
-"""
 
 methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
             'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
@@ -93,6 +89,7 @@ def matchImgray(template,img_gray,
 
     if len(pts)>0:
         if cc:
+            print "__ matchImgray : centering-----"
             pts=calCenter(w,h,pts)
             pts=verifypts(pts,ww,wh,wlt,wrb)
         if len(pts)>0:

@@ -6,16 +6,22 @@ from pymouse import PyMouse
 
 from botv import *
 CFG_FILENAME="bot.conf"
-
+_version="""
+Vsersion=1.0
+Update=2018.3.22
+"""
 class Robot:
 
     def __init__(self,brachlist,commlist,stucklist):
+        print "Init Bot..."
+        print _version
         print "Reading Config of botsetting..."
+        
         cleancfg(CFG_FILENAME)
         config = ConfigParser.RawConfigParser()
         config.read([CFG_FILENAME])
         self.BIMGDIR=config.get('botsetting','BIMGDIR')
-        self.DefaultTH=config.get('botsetting','DefaultTH')
+        self.DefaultTH=float(config.get('botsetting','DefaultTH'))
 
         self.bdict=readimgs(brachlist,self.BIMGDIR)
         self.commdict=readimgs(commlist,self.BIMGDIR)
@@ -30,6 +36,9 @@ class Robot:
         #self.st_all = dict(self.bdict.items()+self.commdict.items())
         self.m = PyMouse()
         self.screen = GameScreen()
+
+        self.cc = True
+        
         print "Bot initial done!!!"
         
 
@@ -53,11 +62,12 @@ class Robot:
 
             print "\n*********** Looping Count Down: ",t," ***********\n"
             delay(5)
-            s,w,h,pts=gstatus(self.commdict,self.screen)
+            s,w,h,pts=gstatus(self.commdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
+            
             if s is None:
                 print "---->No status Found!"
                 print "---->Checking stuck!"
-                s,w,h,pts=gstatus(self.bstuckdict,self.screen)
+                s,w,h,pts=gstatus(self.bstuckdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
                 if s is None:
                     print "---->No status Found! Loop Continue!---->"
                     if onSLOWPC and random.random()>0.5:
