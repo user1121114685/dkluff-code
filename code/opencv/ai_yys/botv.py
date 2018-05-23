@@ -193,7 +193,11 @@ def uwaitchkk(k,imgdict,mouse,screen,threshold=DefaultTH,maxcount=0):
 
 
 def gstatus(imgdict,screen,threshold=DefaultTH,cc=True):
-    s=None
+    """
+    cc: centering,multiplayer should not do center check
+    so that cc = not multiplayer
+    """
+    ss=[]
     f,w,h,pts = (False,0,0,[])
     ww,wh,wlt,wrb =  screen.GetGameWindow()
     img_rgb = screen.GrabGameImage()
@@ -204,10 +208,12 @@ def gstatus(imgdict,screen,threshold=DefaultTH,cc=True):
             print "*Checking status: ",k
             f,w,h,pts = matchImgray(imgdict[k],img_gray,ww,wh,wlt,wrb,threshold,cc)
             if f:
-                s=k
-                print "*Found status: ",s
-                break
+                print "*Found status: ",k
+                ss+=[(k,w,h,pts)]
+                if cc:
+                    break
         except Exception as e:
             print "---->Get Game stuatus Error:\n",e
             continue
-    return s,w,h,pts
+    
+    return ss

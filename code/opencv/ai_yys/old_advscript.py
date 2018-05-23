@@ -41,29 +41,70 @@ def story(t):
     rb.mainbot(t)
 
 ###########################################################################
-def tsgroup(t):
-    blist=[]
-    comlist=["bwin2","btsbox"]
-    STUCKLIST=["bfail1","cancelm","bwin1"]
+def tssolo(t):
+    blist=["btsbox"]
+    comlist=["btsboss","btscomm","bts","bwin2","bts_c8","tsstandby",]
     
+    class TsRobot(Robot):
+        dt=1
+        dtmax=10
+        dtcount=0
+        def beforefunc(self):
+            f=chkk("btsboss",self.commdict,self.m,self.screen)
+            if not f:
+                f=chkk("btscomm",self.commdict,self.m,self.screen)
+            
+            #box
+            f=chkk("btsbox",self.bdict,self.m,self.screen)
+            while f:
+                f=chkk("btsbox",self.bdict,self.m,self.screen)
+            
+            #walking
+            img_rgb = self.screen.GrabGameImage()
+            bflag,w,h,pts = findimg(self.commdict["tsstandby"],img_rgb)
+            if bflag:         
+                x0=0
+                y0=0
+                try:
+                    x0,y0=pts[0]
+                    if self.dt>0:
+                        mx=int(x0-w*random.random())
+                        my=int(y0-h*random.random())
+                        self.m.click(mx,my,1,1)
+                        print "-----> walking!"
+                        self.dtcount += 1
+                        if self.dtcount>self.dtmax:
+                            self.dtcount=0
+                            self.dt=-1*self.dt
+
+                    if self.dt<0:
+                        mx=int(x0-w*random.random()-1.5*w)
+                        my=int(y0-h*random.random())
+                        self.m.click(mx,my,1,1)
+                        print "walking!<-----"
+                        self.dtcount+=1
+                        if self.dtcount>self.dtmax:
+                            self.dtcount=0
+                            self.dt=-1*self.dt
+                except Exception as e:
+                    print e
+
+
     rb = TsRobot(blist,comlist,STUCKLIST)
-    rb.bstart = "bwin2"
+    rb.bstart = "tsstandby"
     rb.mainbot(t)
 
 ###########################################################################
-def jwardb(t,if_refresh=0,pljj=False):
+def jwardb(t,pljj=False):
     jwarda(t,pljj)
 
-def jwarda(t,if_refresh=0,pljj=True):
+def jwarda(t,pljj = True):
     blist =  ["bsx","bqd","jjk","jjs","jjf","bjg"]
     comlist= ["jjt","bwin2","bzb"]
 
     
     class Jwd(Robot):
         def refresh(self,pt=None,wc=0,fc=0,pcount=0):
-            if if_refresh<1:
-                return
-            
             if pljj:
                 if wc>=3 or fc>5 or pcount<3:
                     chkk("bsx",self.bdict,self.m,self.screen)

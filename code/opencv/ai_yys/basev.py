@@ -77,7 +77,11 @@ def verifypts(pts,w,h,lt,rb):
 
 def matchImgray(template,img_gray,
                 ww,wh,wlt,wrb,
-                threshold=0.8,cc=True):
+                threshold=0.8,
+                cc=True):
+    """
+    cc : center check
+    """
     bflag,w,h,pts = False,0,0,[]
     if img_gray is None:
         return bflag,w,h,pts

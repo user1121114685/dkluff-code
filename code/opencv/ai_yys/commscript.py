@@ -37,8 +37,8 @@ class Robot:
         self.m = PyMouse()
         self.screen = GameScreen()
 
-        self.cc = True
-        
+        self.cc = True #multiplayer should not do center check
+                    
         print "Bot initial done!!!"
         
 
@@ -52,9 +52,8 @@ class Robot:
     def mainbot(self,t):
         if t == 0:
             t = 1000
-
-        onSLOWPC=self.screen.onSLOWPC
-
+        #onSLOWPC=self.screen.onSLOWPC
+        
         while 1:
             if t <0:
                 print "---->Quite script as MAX hit!"
@@ -62,31 +61,31 @@ class Robot:
 
             print "\n*********** Looping Count Down: ",t," ***********\n"
             delay(5)
-            s,w,h,pts=gstatus(self.commdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
+            ss=gstatus(self.commdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
             
-            if s is None:
+            if len(ss)==0:
                 print "---->No status Found!"
                 print "---->Checking stuck!"
-                s,w,h,pts=gstatus(self.bstuckdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
-                if s is None:
+                ss=gstatus(self.bstuckdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
+                if len(ss)==0:
                     print "---->No status Found! Loop Continue!---->"
-                    if onSLOWPC and random.random()>0.5:
-                        self.screen.slowpc(self.m)
-                        delay(self.botdelay)
+                    #if onSLOWPC and random.random()>0.5:
+                    #   self.screen.slowpc(self.m)
+                    #   delay(self.botdelay)
                     continue
 
-            if s.startswith("b"):
-                bclick(self.m,w,h,pts)
+            for s,w,h,pts in ss:
+                if s.startswith("b"):
+                    bclick(self.m,w,h,pts)
             
-            try:
-                if s == self.bstart:
-                    self.beforefunc()
-                    print "before-done!"
-                    t-=1
-                    self.afterfunc()
-                    print "after-done!"
-            except Exception as e:
-                print e
-                t-=1
+                try:
+                    if s == self.bstart:
+                        self.beforefunc()
+                        print "before-done!"
+                        t-=1
+                        self.afterfunc()
+                        print "after-done!"
+                except Exception as e:
+                    print e
             
             delay(self.botdelay)
