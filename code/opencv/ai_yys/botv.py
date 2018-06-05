@@ -199,7 +199,9 @@ def gstatus(imgdict,screen,threshold=DefaultTH,cc=True):
     """
     ss=[]
     f,w,h,pts = (False,0,0,[])
-    ww,wh,wlt,wrb =  screen.GetGameWindow()
+    ww,wh,wlt,wrb = (0,0,0,0)
+    if cc:
+        ww,wh,wlt,wrb =  screen.GetGameWindow()
     img_rgb = screen.GrabGameImage()
     #showimgs(img_rgb)
     img_gray = cv.cvtColor(img_rgb,cv.COLOR_BGR2GRAY)
