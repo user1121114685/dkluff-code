@@ -52,12 +52,12 @@ class GameScreen:
         self.MouseScreenX=int(config.get('screen','MouseScreenX'))
         self.MouseScreenY=int(config.get('screen','MouseScreenY'))
 
-        self.onSLOWPC=bool(int(config.get('screen','onSLOWPC'))>=1)
+        #self.onSLOWPC=bool(int(config.get('screen','onSLOWPC'))>=1)
         self.GAMENAME=u"阴阳师-网易游戏" 
         
         print "Screen Initial Done!!!!"
         print "BIGSCREEN:",self.BIGSCREEN
-        print "onSlowPC:",self.onSLOWPC
+        #print "onSlowPC:",self.onSLOWPC
         print "GameName(Hardcode):",self.GAMENAME.encode("GB18030")     
         
 
@@ -133,15 +133,16 @@ def Getpoint(w,h,pts,shift=0):
     mxy=0
     try:
         p=pts[0]
-        mx=int(p[0]+shift*w+0.5+random.random())
+        #mx=int(p[0]+shift*w+0.5+random.random())
+        mx=int(p[0]+w*random.random())
         my=int(p[1]+h*random.random())
     except:
         print "Get Point Failed!"
     return (mx,my)
 
 
-def delay(s=1):
-    t=random.random()*s+0.8
+def delay(s=1,mini=0):
+    t=random.random()*s+mini
     sleep(t)
 
 def bclick(mouse,w,h,pts):

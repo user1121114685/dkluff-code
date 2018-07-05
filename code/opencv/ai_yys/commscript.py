@@ -31,7 +31,7 @@ class Robot:
         self.wcount = 20
         self.wtimeout = 5
         self.bstart="btz"
-        self.botdelay=5
+        self.botdelay=1
         self.starttime=time.time()
         #self.st_all = dict(self.bdict.items()+self.commdict.items())
         self.m = PyMouse()
@@ -60,7 +60,7 @@ class Robot:
                 break
 
             print "\n*********** Looping Count Down: ",t," ***********\n"
-            delay(5)
+            delay(self.botdelay)
             ss=gstatus(self.commdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
             
             if len(ss)==0:
@@ -87,5 +87,4 @@ class Robot:
                         print "after-done!"
                 except Exception as e:
                     print e
-            
-            delay(self.botdelay)
+
