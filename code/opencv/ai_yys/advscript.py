@@ -38,6 +38,7 @@ def story(t):
     blist=[]
     comlist=["bst1","bst2","bst3","bst4","bst5","bzb","btscomm","bwin2"]
     rb = Robot(blist,comlist,STUCKLIST)
+    rb.cc = False
     rb.mainbot(t)
 
 ###########################################################################
