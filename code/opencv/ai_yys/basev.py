@@ -12,15 +12,47 @@ from PIL import ImageGrab as ig
 from matplotlib import pyplot as plt
 from pykeyboard import PyKeyboard
 from ctypes import windll
+import sys
 
 #import win32clipboard
 import win32gui as w32
 
+isDebug = False
 
-methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
-            'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
+import cStringIO, functools
+def MuteStdout(retCache=False):
+	def decorator(func):
+		@functools.wraps(func)
+		def wrapper(*args, **kwargs):
+			savedStdout = sys.stdout
+			if retCache:
+				sys.stdout = cStringIO.StringIO()
+			try:
+				ret=func(*args, **kwargs)
+			finally:
+				sys.stdout = savedStdout
+			return ret
+		return wrapper
+	return decorator
 
+@MuteStdout(isDebug)
+def pprint(s):
+    sys.stdout.write(s)
+    sys.stdout.flush()
 
+@MuteStdout(not isDebug)
+def nprint(s,*args):
+    print s,args
+
+def cleancfg(fname):
+    content = open(fname).read()  
+    #Window下用记事本打开配置文件并修改保存后，编码为UNICODE或UTF-8的文件的文件头  
+    #会被相应的加上\xff\xfe（\xff\xfe）或\xef\xbb\xbf，然后再传递给ConfigParser解析的时候会出错  
+    #，因此解析之前，先替换掉  
+    content = re.sub(r"\xfe\xff","", content)  
+    content = re.sub(r"\xff\xfe","", content)  
+    content = re.sub(r"\xef\xbb\xbf","", content)  
+    open(fname, 'w').write(content)
 
 def grabscreen(i=0):
     if i>10: return None
@@ -45,90 +77,78 @@ def grabscreen(i=0):
     return img_rgb
 
 
-def calCenter(w,h,pts):
-    if len(pts)<0: return []
+def uniqpts(w,h,pts):
+    pass
 
-    centers=[pts[0]]
-    r=min(w,h)**2/4
-
-    upts=[]
-    #pdb.set_trace()
-    for x,y in pts:
-        ix=x+w/2
-        iy=y+h/2
-        dis=[(cx-ix)**2+(cy-iy)**2 for cx,cy in centers ]
-        
-        if len(dis)>0:
-            dis.sort()
-            if dis[0]>r:
-                centers.append((ix,iy))
-                upts.append((x,y))
-
-    return upts
-
-def verifypts(pts,w,h,lt,rb):
+@MuteStdout(not isDebug)
+def verify_point(pt,window_info):
+    w,h,lt,rb = window_info
     l,t = lt
     r,b = rb
-    goodpts = []
-    for x,y in pts:
-        if (x>l and x<r) and (y>t and y<b):
-            goodpts.append((x,y))
-    return goodpts
-
-def matchImgray(template,img_gray,
-                ww,wh,wlt,wrb,
-                threshold=0.8,
-                cc=True):
-    """
-    cc : center check
-    """
-    bflag,w,h,pts = False,0,0,[]
-    if img_gray is None:
-        return bflag,w,h,pts
-    res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)	
-    loc = np.where( res >= threshold)
-
-    bflag = False
-    pts=zip(*loc[::-1])
-
-    if len(pts)>0:
-        if cc:
-            print "__ matchImgray : centering-----"
-            pts=calCenter(w,h,pts)
-            pts=verifypts(pts,ww,wh,wlt,wrb)
-        if len(pts)>0:
-            bflag = True
-    return bflag,w,h,pts
-
-def dyMatchIm(template,img_gray,
-              ww,wh,wlt,wrb,
-              threshold=0.8,cc=True,
-              maxth=0.9,minth=0.5,step=0.1,):
-    bflag,w,h,pts = False,0,0,[]
-    while maxth>=minth:
-        bflag,w,h,pts = matchImgray(template,ww,wh,wlt,wrb,img_gray,maxth,cc)
-        if bflag:
-            break
-        maxth-=step
-    return bflag,w,h,pts
-
-
-def findimg(template,img_rgb,threshold=0.8,rflag=False):
     
-    img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
-    #template = cv.imread(timg,0)
-    w, h = template.shape[::-1]
+    print "verify point ..."
+    x,y=pt
+    if (x>l and x<r) and (y>t and y<b):
+        return (x,y)
+    return []
+    
+def showimgs(imgs=[]):
+    for i in imgs:
+        plt.imshow(i)
+        plt.show()
+            
+def paint(w,h,pts,screen):
+    img_rgb=screen.GrabGameImage()
+    
+    for pt in pts:
+        cv.rectangle(img_rgb, pt, (pt[0] + w, pt[1] + h), (0,0,255), 2)
+    showimgs([img_rgb])
 
+def readimgs(blist,imgsdir):
+    imdict={}
+    for b in blist:
+        imdir=os.path.join(imgsdir,b+".png")
+        print "Reading image:",imdir
+        im=cv.imread(imdir,0)
+        imdict[b]=im
+    return imdict
+
+
+
+def delay(s=1,mini=0):
+    t=random.random()*s+mini
+    sleep(t)
+
+def bclick(mouse,w,h,pt):
+    mx,my = pt
+    if w*h == 0:
+        w=10
+        h=10
+
+    mx=int(mx+w*random.random())
+    my=int(my+h*random.random())
+
+    mouse.click(mx,my,1,1)
+    print "\n*click: ",(mx,my)
+    delay(1)
+
+    #move mouse random
+    rx,ry=mouse.screen_size()
+    rx=int(random.random()*rx)
+    ry=int(random.random()*ry)
+    mouse.move(rx,ry)
+
+
+methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
+            'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
+
+def matchGray(img_gray,template,threshold=0.8):
+    pts=[]
+    # w, h = template.shape[::-1]
     res = cv.matchTemplate(img_gray,template,cv.TM_CCOEFF_NORMED)	
     loc = np.where( res >= threshold)
 
-    bflag = False
     pts=zip(*loc[::-1])
 
-    if len(pts)>0:
-        bflag=True
-        pts=calCenter(w,h,pts)
-
-    if rflag: return bflag,w,h,pts,img_rgb
-    return bflag,w,h,pts
+    return pts
 

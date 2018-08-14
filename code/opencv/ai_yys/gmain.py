@@ -4,7 +4,7 @@ import sys
 from multiprocessing import Process
 from pynput import keyboard
 
-from botv import readimgs
+from basev import readimgs
 
 import pdb
 

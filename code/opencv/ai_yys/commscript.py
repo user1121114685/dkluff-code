@@ -1,14 +1,16 @@
 import os
 import random
 import time
-
+import ConfigParser
 from pymouse import PyMouse
 
-from botv import *
+from GameScreen import GameScreen
+from basev import *
+
 CFG_FILENAME="bot.conf"
 _version="""
-Vsersion=1.0
-Update=2018.3.22
+Vsersion=2.0
+Update=2018.8.22
 """
 class Robot:
 
@@ -28,63 +30,69 @@ class Robot:
         self.bstuckdict=readimgs(stucklist,self.BIMGDIR)
 
         self.bwin="bwin2"
-        self.wcount = 20
-        self.wtimeout = 5
         self.bstart="btz"
         self.botdelay=1
-        self.starttime=time.time()
+        
         #self.st_all = dict(self.bdict.items()+self.commdict.items())
         self.m = PyMouse()
         self.screen = GameScreen()
 
-        self.cc = True #multiplayer should not do center check
-                    
+        self.multiplayer = False
+        self.strict = False
+
+        self.starttime=time.time()
+        self.lasttime=time.time()
+         
         print "Bot initial done!!!"
         
 
     def beforefunc(self):
-        print "before-done!"
+        nprint("---->No status Found! Call beforefunc!\n")
     
-    def afterfunc(self):
+    def afterfunc(self,st,sltime):
+        print "\n======================"
+        self.lasttime=time.time()
+        print "Time For this Loop: ",int(self.lasttime-sltime)
+        print "Avg time per Loop: ",int(self.lasttime-self.starttime)/st
+        print "Total time: ",int(self.lasttime-self.starttime),"For Loop Count: ",st
         #put statics and others here
-        print "after-done!"
+        print "======================\n"
 
     def mainbot(self,t):
         if t == 0:
             t = 1000
-        #onSLOWPC=self.screen.onSLOWPC
-        
-        while 1:
-            if t <0:
-                print "---->Quite script as MAX hit!"
-                break
+        st=0
+        cnt=0
+        while t-st>0:
+            sltime=time.time()
+            cnt+=1
+            prgbar="**** Looping Count ({}/{}): {}% ***\r".format(cnt,st,st*100.0/t*1.0)
+            pprint(prgbar)
 
-            print "\n*********** Looping Count Down: ",t," ***********\n"
             delay(self.botdelay)
-            ss=gstatus(self.commdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
+            ss=self.screen.gstatus(self.commdict,threshold=self.DefaultTH,
+                strict=self.strict,
+                mp=self.multiplayer)
             
             if len(ss)==0:
-                print "---->No status Found!"
-                print "---->Checking stuck!"
-                ss=gstatus(self.bstuckdict,self.screen,threshold=self.DefaultTH,cc=self.cc)
+                nprint("---->Checking stuck!\t\n")
+                ss=self.screen.gstatus(self.bstuckdict,threshold=self.DefaultTH,
+                    strict=self.strict,
+                    mp=self.multiplayer)
                 if len(ss)==0:
-                    print "---->No status Found! Loop Continue!---->"
-                    #if onSLOWPC and random.random()>0.5:
-                    #   self.screen.slowpc(self.m)
-                    #   delay(self.botdelay)
+                    self.beforefunc()
                     continue
 
-            for s,w,h,pts in ss:
+            for s,w,h,pt in ss:
                 if s.startswith("b"):
-                    bclick(self.m,w,h,pts)
+                    bclick(self.m,w,h,pt)
             
-                try:
-                    if s == self.bstart:
-                        self.beforefunc()
-                        print "before-done!"
-                        t-=1
-                        self.afterfunc()
-                        print "after-done!"
-                except Exception as e:
-                    print e
+               
+                if s == self.bstart:                    
+                    st+=1
+                    self.afterfunc(st,sltime)
+        #end while            
+        print "---->Quite script as MAX hit!"
+                       
+               
 
