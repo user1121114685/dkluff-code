@@ -38,9 +38,9 @@ if __name__ == "__main__":
 
 	task,count,test = parseArg()
 
-	srt=raw_input(u"输个密码呗:\n".encode("GB18030"))
-	if not srt == "fortutu":
-		sys.exit(0)
+	#srt=raw_input(u"输个密码呗:\n".encode("GB18030"))
+	#if not srt == "fortutu":
+	#	sys.exit(0)
 
 
 	#####TEST#####
